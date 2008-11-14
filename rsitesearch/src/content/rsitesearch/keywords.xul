@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://rsitesearch/skin" type="text/css"?>
+
+
+<!DOCTYPE overlay SYSTEM "chrome://rsitesearch/locale/rsitesearch.dtd">
+
+
+<window class="dialog"
+	title="R Keywords"
+	orient="vertical"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    
+
+   <tree id="tree_rsitesearch_keywords" seltype="single" flex="1" hidecolumnpicker="false" class="tree_rsitesearch">
+<treecols>
+	<treecol id="tree_rsitesearch_keyword" label="&rsitesearch.keywords;" flex="1" primary="true" />
+	<treecol id="tree_rsitesearch_keyword_description" label="&rsitesearch.description;" flex="1" />
+</treecols>  
+	   
+<treechildren >
+  <treeitem container="true" open="true"> 
+    <treerow>
+       <treecell label="Graphics" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_graphics">
+      <treeitem container="false" id="kw:graphics:aplot"> <treerow properties="aplot"><treecell label="aplot" /> <treecell label="Add to Existing Plot / internal plot" /></treerow> </treeitem>
+      <treeitem container="false" id="kw:graphics:dplot">  <treerow properties="dplot"><treecell label="dplot" /> <treecell label="Computations Related to Plotting" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:graphics:hplot">  <treerow properties="hplot"><treecell label="hplot" /> <treecell label="High-Level Plots" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:graphics:iplot">  <treerow properties="iplot"><treecell label="iplot" /> <treecell label="Interacting with Plots" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:graphics:color">  <treerow properties="color"><treecell label="color" /> <treecell label="Color, Palettes etc" /> </treerow></treeitem>
+      <treeitem container="false" id="kw:graphics:dynamic">     <treerow properties="dynamic"><treecell label="dynamic" /> <treecell label="Dynamic Graphics" /> </treerow></treeitem>
+      <treeitem container="false" id="kw:graphics:device">    <treerow properties="device"><treecell label="device" /> <treecell label="Graphical Devices" /> </treerow></treeitem>  
+    </treechildren>
+  </treeitem>
+  
+  <treeseparator />
+  
+  <treeitem container="true" open="true"> 
+    <treerow>
+      <treecell label="Basics" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_basics">
+      
+      <treeitem container="false" id="kw:basics:sysdata"><treerow properties="sysdata"><treecell label="sysdata" /> <treecell label="Basic System Variables" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:datasets"><treerow properties="datasets"><treecell label="datasets" /> <treecell label="Datasets available by data(.)" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:data"><treerow properties="data"><treecell label="data" /> <treecell label="Environments, Scoping, Packages" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:manip"><treerow properties="manip"><treecell label="manip" /> <treecell label="Data Manipulation" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:attribute"><treerow properties="attribute"><treecell label="attribute" /> <treecell label="Data Attributes" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:list"><treerow properties="list"><treecell label="list" /> <treecell label="Lists" /> </treerow> </treeitem>
+      
+      <treeitem container="true" open="true" id="kw:basics:classes">
+        <treerow properties="classes"><treecell label="classes" /> <treecell label="Data Types (Not OO)" /> </treerow>
+        <treechildren id="kw_basics_classes">
+          <treeitem id="kw:basics:classes:character"> <treerow properties="character"><treecell label="character" /> <treecell label="Character Data (String) Operations" /> </treerow></treeitem>
+          <treeitem id="kw:basics:classes:complex"> <treerow properties="complex"><treecell label="complex" /> <treecell label="Complex Numbers" /> </treerow></treeitem>
+          <treeitem id="kw:basics:classes:category"> <treerow properties="category"><treecell label="category" /> <treecell label="Categorical Data" /> </treerow></treeitem>
+          <treeitem id="kw:basics:classes:NA"> <treerow properties="NA"><treecell label="NA" /> <treecell label="Missing Values" /> </treerow></treeitem>
+        </treechildren> 
+      </treeitem> 
+      
+      <treeitem container="false" id="kw:basics:chron"><treerow properties="chron"><treecell label="chron" /> <treecell label="Dates and Times" /> </treerow></treeitem> 
+      <treeitem container="false" id="kw:basics:package"><treerow properties="package"><treecell label="package" /> <treecell label="Package Summaries" /> </treerow></treeitem> 	
+      
+    </treechildren>    
+  </treeitem>
+  
+  <treeseparator />
+  <treeitem container="true" open="true"> 
+    <treerow>
+      <treecell label="Mathematics" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_mathematics">
+      
+      
+      <treeitem container="true" open="true" id="kw:mathematics:array">
+        <treerow properties="array"><treecell label="array" /> <treecell label="Matrices and Arrays" /> </treerow>
+        <treechildren id="kw_mathematics_array">
+          <treeitem id="kw:mathematics:array:algebra"> <treerow properties="algebra"><treecell label="algebra" /> <treecell label="Linear Algebra" /> </treerow></treeitem>
+         </treechildren> 
+      </treeitem> 
+      
+      <treeitem container="false" id="kw:mathematics:arith"><treerow properties="arith"><treecell label="arith" /> <treecell label="Basic Arithmetic and Sorting" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mathematics:math"><treerow properties="math"><treecell label="math" /> <treecell label="Mathematical Calculus etc." /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mathematics:logic"><treerow properties="logic"><treecell label="logic" /> <treecell label="Logical operators" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mathematics:optimize"><treerow properties="optimize"><treecell label="optimize" /> <treecell label="Optimization" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mathematics:symbolmath"><treerow properties="symbolmath"><treecell label="symbolmath" /> <treecell label="Symbolic Math, as polynomials, fractions" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mathematics:graphs"><treerow properties="graphs"><treecell label="graphs" /> <treecell label="Graphs, (not graphics), e.g. dendrograms" /> </treerow> </treeitem>
+    </treechildren>    
+  </treeitem>
+  
+  <treeseparator />
+  
+  <treeitem container="true" open="true"> 
+    <treerow>
+      <treecell label="Programming, Input/Ouput, and Miscellaneous" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_programming">
+      
+      
+      <treeitem container="true" open="true" id="kw:programming:programming">
+        <treerow properties="programming"><treecell label="programming" /> <treecell label="Programming" /> </treerow>
+        <treechildren id="kw_programming_progrmming">
+          <treeitem id="kw:programming:programming:interface"> <treerow properties="interface"><treecell label="interface" /> <treecell label="Interfaces to other Languages" /> </treerow></treeitem>
+        </treechildren> 
+      </treeitem> 
+      
+      <treeitem container="true" open="true" id="kw:programming:IO">
+        <treerow properties="IO"><treecell label="IO" /> <treecell label="Input/Output" /> </treerow>
+        <treechildren id="kw_programming_io">
+          <treeitem id="kw:programming:io:file"> <treerow properties="file"><treecell label="file" /> <treecell label="Files" /> </treerow></treeitem>
+          <treeitem id="kw:programming:io:connection"> <treerow properties="connection"><treecell label="connection" /> <treecell label="Connections" /> </treerow></treeitem>
+          <treeitem id="kw:programming:io:database"> <treerow properties="database"><treecell label="database" /> <treecell label="Iterfaces to databases" /> </treerow></treeitem>
+        </treechildren> 
+      </treeitem> 
+      
+      
+      <treeitem container="false" id="kw:programming:iteration"><treerow properties="iteration"><treecell label="iteration" /> <treecell label="Looping and Iteration" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:methods"><treerow properties="methods"><treecell label="methods" /> <treecell label="Methods ang Generic functions" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:print"><treerow properties="print"><treecell label="print" /> <treecell label="Printing" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:error"><treerow properties="error"><treecell label="error" /> <treecell label="Error handling" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:environment"><treerow properties="environment"><treecell label="environment" /> <treecell label="Session Environment" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:internal"><treerow properties="internal"><treecell label="internal" /> <treecell label="Internal Objects (not part of API)" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:utilities"><treerow properties="utilities"><treecell label="utilities" /> <treecell label="Utilities" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:misc"><treerow properties="misc"><treecell label="misc" /> <treecell label="Miscellanous" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:documentation"><treerow properties="documentation"><treecell label="documentation" /> <treecell label="Documentation" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:programming:debugging"><treerow properties="debugging"><treecell label="debugging" /> <treecell label="Debugging Tools" /> </treerow> </treeitem>
+      
+    </treechildren>    
+  </treeitem>
+  <treeseparator />
+  
+  <treeitem container="true" open="true"> 
+    <treerow>
+      <treecell label="Statistics" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_statistics">
+      
+      <treeitem container="false" id="kw:statistics:datagen"><treerow properties="datagen"><treecell label="datagen" /> <treecell label="Functions for generating data sets" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:distribution"><treerow properties="distribution"><treecell label="distribution" /> <treecell label="Probability Distributions and Random Numbers" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:univar"><treerow properties="univar"><treecell label="univar" /> <treecell label="simple univariate statistics" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:htest"><treerow properties="htest"><treecell label="htest" /> <treecell label="Statistical Inference" /> </treerow> </treeitem>
+      <treeitem container="true" open="true" id="kw:statistics:models">
+        <treerow properties="models"><treecell label="models" /> <treecell label="Statistical Models" /> </treerow>
+        <treechildren id="kw_statistics_models">
+          <treeitem id="kw:statistics:regression"> <treerow properties="regression"><treecell label="regression" /> <treecell label="Regression" /> </treerow></treeitem>
+          <treeitem id="kw:statistics:nonlinear"> <treerow properties="nonlinear"><treecell label="nonlinear" /> <treecell label="Non linear Regression" /> </treerow></treeitem>
+        </treechildren> 
+      </treeitem> 
+      <treeitem container="false" id="kw:statistics:robust"><treerow properties="robust"><treecell label="robust" /> <treecell label="Robust/Resistant Techniques" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:design"><treerow properties="design"><treecell label="design" /> <treecell label="Designed Experiments" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:multivariate"><treerow properties="multivariate"><treecell label="multivariate" /> <treecell label="Multivariate Techniques" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:ts"><treerow properties="ts"><treecell label="ts" /> <treecell label="Time Series" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:survival"><treerow properties="survival"><treecell label="survival" /> <treecell label="Survival Analysis" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:nonparametric"><treerow properties="nonparametric"><treecell label="nonparametric" /> <treecell label="Nonparametric Statistics [w/o smooth]" /> </treerow> </treeitem>
+      <treeitem container="true" open="true" id="kw:statistics:smooth">
+        <treerow properties="smooth"><treecell label="smooth" /> <treecell label="Curve (and Surface) Smoothing" /> </treerow>
+        <treechildren id="kw_statistics_smooth">
+          <treeitem id="kw:statistics:smooth:loess"> <treerow properties="loess"><treecell label="loess" /> <treecell label="Loess Objects" /> </treerow></treeitem>
+        </treechildren> 
+      </treeitem> 
+      <treeitem container="false" id="kw:statistics:cluster"><treerow properties="cluster"><treecell label="cluster" /> <treecell label="Clustering" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:tree"><treerow properties="tree"><treecell label="tree" /> <treecell label="Regression and Classification Trees" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:statistics:survey"><treerow properties="survey"><treecell label="survey" /> <treecell label="Complex Survey Samples" /> </treerow> </treeitem>
+      
+    
+      
+    </treechildren>    
+  </treeitem>
+  
+  <treeseparator />
+  <treeitem container="true" open="true"> 
+    <treerow>
+      <treecell label="MASS" /> <treecell label=""/>
+    </treerow>
+    <treechildren id="kw_mass">
+      <treeitem container="false" id="kw:mass:classif"><treerow properties="classif"><treecell label="classif" /> <treecell label="Classification (class package)" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mass:spatial"><treerow properties="spatial"><treecell label="spatial" /> <treecell label="Spatial Statistics (spatial package)" /> </treerow> </treeitem>
+      <treeitem container="false" id="kw:mass:neural"><treerow properties="neural"><treecell label="neural" /> <treecell label="Neural Networks (nnet package)" /> </treerow> </treeitem>
+      
+    </treechildren>    
+  </treeitem>
+  
+</treechildren>
+
+</tree>
+					   
+						   
+   
+</window>

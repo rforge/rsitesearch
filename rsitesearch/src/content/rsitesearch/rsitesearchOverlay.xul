@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://rsitesearch/skin/rsitesearch.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://rsitesearch/locale/rsitesearch.dtd">
+
+<overlay id="rsitesearchOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/toggle.js" />
+	  
+    <broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="viewRSSSidebar"
+					autoCheck="false"
+					label="&rsitesearch.menuitem.label;"
+					type="checkbox"
+					group="sidebar"
+					sidebarurl="chrome://rsitesearch/content/rsitesearch.xul"
+					sidebartitle="&rsitesearch.sidebarTitle;"
+					oncommand="toggleSidebar('viewRSSSidebar'); " />
+    </broadcasterset>
+
+  
+    <statusbar id="status-bar">
+       <statusbarpanel id="rsitesearch_statusbar_panel" 
+                       insertbefore="statusbar-display" 
+                       collapsed="false" 
+                       persist="collapsed">
+           <box id="rsitesearch_statusbar" 
+                title="R Site Search" 
+                width="20" height="16" 
+                tooltiptext="RSiteSearch" 
+                onclick="toggleSidebar('viewRSSSidebar'); "/>
+       </statusbarpanel>
+   </statusbar>
+
+    
+    <hbox flex="1" id="browser">
+        <vbox id="appcontent">
+            <hbox id="rsitesearch-adverts"
+                  insertafter="content"
+                  class="rsitesearch-advert"
+                  pack="center"
+                  collapsed="true" >
+                <label value="Advertise Here!" class="rsitesearch-advert-label" />
+            </hbox>    
+        </vbox>
+        
+        <arrowscrollbox orient="vertical" id="rsitesearch-graphics-browser" collapsed="true" />
+        
+    </hbox>    
+
+</overlay>
+

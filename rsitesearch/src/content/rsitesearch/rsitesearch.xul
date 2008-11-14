@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://rsitesearch/skin/rsitesearch.css" type="text/css" ?>
+
+<!DOCTYPE window SYSTEM "chrome://rsitesearch/locale/rsitesearch.dtd">
+
+<window id="rsitesearch-window"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        windowtype="rsitesearch"
+        orient="vertical"
+        persist="width"
+        onload=" updateAdverts() ; sv.search.toolbar.mode.init(); sv.search.options.init(); sv.search.sidebar.init();"
+        onunload="updateAdverts() ; sv.search.sidebar.hide(false) " >
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sciviews.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/prefs.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/search/sidebar.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/search/engines.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/search/search.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/tools/e4x2dom.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/tools/rx.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/log/log.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/db.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/toggle.js" />
+<script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/search/toolbar/mode.js" />
+
+<!-- localization in javascript -->
+<stringbundleset id="strings">
+  <stringbundle id="rsitesearch-strings" src="chrome://rsitesearch/locale/rsitesearch.properties"/>
+</stringbundleset>
+
+<toolbox>
+  <toolbar id="rsitesearch-options">
+    <toolbarbutton id="rsitesearch-results-mode"
+                   oncommand="sv.search.toolbar.mode.toggle();"
+                   tooltiptext="" />
+    <toolbarbutton id="rsitesearch-options-button"
+                   oncommand="sv.search.options.toggle()"
+                   tooltiptext=""
+                   class="options-hide" />
+    <toolbarbutton id="rsitesearch-options-sidebar"
+                   oncommand="sv.search.sidebar.toggle()"
+                   tooltiptext="&rsitesearch-show-hide-sidebar;" />
+    <vbox id="progressbars" collapsed="true" flex="1">
+      <progressmeter value="100" flex="1" id = "rsitesearch_meter" />
+    </vbox>
+
+  </toolbar>
+</toolbox>  
+
+<vbox id="rsitesearch-options-box">
+  <label value="&rsitesearch-search-engines;" />
+  <vbox id="rsitesearch-options-engines" />
+  <label value="&rsitesearch-show-graph-sidebar;" />
+  <checkbox checked="true" label="Show the sidebar" disabled="true" />
+</vbox>  
+  
+<toolbox>
+  <toolbar id="rsitesearch-toolbar">
+    <textbox id="rsitesearch-textbox"
+             flex="1"
+             type="timed"
+             oncommand="sv.search.search.searchQuery();"
+             tooltiptext="Search for R documentation in various engines" />
+  </toolbar>
+</toolbox>
+
+<popupset>
+  <tooltip id="rsitesearch-tree-treetooltip" orient="vertical"
+           onpopupshowing="sv.search.tree.updateTooltip(event) ;"
+           onpopuphiding="sv.search.tree.clearTooltip() ;">
+  </tooltip>
+</popupset>
+
+
+<tree id="tree_r_help_pages" hidecolumnpicker="true" seltype="single" flex="1"
+      onselect="sv.search.search.go(event);"
+      class="tree_rsitesearch" >
+  <treecols>
+    <treecol id="r_help_page_name" primary="true" flex="1" hideheader="true" />
+  </treecols>  
+  <treechildren id="treeroot" tooltip="rsitesearch-tree-treetooltip" />
+</tree>     
+
+</window>

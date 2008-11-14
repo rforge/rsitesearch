@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://rsitesearch/locale/rsitesearch.dtd">
+
+<!-- TODO : Internationnalize -->
+
+
+<window class="dialog"
+	title="About RSiteSearch"
+	orient="vertical"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<!-- Original template by Jed Brown -->
+
+<groupbox align="center" orient="horizontal" style="background:#ffffff">
+<vbox flex="1">
+  <separator class="thin"/>
+  <text value="Created by" style="font-weight: bold;"/>
+  <text value="Romain Francois" class="url" style="text-decoration:underline;cursor:pointer"
+        onclick="window.open('http://francoisromain.free.fr/'); window.close();"/>
+  <separator class="thin"/>
+    <text value="RSiteSearch Homepage" style="font-weight: bold;"/>
+    <text value="http://addictedtor.free.fr/rsitesearch"
+          class="url" style="text-decoration:underline;cursor:pointer"
+        onclick="window.open('http://addictedtor.free.fr/rsitesearch'); window.close();"/>
+  <separator class="thin"/>
+</vbox>
+<spring flex="1"/>
+</groupbox>
+
+  
+</window>
