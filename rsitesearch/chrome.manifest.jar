@@ -1,0 +1,6 @@
+content	rsitesearch 	jar:chrome/rsitesearch.jar!/content/rsitesearch/
+locale  rsitesearch     en-GB   jar:chrome/rsitesearch.jar!/locale/en-GB/
+locale  rsitesearch     fr-FR   jar:chrome/rsitesearch.jar!/locale/fr-FR/
+locale  rsitesearch     ro   jar:chrome/rsitesearch.jar!/locale/ro/
+skin    rsitesearch     classic     jar:chrome/rsitesearch.jar!/skin/classic/rsitesearch/
+overlay chrome://browser/content/browser.xul    chrome://rsitesearch/content/rsitesearchOverlay.xul

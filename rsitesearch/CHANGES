@@ -1,0 +1,27 @@
+version 1.1.0
+* tree not built before anymore
+* compatible with firefox 3.0
+
+version 1.0.1
+* search in R wiki as well
+
+version 1.0.0
+* first public version : announce on R-help
+
+version 0.0.4
+* added keywords.xul
+* update.rdf
+
+version 0.0.3
+* no more contents.rdf --> chrome.manifest
+* added about toolbar button
+
+version 0.0.2
+* fixed the mango solutions link
+* search by hitting Enter after entering the query
+* some minor skin fixes
+* empty search does not build an empty tree anyore
+
+version 0.0.1
+* romanian (locale ro) translation by Adrian Dusa
+* added about.xul

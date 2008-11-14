@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:extension:file:rsitesearch.jar"
+                   em:package="content/rsitesearch/"
+                   em:skin="skin/classic/rsitesearch/">
+    <em:locale>locale/en-GB/</em:locale>
+    <em:locale>locale/fr-FR/</em:locale>
+    <em:locale>locale/ro/</em:locale>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="{ba1b7cac-81ec-403d-a4b0-5d45636a70d2}"
+                   em:name="RSiteSearch"
+                   em:version="1.1-38"
+                   em:description="Search in R help in a firefox sidebar"
+                   em:creator="Romain Francois"
+                   em:homepageURL="http://rsitesearch.r-forge.r-project.org"
+                   em:aboutURL="chrome://rsitesearch/content/about.xul"
+                   em:updateURL="http://rsitesearch.r-forge.r-project.org/xpi/update.rdf"
+                   em:iconURL="chrome://rsitesearch/skin/r_and_firefox_medium.png"
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEjONgFWzA9DMXXGkprEn5JuR6LHZNAPvNLpWnOqzODjDPwXtR4eOVNCaRsPQdZnCTVjN48+wJbS4A/MbdaTQzrOx4fTCOS2gKwxpqRVvDKge/nQ4q7BfiBsE1dQGxPe7wLa/iiYrMjSZ9nCHh5ohBK4NnV7FuZHjBTWBZgmiGkQIDAQAB">
+    <em:file RDF:resource="urn:mozilla:extension:file:rsitesearch.jar"/>
+    <em:targetApplication RDF:resource="rdf:#$LqXNS"/>
+    <em:targetApplication RDF:resource="rdf:#$QqXNS"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$LqXNS"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="1.5"
+                   em:maxVersion="3.*" />
+  <RDF:Description RDF:about="rdf:#$QqXNS"
+                   em:id="{a463f10c-3994-11da-9945-000d60ca027b}"
+                   em:minVersion="0.7"
+                   em:maxVersion="1.0" />
+</RDF:RDF>
