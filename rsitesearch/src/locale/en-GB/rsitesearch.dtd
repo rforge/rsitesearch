@@ -1,0 +1,21 @@
+<!ENTITY rsitesearch.commandkey "R">
+<!ENTITY rsitesearch.opt.label "Options...">
+<!ENTITY rsitesearch.opt.tooltip "Search Options (engine, number of results)">
+<!ENTITY rsitesearch.sidebarTitle "R Site Search Sidebar">
+<!ENTITY rsitesearch.button.label "R Site Search" > 
+<!ENTITY rsitesearch.button.tooltip "Open the R Site Search Sidebar" > 
+<!ENTITY rsitesearch.menuitem.label "R Site Search" >
+<!ENTITY rsitesearch.howtosearch "How To Search" >
+<!ENTITY rsitesearch.numberofresults "Number of results from R Site Search">
+<!ENTITY rsitesearch.filter "Package name filter">
+<!ENTITY rsitesearch.websearch "Web search on R Site Search">
+<!ENTITY rsitesearch.homepage "RSiteSearch extension homepage">
+<!ENTITY rsitesearch.keywords "Keywords">
+<!ENTITY rsitesearch.keywords.tooltip "Show Keywords and their icons">
+<!ENTITY rsitesearch.description "Description">
+<!ENTITY rsitesearch.allpackages "All packages">
+
+<!ENTITY rsitesearch-search-engines "Search engines">
+<!ENTITY rsitesearch-show-graph-sidebar "Graph Sidebar">
+
+<!ENTITY rsitesearch-show-hide-sidebar "Show/Hide the graphics sidebar">

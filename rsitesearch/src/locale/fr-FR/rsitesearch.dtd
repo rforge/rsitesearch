@@ -1,0 +1,20 @@
+<!ENTITY rsitesearch.commandkey "R">
+<!ENTITY rsitesearch.opt.label "Options...">
+<!ENTITY rsitesearch.opt.tooltip "Options de recherche (moteur, nombre de resultats)">
+<!ENTITY rsitesearch.sidebarTitle "R Site Search : Panneau Lateral">
+<!ENTITY rsitesearch.button.label "R Site Search" > 
+<!ENTITY rsitesearch.button.tooltip "Ouvrir le Panneau lateral : R Site Search" > 
+<!ENTITY rsitesearch.menuitem.label "R Site Search" >
+<!ENTITY rsitesearch.howtosearch "Comment chercher" >
+<!ENTITY rsitesearch.numberofresults "Nombre de résultats requis">
+<!ENTITY rsitesearch.filter "Filtre sur les noms des packages">
+<!ENTITY rsitesearch.websearch "Recherche sur le site web R Site Search">
+<!ENTITY rsitesearch.homepage "Page d'acceuil de l'extension RSiteSearch">
+<!ENTITY rsitesearch.keywords "Mots clés">
+<!ENTITY rsitesearch.keywords.tooltip "Montrer les mots clés et leurs icones">
+<!ENTITY rsitesearch.description "Description">
+<!ENTITY rsitesearch.allpackages "Tous les packages">
+
+<!ENTITY rsitesearch-search-engines "Moteurs de Recherche">
+<!ENTITY rsitesearch-show-hide-sidebar "Montrer/Cacher la barre latérale de graphiques">
+<!ENTITY rsitesearch-show-graph-sidebar "Graph Sidebar">

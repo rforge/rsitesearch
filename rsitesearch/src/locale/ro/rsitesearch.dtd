@@ -1,0 +1,16 @@
+<!ENTITY rsitesearch.commandkey "r">
+<!ENTITY rsitesearch.opt.label "Opţiuni...">
+<!ENTITY rsitesearch.opt.tooltip "Opţiuni de căutare (motor, număr de rezultate)">
+<!ENTITY rsitesearch.sidebarTitle "R Site Search: panou lateral">
+<!ENTITY rsitesearch.button.label "R Site Search" > 
+<!ENTITY rsitesearch.button.tooltip "Deschide panou lateral R Site Search" > 
+<!ENTITY rsitesearch.menuitem.label "R Site Search" >
+<!ENTITY rsitesearch.howtosearch "Cum se caută" >
+<!ENTITY rsitesearch.numberofresults "Număr de rezultate cerut">
+<!ENTITY rsitesearch.filter "Filtru după numele pachetului">
+<!ENTITY rsitesearch.websearch "Căutare pe sit-ul web R Site Search">
+<!ENTITY rsitesearch.homepage "RSiteSearch extension homepage">
+<!ENTITY rsitesearch.keywords "Keywords">
+<!ENTITY rsitesearch.keywords.tooltip "Show Keywords and their icons">
+<!ENTITY rsitesearch.description "Description">
+<!ENTITY rsitesearch.allpackages "All packages">
