@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <RDF:Description RDF:about="urn:mozilla:extension:{ba1b7cac-81ec-403d-a4b0-5d45636a70d2}">
+    <em:version>VERSION</em:version>
+    <em:updateLink>http://rsitesearch.r-forge.r-project.org/xpi/rsitesearch.xpi</em:updateLink>
+  </RDF:Description>
+ </RDF:RDF>
