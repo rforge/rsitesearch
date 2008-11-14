@@ -1,0 +1,356 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#homepage-button{
+  list-style-image : url("chrome://rsitesearch/skin/images/r_and_firefox_small.png") ;
+}
+
+#rsitesearch_statusbar{
+ background: url("chrome://rsitesearch/skin/images/R_tiny.png") no-repeat; 
+}
+
+#tools-rsitesearch-button{
+ list-style-image: url("chrome://rsitesearch/skin/images/R_tiny.png"); 
+}
+
+.rss_engine_wiki{ list-style-image: url("chrome://rsitesearch/skin/images/e_wiki.png") ;  -moz-appearance: none !important; background-color: white !important; color: black !important;  }
+.rss_engine_rss{ list-style-image: url("chrome://rsitesearch/skin/images/e_rss.png") ; -moz-appearance: none !important; background-color: white !important; color: black !important; }
+.rss_engine_filter{ list-style-image: url("chrome://rsitesearch/skin/images/e_filter.png") ; -moz-appearance: none !important; background-color: white !important ; color: black !important; }
+
+.rss_engine_wiki:hover{ color:red !important; }
+.rss_engine_rss:hover{ color:red !important; }
+.rss_engine_filter:hover{ color:red !important; }
+
+#tree_r_help_pages{
+  -moz-appearance: none ;
+  background: url("chrome://rsitesearch/skin/images/background.png") no-repeat right white ;
+  border: 1px solid black ;
+  padding: 0px;
+  margin: 0px ;
+}
+
+.tree_rsitesearch treechildren::-moz-tree-row(filter) {
+  color: blue ;                                     
+}
+
+.tree_rsitesearch treechildren::-moz-tree-row(selected) {
+  border : 1px dotted red ;
+  background-color : white ;                                    
+}
+
+.tree_rsitesearch treechildren::-moz-tree-cell(selected) {
+  color: black ;                                    
+}
+
+.tree_rsitesearch treechildren::-moz-tree-row(vignette) {
+  background: no-repeat url("chrome://rsitesearch/skin/images/pdf.png");
+  background-color:orange;
+  color: black ;
+}
+
+.tree_rsitesearch treechildren::-moz-tree-cell-text(selected) { 
+  color: black;
+}
+
+ .toolbar-rsitesearch-button{
+   font-family:"Trebuchet MS",Trebuchet,Verdana,Sans-Serif;
+   font-size:x-small;
+   color:black !important;
+   background-color:orange !important;
+    -moz-appearance: none;
+ }
+ 
+ .menuitem-rss{
+   font-family:"Trebuchet MS",Trebuchet,Verdana,Sans-Serif;
+   font-size:x-small;width:auto;
+ }                                                  
+ 
+
+ 
+#rsitesearch-toolbar{
+ background-color:white !important;
+  -moz-appearance: none;
+}
+ #rsitesearch-textbox{
+  font-family:"Trebuchet MS",Trebuchet,Verdana,Sans-Serif;
+  font-size:small;width:auto; 
+  color:black;
+  background: url("chrome://rsitesearch/skin/images/textbox/background.png") white no-repeat;
+  -moz-appearance: none;
+  font-weight:bold;
+  padding: 0px;
+  padding-left: 16px ;
+  margin:0;
+  border-top-width: 1px;
+  
+ }
+ 
+/* Graphics */
+
+.red {color:red !important;
+-moz-appearance: none;
+}
+
+
+.rsitesearch-advert{
+  height: 100px;
+  background-image: url("chrome://rsitesearch/skin/images/banner/image.png") ;
+  background-repeat: no-repeat ;
+  background-color: white ;
+  border-top: 1px solid grey ;
+  font-size: xx-large;
+  font-variant: small-caps ;
+  font-style: italic ;
+}
+
+#rsitesearch-window {
+  font-size: small ;
+}
+
+/** textbox **/
+
+
+
+/** defining styles for each engine **/
+
+
+treechildren::-moz-tree-row(rsitesearch) {
+  background-repeat: no-repeat;
+  background-image: url("chrome://rsitesearch/skin/images/engines/rsitesearch.png") ;
+  background-position: left ;
+  border-bottom: 1px solid #f1f1f1 ;
+}
+
+treechildren::-moz-tree-row(gmane) {
+  background-repeat: no-repeat;
+  background-image: url("chrome://rsitesearch/skin/images/engines/gmane.png") ;
+  background-position: left ;
+  border-bottom: 1px solid #f1f1c1 ;
+}
+
+treechildren::-moz-tree-row(wiki) {
+  background-repeat: no-repeat;
+  background-image: url("chrome://rsitesearch/skin/images/engines/wiki.png") ;
+  background-position: left ;
+  border-bottom: 1px solid #ccd8f3 ;
+}
+
+treechildren::-moz-tree-row(rgraphgallery) {
+  background-repeat: no-repeat;
+  background-position: left ;
+  background-image: url("chrome://rsitesearch/skin/images/engines/rgraphgallery.png") ;
+  border-bottom: 1px solid #ffeabc ;
+}
+
+treechildren::-moz-tree-row(rgraphicalmanuals) {
+  background-repeat: no-repeat;
+  background-position: left ;
+  background-image: url("chrome://rsitesearch/skin/images/engines/rgraphicalmanuals.png") ;
+  border-bottom: 1px solid #ffd5cf ;
+}
+
+treechildren::-moz-tree-row(hover){
+  background-color: white ;
+}
+
+
+treechildren::-moz-tree-cell{
+  padding-left: 10px; 
+}
+
+/** toolbar : single ou multiple **/
+
+.result-multiple{
+  -moz-appearance: none;
+  padding: 0px;
+  margin: 0px;
+  list-style-image: url( "chrome://rsitesearch/skin/images/toolbar/multiple.png" ) ; 
+}
+
+.result-single{
+  -moz-appearance: none;
+  padding: 0px;
+  margin: 0px;
+  list-style-image: url( "chrome://rsitesearch/skin/images/toolbar/single.png" ) ; 
+}
+
+.options-hidden{
+  -moz-appearance: none;
+  padding: 0px;
+  margin: 0px;
+  list-style-image: url( "chrome://rsitesearch/skin/images/options/options-hidden.png" ) ; 
+}
+
+.options-visible{
+  -moz-appearance: none;
+  padding: 0px;
+  margin: 0px;
+  list-style-image: url( "chrome://rsitesearch/skin/images/options/options-visible.png" ) ; 
+}
+
+.engine{
+  -moz-appearance: none ;
+  max-width:25px;
+}
+
+.engine-rsitesearch{
+  background: url("chrome://rsitesearch/skin/images/engines/rsitesearch.png") right no-repeat ;
+}
+
+.engine-gmane{
+  background: url("chrome://rsitesearch/skin/images/engines/gmane.png") right no-repeat ;
+}
+
+.engine-rgraphgallery{
+  background: url("chrome://rsitesearch/skin/images/engines/rgraphgallery.png") right no-repeat ;
+}
+
+.engine-rgraphicalmanuals{
+  background: url("chrome://rsitesearch/skin/images/engines/rgraphicalmanuals.png") right no-repeat ;
+}
+
+.engine-wiki{
+  background: url("chrome://rsitesearch/skin/images/engines/wiki.png") right no-repeat ;
+}
+
+.rsitesearch-sidebar-thumbnail{
+  border: 1px solid blue ;
+}
+
+.rsitesearch-sidebar-tooltip{
+  -moz-appearance: none ;
+  border: 1px solid red ;
+  padding: 25px ;
+  background: url("chrome://rsitesearch/skin/images/sidebar/tooltip-background.png") white no-repeat top left;
+}
+
+.rsitesearch-sidebar-tooltip-description{
+  color: #0000a3;
+  font-weight: bolder ;
+  font-family : sans-serif ;
+  font-size: medium ;
+}
+
+.rsitesearch-sidebar-tooltip-footer{
+  color: #0000a3;
+  font-size: small ;
+  font-family : sans-serif ;
+  text-align : right ;
+  font-style: italic ;
+}
+
+.rsitesearch-sidebar-tooltip image{
+  border: 1px solid black ;
+}
+
+treechildren::-moz-tree-row(aplot) {background: no-repeat url("chrome://rsitesearch/skin/images/aplot.png"); }
+treechildren::-moz-tree-row(dplot) {background: no-repeat url("chrome://rsitesearch/skin/images/dplot.png"); }
+treechildren::-moz-tree-row(hplot) {background: no-repeat url("chrome://rsitesearch/skin/images/hplot.png"); }
+treechildren::-moz-tree-row(iplot) {background: no-repeat url("chrome://rsitesearch/skin/images/iplot.png"); }
+treechildren::-moz-tree-row(color) {background: no-repeat url("chrome://rsitesearch/skin/images/color.png"); }
+treechildren::-moz-tree-row(dynamic) {background: no-repeat url("chrome://rsitesearch/skin/images/dynamic.gif"); }
+treechildren::-moz-tree-row(device) {background: no-repeat url("chrome://rsitesearch/skin/images/device.png"); }
+
+/* Basics */
+treechildren::-moz-tree-row(sysdata) {background: no-repeat url("chrome://rsitesearch/skin/images/sysdata.png"); }
+treechildren::-moz-tree-row(datasets) {background: no-repeat url("chrome://rsitesearch/skin/images/datasets.png"); }
+treechildren::-moz-tree-row(data) {background: no-repeat url("chrome://rsitesearch/skin/images/data.png"); }
+treechildren::-moz-tree-row(manip) { background: no-repeat url("chrome://rsitesearch/skin/images/manip.png");}
+treechildren::-moz-tree-row(attribute) {background: no-repeat url("chrome://rsitesearch/skin/images/attribute.png"); }
+treechildren::-moz-tree-row(classes) { background: no-repeat url("chrome://rsitesearch/skin/images/classes.png");}
+treechildren::-moz-tree-row(character) {background: no-repeat url("chrome://rsitesearch/skin/images/character.png"); }
+treechildren::-moz-tree-row(complex) {background: no-repeat url("chrome://rsitesearch/skin/images/complex.png"); }
+treechildren::-moz-tree-row(category) {background: no-repeat url("chrome://rsitesearch/skin/images/category.png"); }
+treechildren::-moz-tree-row(NA) {background: no-repeat url("chrome://rsitesearch/skin/images/NA.png"); }
+treechildren::-moz-tree-row(list) {background: no-repeat url("chrome://rsitesearch/skin/images/list.png"); }
+treechildren::-moz-tree-row(chron) {background: no-repeat url("chrome://rsitesearch/skin/images/chron.png");}
+treechildren::-moz-tree-row(package) {background: no-repeat url("chrome://rsitesearch/skin/images/package.png"); }
+
+
+/* Mathematics */
+treechildren::-moz-tree-row(array) {background: no-repeat url("chrome://rsitesearch/skin/images/array.png");}
+treechildren::-moz-tree-row(algebra) {background: no-repeat url("chrome://rsitesearch/skin/images/algebra.png"); }
+treechildren::-moz-tree-row(arith) {background: no-repeat url("chrome://rsitesearch/skin/images/arith.png");}
+treechildren::-moz-tree-row(math) {background: no-repeat url("chrome://rsitesearch/skin/math.png"); }
+treechildren::-moz-tree-row(logic) {background: no-repeat url("chrome://rsitesearch/skin/images/logic.png"); }
+treechildren::-moz-tree-row(optimize) {background: no-repeat url("chrome://rsitesearch/skin/images/optimize.png"); }
+treechildren::-moz-tree-row(symbolmath) {background: no-repeat url("chrome://rsitesearch/skin/images/symbolmath.png"); }
+treechildren::-moz-tree-row(graphs) {background: no-repeat url("chrome://rsitesearch/skin/images/graphs.png");}
+
+/* Programming */
+treechildren::-moz-tree-row(programming) {/*background: no-repeat url("chrome://rsitesearch/skin/images/programming.png");*/ }
+treechildren::-moz-tree-row(interface) {/*background: no-repeat url("chrome://rsitesearch/skin/images/interface.png");*/ }
+treechildren::-moz-tree-row(IO) {background: no-repeat url("chrome://rsitesearch/skin/images/IO.png"); }
+treechildren::-moz-tree-row(file) {background: no-repeat url("chrome://rsitesearch/skin/images/file.png");}
+treechildren::-moz-tree-row(connection) {background: no-repeat url("chrome://rsitesearch/skin/images/connection.png"); }
+treechildren::-moz-tree-row(database) {background: no-repeat url("chrome://rsitesearch/skin/images/database.png");}
+treechildren::-moz-tree-row(iteration) {/*background: no-repeat url("chrome://rsitesearch/skin/images/iteration.png");*/ }
+treechildren::-moz-tree-row(methods) {/*background: no-repeat url("chrome://rsitesearch/skin/images/methods.png");*/ }
+treechildren::-moz-tree-row(print) {background: no-repeat url("chrome://rsitesearch/skin/images/print.png"); }
+treechildren::-moz-tree-row(error) {background: no-repeat url("chrome://rsitesearch/skin/images/error.png"); }
+treechildren::-moz-tree-row(environment) {/*background: no-repeat url("chrome://rsitesearch/skin/images/environment.png");*/ }
+treechildren::-moz-tree-row(internal) {/*background: no-repeat url("chrome://rsitesearch/skin/images/internal.png");*/ }
+treechildren::-moz-tree-row(utilities) {/*background: no-repeat url("chrome://rsitesearch/skin/images/utilities.png");*/ }
+treechildren::-moz-tree-row(misc) {/*background: no-repeat url("chrome://rsitesearch/skin/images/misc.png");*/ }
+treechildren::-moz-tree-row(documentation) {background: no-repeat url("chrome://rsitesearch/skin/images/documentation.png"); }
+treechildren::-moz-tree-row(debugging) {background: no-repeat url("chrome://rsitesearch/skin/images/debugging.png"); }
+
+
+/* Statistics */
+treechildren::-moz-tree-row(datagen) {background: no-repeat url("chrome://rsitesearch/skin/images/datagen.png"); }
+treechildren::-moz-tree-row(distribution) {background: no-repeat url("chrome://rsitesearch/skin/images/distribution.png"); }
+treechildren::-moz-tree-row(univar) {background: no-repeat url("chrome://rsitesearch/skin/images/univar.png"); }
+treechildren::-moz-tree-row(htest) {background: no-repeat url("chrome://rsitesearch/skin/images/htest.png"); }
+treechildren::-moz-tree-row(models) {/*background: no-repeat url("chrome://rsitesearch/skin/images/models.png");*/ }
+treechildren::-moz-tree-row(regression) {background: no-repeat url("chrome://rsitesearch/skin/images/regression.png"); }
+treechildren::-moz-tree-row(nonlinear) {background: no-repeat url("chrome://rsitesearch/skin/images/nonlinear.png"); }
+treechildren::-moz-tree-row(robust) {background: no-repeat url("chrome://rsitesearch/skin/images/robust.png"); }
+treechildren::-moz-tree-row(design) {/*background: no-repeat url("chrome://rsitesearch/skin/images/design.png");*/ }
+treechildren::-moz-tree-row(multivariate) {background: no-repeat url("chrome://rsitesearch/skin/images/multivariate.png"); }
+treechildren::-moz-tree-row(ts) {background: no-repeat url("chrome://rsitesearch/skin/images/ts.png"); }
+treechildren::-moz-tree-row(survival) {background: no-repeat url("chrome://rsitesearch/skin/images/survival.png"); }
+treechildren::-moz-tree-row(nonparametric) {background: no-repeat url("chrome://rsitesearch/skin/images/nonparametric.png"); }
+treechildren::-moz-tree-row(smooth) {background: no-repeat url("chrome://rsitesearch/skin/images/smooth.png"); }
+treechildren::-moz-tree-row(loess) {background: no-repeat url("chrome://rsitesearch/skin/images/loess.png"); }
+treechildren::-moz-tree-row(cluster) {background: no-repeat url("chrome://rsitesearch/skin/images/cluster.png"); }
+treechildren::-moz-tree-row(tree) {background: no-repeat url("chrome://rsitesearch/skin/images/tree.png");}
+treechildren::-moz-tree-row(survey) {/*background: no-repeat url("chrome://rsitesearch/skin/images/survey.png");*/ }
+
+/* from MASS */
+treechildren::-moz-tree-row(classif) {background: no-repeat url("chrome://rsitesearch/skin/images/classif.png"); }
+treechildren::-moz-tree-row(spatial) {background: no-repeat url("chrome://rsitesearch/skin/images/spatial.png"); }
+treechildren::-moz-tree-row(neural) {background: no-repeat url("chrome://rsitesearch/skin/images/neural.png"); }
+
+#rsitesearch-graphics-browser{
+  -moz-appearance: none ;
+  background: url("chrome://rsitesearch/skin/images/sidebar/sidebar-background.png") black right no-repeat ;
+  width: 100px;
+}
+
+#rsitesearch-options-sidebar{
+  -moz-appearance: none ;
+  max-width: 25px;
+  min-width: 25px;
+}
+
+.rsitesearch-options-sidebar-hidden{
+  background: url("chrome://rsitesearch/skin/images/sidebar/hidden.png") no-repeat ;
+}
+
+.rsitesearch-options-sidebar-visible{
+  background: url("chrome://rsitesearch/skin/images/sidebar/visible.png") no-repeat ;
+}
+
+.rsitesearch-tree-tooltip-image{
+  border : 1px solid black ;
+  margin-right: 5px ;
+}
+
+.rsitesearch-sidebar-tooltip-label{
+  font-style: italic ;
+  font-size: small ;
+}
+
+.rsitesearch-sidebar-tooltip-label-gray{
+  color: gray ;
+}
+
