@@ -5,7 +5,8 @@
 <!DOCTYPE overlay SYSTEM "chrome://rsitesearch/locale/rsitesearch.dtd">
 
 <overlay id="rsitesearchOverlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         xmlns:html="http://www.w3.org/1999/xhtml" >
 
     <script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/toggle.js" />
 	  
@@ -42,7 +43,14 @@
                   class="rsitesearch-advert"
                   pack="center"
                   collapsed="true" >
-                <label value="Advertise Here!" class="rsitesearch-advert-label" />
+                <html:html>
+                    <html:body>
+                        <html:div class="discrete">
+                          Advertise here
+                        </html:div>
+                        <html:a href="mailto:francoisromain@free.fr" >( ask romain for details)</html:a>
+                    </html:body>
+                </html:html>
             </hbox>    
         </vbox>
         

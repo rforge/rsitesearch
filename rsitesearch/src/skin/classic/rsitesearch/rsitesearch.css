@@ -354,3 +354,8 @@ treechildren::-moz-tree-row(neural) {background: no-repeat url("chrome://rsitese
   color: gray ;
 }
 
+.discrete{
+  font-size: smaller ;
+  font-weight: bolder ;
+  text-align: right;
+}

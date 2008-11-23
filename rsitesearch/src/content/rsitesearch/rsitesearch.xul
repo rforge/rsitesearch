@@ -11,7 +11,7 @@
         windowtype="rsitesearch"
         orient="vertical"
         persist="width"
-        onload=" updateAdverts() ; sv.search.toolbar.mode.init(); sv.search.options.init(); sv.search.sidebar.init();"
+        onload="updateAdverts() ; sv.search.toolbar.mode.init(); sv.search.options.init(); sv.search.sidebar.init();"
         onunload="updateAdverts() ; sv.search.sidebar.hide(false) " >
 <script type="application/x-javascript" src="chrome://rsitesearch/content/js/sciviews.js" />
 <script type="application/x-javascript" src="chrome://rsitesearch/content/js/sv/prefs.js" />

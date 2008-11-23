@@ -315,7 +315,7 @@ sv.search.engines["rgraphgallery"] = {
 sv.search.engines["rgraphicalmanuals"] = {
     description : "R Graphical Manuals",
     url : function( query ){
-        var search = "http://bm2.genes.nig.ac.jp/RGM2/index.php?query="+ query +"&scope=title" ;
+        var search = "http://bm2.genes.nig.ac.jp/RGM2/index.php?query="+ query ;
         return( search ) ;
     },
     process: function( txt) {
@@ -329,11 +329,12 @@ sv.search.engines["rgraphicalmanuals"] = {
         for( var i=0; i<txt.length; i++){
             td = txt[i] ;
             if( tdrx.test(td) ){
-                url = "http://bm2.genes.nig.ac.jp" + td.replace( /^.*?"(.*?)".*$/, "$1" ) ;
+                url = "http://bm2.genes.nig.ac.jp" + td.replace( /^.*?href="(.*?)".*$/, "$1" ) ;
                 png = "http://bm2.genes.nig.ac.jp" + td.replace( /^.*?src="(.*?)".*$/, "$1" ) ;
-                description = td.replace( /^.*?title="(.*?)".*$/, "$1") 
+                
+                description = td.replace( /^.*html" title="" target="_blank">(.*?)<\/a> \(.*$/, "$1") 
                 pack = td.replace( /^.*library\//, "" ).replace( /\/.*$/, "" )  ;
-                alias = td.replace( /.html">.*$/, "" ).replace( /.*\//, "" )  ;
+                alias = td.replace( /.*?\/man\/(.*?).html".*$/, "$1" ) ;
                 data[ data.length ] = {
                     url : url,
                     description : description,
