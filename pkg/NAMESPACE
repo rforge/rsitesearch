@@ -1,0 +1,6 @@
+export(RSiteSearch.function,
+       HTML)
+
+S3method(HTML, RSiteSearch)
+S3method(summary, RSiteSearch)
+S3method(print, summary.RSiteSearch)
