@@ -9,17 +9,27 @@ HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE, ...) {
   string <- eval(ocall$string)
   if(missing(file))
     file <- sprintf("%s.html", paste(string, collapse = "_"))
+  File <- file
   if(missing(title))
     title <- string
-  dir <- dirname(file)
-  dc0 <- dir.create(dir, FALSE, TRUE)
-  con <- file(file, "wt")
+  Dir <- dirname(File)
+  {
+    if(Dir=='.'){
+      Dir <- getwd()
+      File <- file.path(Dir, File)
+    }
+    else {
+      dc0 <- dir.create(Dir, FALSE, TRUE)
+    }
+  }
+  con <- file(File, "wt")
   on.exit(close(con))
   js <- system.file("js/sorttable.js", package = "RSiteSearch")
   if(!file.exists(js)) {
     warning("Unable to locate 'sorttable.js' file")
   } else {
-    file.copy(js, dir)
+#    file.copy(js, Dir)
+    file.copy(js, File)
   }
   cat("<html>", file = con)
   .cat("<head>")
@@ -100,6 +110,6 @@ table.sortable .empty {
 </table>
 </body>
 </html>")
-  browseURL(file)
+  browseURL(File)
   invisible()
 }

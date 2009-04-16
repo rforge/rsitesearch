@@ -29,16 +29,8 @@ HTML(x, ...)
   \code{\link[utils]{browseURL}}
 }
 \examples{
-  z <- RSiteSearch.function("spline", maxPages = 2)
-#  HTML(z)
-# Error in shell.exec(url) : 's' not found
-# In addition: Warning message:
-# In HTML.RSiteSearch(z) : Unable to locate 'sorttable.js' file
-# > traceback()
-# 4: shell.exec(url)
-# 3: browseURL(file)
-# 2: HTML.RSiteSearch(z)
-# 1: HTML(z)
+  splineSearch <- RSiteSearch.function("spline", maxPages = 2)
+  HTML(splineSearch)
 }
 \keyword{print}
 \keyword{methods}

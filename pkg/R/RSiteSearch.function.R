@@ -42,7 +42,9 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
     attr(ans, "hits") <- hits
     ans
   }
-  string <- gsub(" ", "+", string)
+# if substring(string, 1,1) != "{":
+  if(substr(string, 1, 1) != "{")
+    string <- gsub(" ", "+", string)
   tmpfile <- tempfile()
   url <- sprintf(
    "http://search.r-project.org/cgi-bin/namazu.cgi?query=%s&max=20&result=normal&sort=score&idxname=functions",
@@ -97,7 +99,7 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ##
 ## 4.  Merge(packageSum, ans)
 ##
-  pkgS2 <- pkgSum[ans$Package, ]
+  pkgS2 <- pkgSum[ans$Package,, drop=FALSE]
   rownames(pkgS2) <- NULL
   Ans <- cbind(as.data.frame(pkgS2), ans)
 ##
