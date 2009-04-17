@@ -1,11 +1,11 @@
-\title{A Super Fast 'RSiteSearch'}
+\title{Searching R Packages} 
 \author{by Spencer Graves and Sundar Dorai-Raj}
 
 \maketitle
 
 The {\tt RSiteSearch} package provides a means to quickly and
 flexibly search the help pages of contributed packages, finding
-functions and datasets in seconds or a few minutes that could not be
+functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
 The results are returned in a {\tt data.frame} of class {\tt
@@ -141,12 +141,22 @@ establish priorities for further study of the different packages and
 functions.
 
 \section*{HTML}
+The {\tt HTML} function writes an {\tt RSiteSearch} object to a file 
+in HTML format and opens it in a browser from which a mouse click will 
+open a desired help page.  
 
+The power of this can be seen by applying this function to the 
+{\tt grep'ed} subset of help pages with names including the phrase 
+{\tt spline}:  
 
-Example of use of HTML.RSiteSearch???
+\begin{verbatim} 
+HTML(splineAll[select, ])
+\end{verbatim} 
 
-
-
+Of the 631 help pages containing {\tt spline}, this displayed only 
+those whose name included the phrase {\tt spline}.  Similar analyses 
+could display any desired subset of an {\tt RSiteSearch} object 
+created from merging several calls to {\tt RSiteSearch.function}.  
 
 \section*{Summary}
 In sum, we have found the {\tt RSiteSearch.function} in the {\tt
@@ -154,3 +164,8 @@ RSiteSearch} package to be a very quick and efficient method for
 finding things in contributed packages when the obvious alternatives
 would have taken more effort.
 
+\section*{Acknowledgments} 
+The {\tt RSiteSearch} capabilities here extend the power of the 
+{\tt RSiteSearch} search engine maintained by Jonathan Baron.  
+Without Prof. Baron's support, it would not have been feasible 
+to develop the features described here.  

@@ -98,6 +98,10 @@ table.sortable .empty {
   desc <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description))
   x$Link <- sprintf("<a href='%s' target='_blank'>%s</a>", link, desc)
   x$Description <- NULL
+# change "Link" to "Description and Link"
+  ilk <- which(names(x)=='Link')
+  names(x)[ilk] <- "Description and Link"
+#
   .cat("<tr>\n  <th style='width:40px'>Id</th>")
   .cat(sprintf("  <th>%s</th>\n</tr>", paste(names(x), collapse = "</th>\n  <th>")))
   .cat("</thead>\n<tbody>")
@@ -111,5 +115,5 @@ table.sortable .empty {
 </body>
 </html>")
   browseURL(File)
-  invisible()
+  invisible(File)
 }

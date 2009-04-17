@@ -2,7 +2,8 @@
 \alias{HTML}
 \alias{HTML.RSiteSearch}
 \title{RSiteSearch HTML Tables}
-\description{Create and view an HTML table from the result of calling
+\description{
+  Create and view an HTML table from the result of calling
   \code{\link{RSiteSearch.function}}.
 }
 \usage{
@@ -11,17 +12,24 @@ HTML(x, ...)
 }
 \arguments{
   \item{x}{An object of class \code{RSiteSearch}}
-  \item{file}{An optional file name to print the table. Default is to
-    use a collapsed version of the original query string.}
-  \item{title}{An optional title to give the HTML file. Default is to
-    use the original query string.}
-  \item{openBrowser}{logical; if \code{TRUE} then launch default browser
-    after building table.}
+  \item{file}{
+    An optional name for the file containing the HTML file to be
+    created.  The default is to use a collapsed version of the original
+    query string.
+  }
+  \item{title}{
+    An optional title to give the HTML file. Default is to use the
+    original query string.
+  }
+  \item{openBrowser}{
+    logical; if \code{TRUE} then launch default browser after building
+    table.
+  }
   \item{\dots}{ignored}
 }
-
-\details{
-  more later
+%\details{ more later}
+\value{
+  The full path and name of the file created is returned invisibly.
 }
 \seealso{
   \code{\link{RSiteSearch.function}},

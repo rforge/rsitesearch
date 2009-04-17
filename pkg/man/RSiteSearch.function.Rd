@@ -65,7 +65,6 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   \item{Columns}{
 
     \itemize{
-      \item{Score}{Score returned by RSiteSearch}
       \item{Count}{Total number of hits downloaded in this package}
       \item{MaxScore}{
 	maximum of the hits downloaded in this \code{Package}
@@ -82,6 +81,7 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
 	criterion.
       }
       \item{Date}{Date of the help page}
+      \item{Score}{Score returned by RSiteSearch}
       \item{Description}{Title of the help page}
       \item{Link}{Universal Resource Locator (URL) for the help page}
     }
