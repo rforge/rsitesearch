@@ -8,7 +8,10 @@
 }
 \usage{
 HTML(x, ...)
-\method{HTML}{RSiteSearch}(x, file, title, openBrowser = TRUE, ...)
+\method{HTML}{RSiteSearch}(x, file, title, openBrowser = TRUE,
+	template = system.file( "brew", "results.brew.html",
+               package = "RSiteSearch" ),
+        ...)
 }
 \arguments{
   \item{x}{An object of class \code{RSiteSearch}}
@@ -25,6 +28,7 @@ HTML(x, ...)
     logical; if \code{TRUE} then launch default browser after building
     table.
   }
+  \item{template}{ argument passed to \code{brew} }
   \item{\dots}{ignored}
 }
 %\details{ more later}
@@ -35,12 +39,11 @@ HTML(x, ...)
   \code{\link{RSiteSearch.function}},
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{browseURL}}
+  \code{\link[brew]{brew}}
 }
 \examples{
   splineSearch <- RSiteSearch.function("spline", maxPages = 2)
-  \dontrun{
-	  HTML(splineSearch)
-  }
+  HTML(splineSearch)
 }
 \keyword{print}
 \keyword{methods}
