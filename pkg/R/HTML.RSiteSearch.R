@@ -22,10 +22,9 @@ HTML.RSiteSearch <- function( x, file, title, openBrowser = TRUE,
   } else {
     file.copy(js, Dir)
   }
-  X <- x
-  X$Description <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description))
+  x$Description <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description))
   for( j in 1:ncol(x) ){
-	 X[,j] <- as.character(x[,j])
+	 x[,j] <- as.character(x[,j])
   }
   brew( template,  File )
   if( openBrowser ) {
