@@ -38,7 +38,9 @@ HTML(x, ...)
 }
 \examples{
   splineSearch <- RSiteSearch.function("spline", maxPages = 2)
-  HTML(splineSearch)
+  \dontrun{
+	  HTML(splineSearch)
+  }
 }
 \keyword{print}
 \keyword{methods}
