@@ -2,10 +2,7 @@ HTML <- function(x, ...) {
   UseMethod("HTML")
 }
 
-HTML.RSiteSearch <- function( x, file, title, openBrowser = TRUE,
-             template = system.file( "brew", "results.brew.html",
-                                 package = "RSiteSearch" ),
-                             ...){
+HTML.RSiteSearch <- function( x, file, title, openBrowser = TRUE, template,  ...){
   ocall <- attr(x, "call")
   string <- eval(ocall$string)
   if(missing(file)){
@@ -25,6 +22,9 @@ HTML.RSiteSearch <- function( x, file, title, openBrowser = TRUE,
   x$Description <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description))
   for( j in 1:ncol(x) ){
 	 x[,j] <- as.character(x[,j])
+  }
+  if( missing( template ) ){
+	  template <- file( system.file( "brew", "results.brew.html", package = "RSiteSearch" ), encoding = "utf-8", open = "r" )
   }
   brew( template,  File )
   if( openBrowser ) {
