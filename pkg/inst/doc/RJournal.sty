@@ -1,32 +1,32 @@
 %%
-%% This is file `Rnews.sty',
+%% This is file `RJournal.sty',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% Rnews.dtx  (with options: `package')
+%% RJournal.dtx  (with options: `package')
 %% 
 %% IMPORTANT NOTICE:
 %% 
 %% For the copyright see the source file.
 %% 
 %% Any modified versions of this file must be renamed
-%% with new filenames distinct from Rnews.sty.
+%% with new filenames distinct from RJournal.sty.
 %% 
 %% For distribution of the original source see the terms
-%% for copying and modification in the file Rnews.dtx.
+%% for copying and modification in the file RJournal.dtx.
 %% 
 %% This generated file may be distributed as long as the
 %% original source files, as listed above, are part of the
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
-\def\fileversion{v0.3.6}
-\def\filename{Rnews}
-\def\filedate{2002/06/02}
-\def\docdate {2001/10/31}
+\def\fileversion{v0.5}
+\def\filename{RJournal}
+\def\filedate{2008/09/04}
+\def\docdate {2008/09/04}
 %%
-%% Package `Rnews' to use with LaTeX2e
-%% Copyright (C) 2001--2002 by the R Core Development Team
+%% Package `RJournal' to use with LaTeX2e
+%% Copyright (C) 2008 by the R Foundation
 %% Please report errors to KH or FL
 %%
 %% -*- LaTeX -*-
@@ -43,6 +43,7 @@
 \ProcessOptions\relax
 \ifthenelse{\boolean{Rnews@driver}}{}{
 \RequirePackage{multicol,graphicx,color,fancyhdr,hyperref}
+\IfFileExists{upquote.sty}{\RequirePackage{upquote}}{}
 \newcommand{\volume}[1]{\def\Rnews@volume{#1}}
 \newcommand{\volnumber}[1]{\def\Rnews@number{#1}}
 \renewcommand{\date}[1]{\def\Rnews@date{#1}}
@@ -97,11 +98,10 @@
   \rule{\textwidth}{1pt}\\[-.8\baselineskip]
   \rule{\textwidth}{.5pt}
   \begin{center}
-    \includegraphics[height=2cm]{Rlogo}\hspace{7mm}
     \fontsize{2cm}{2cm}\selectfont
-    News
+    The \includegraphics[height=2cm]{Rlogo}\hspace{7mm}
+    Journal
   \end{center}
-  The Newsletter of the R Project\hfill
   Volume \Rnews@volume/\Rnews@number, \Rnews@date\\[-.5\baselineskip]
   \rule{\textwidth}{.5pt}\\[-.8\baselineskip]
   \rule{\textwidth}{1pt}
@@ -109,8 +109,8 @@
   \fancyhf{}
   \fancyhead[L]{Vol.~\Rnews@volume/\Rnews@number, \Rnews@date}
   \fancyhead[R]{\thepage}
-  \fancyfoot[L]{R News}
-  \fancyfoot[R]{ISSN 1609-3631}
+  \fancyfoot[L]{The R Journal}
+  \fancyfoot[R]{ISSN ????-????}
   \thispagestyle{empty}
   \begin{bottombox}
     \begin{multicols}{2}
@@ -119,6 +119,18 @@
       \setcounter{tocdepth}{2}
     \end{multicols}
   \end{bottombox}}
+\newcommand{\startRnews}{%
+  \newpage\noindent
+  \begin{center}
+    \fontsize{15mm}{1mm}\selectfont
+    \includegraphics[height=15mm]{Rlogo}\hspace{7mm}
+    News
+  \end{center}
+  \rule{\textwidth}{.5pt}
+  \vspace{1cm}
+  \addcontentsline{toc}{chapter}{R News}
+}
+
 \setlength{\textheight}{250mm}
 \setlength{\topmargin}{-10mm}
 \setlength{\textwidth}{17cm}
@@ -189,6 +201,10 @@
 \newenvironment{smallexample}{\begin{alltt}\small}{\end{alltt}}
 \newenvironment{display}{\list{}{}\item\relax}{\endlist}
 \newenvironment{smallverbatim}{\small\verbatim}{\endverbatim}
+\RequirePackage{fancyvrb}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontsize=\small,fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontsize=\small}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontsize=\small,fontshape=sl}
 \providecommand{\operatorname}[1]{%
   \mathop{\operator@font#1}\nolimits}
 \renewcommand{\P}{%
@@ -201,4 +217,4 @@
 \RequirePackage{amsfonts}
 \endinput
 %%
-%% End of file `Rnews.sty'.
+%% End of file `RJournal.sty'.
