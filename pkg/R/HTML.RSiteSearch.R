@@ -2,100 +2,93 @@ HTML <- function(x, ...) {
   UseMethod("HTML")
 }
 
-HTML.RSiteSearch <- function( x, file, title, openBrowser = TRUE,
-                             template,  ...){
-##
-## 1.  Get call including search string
-##
+HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE, template,  ...) {
+  ##
+  ## 1.  Get call including search string
+  ##
   ocall <- attr(x, "call")
   string <- eval(ocall$string)
-##
-## 2.  File, title, Dir?
-##
-  if(missing(file)){
+  ##
+  ## 2.  File, title, Dir?
+  ##
+  if (missing(file)) {
     file <- sprintf("%s.html", paste(string, collapse = "_"))
   }
   File <- file
-  if(missing(title)){
+  if (missing(title)) {
     title <- string
   }
   Dir <- dirname(File)
-  {
-    if(Dir=='.'){
-      Dir <- getwd()
-      File <- file.path(Dir, File)
-    }
-    else {
-      dc0 <- dir.create(Dir, FALSE, TRUE)
-    }
+  if (Dir == '.') {
+    Dir <- getwd()
+    File <- file.path(Dir, File)
+  } else {
+    dc0 <- dir.create(Dir, FALSE, TRUE)
   }
-  con <- file(File, "wt")
-  on.exit(close(con))
-##
-## 3.  sorttable.js?
-##
-#  Dir <- tools:::file_path_as_absolute( dirname(File) )
-#  This line is NOT ENOUGH:
-#           browseURL(File) needs the full path in File
+  ##
+  ## 3.  sorttable.js?
+  ##
+  ##  Dir <- tools:::file_path_as_absolute( dirname(File) )
+  ##  This line is NOT ENOUGH:
+  ##           browseURL(File) needs the full path in File
   js <- system.file("js", "sorttable.js", package = "RSiteSearch")
-  {
-    if(!file.exists(js)) {
-      warning("Unable to locate 'sorttable.js' file")
-    } else {
-#*** Future:
-# Replace 'Dir\js' with a temp file
-# that does not exist, then delete it on.exit
-      file.copy(js, Dir)
-    }
+  if (!file.exists(js)) {
+    warning("Unable to locate 'sorttable.js' file")
+  } else {
+    ##*** Future:
+    ## Replace 'Dir\js' with a temp file
+    ## that does not exist, then delete it on.exit
+    file.copy(js, Dir)
   }
-##
-## 4.  Modify x$Description
-##
-# save 'x' as 'xin' for debugging
+  ##
+  ## 4.  Modify x$Description
+  ##
+  ## save 'x' as 'xin' for debugging
   xin <- x
   x$Description <- gsub("(^[ ]+)|([ ]+$)", "",
                         as.character(x$Description))
-  for( j in 1:ncol(x) ){
-    x[,j] <- as.character(x[,j])
-  }
-##
-## 5.  template for brew?
-##
-  if( missing( template ) ){
+  x[] <- lapply(x, as.character)
+  ##
+  ## 5.  template for brew?
+  ##
+  hasTemplate <- !missing(template)
+  if (!hasTemplate) {
     templateFile <- system.file("brew", "results.brew.html",
                                 package = "RSiteSearch")
     template <- file(templateFile, encoding = "utf-8", open = "r" )
   }
-# 'brew( template,  File )' malfunctioned;
-# try putting what we need in a special environment
+  ## 'brew( template,  File )' malfunctioned;
+  ## try putting what we need in a special environment
   xenv <- new.env()
   assign('ocall', ocall, envir=xenv)
   assign('x', x, envir=xenv)
-#
-  brew( template,  File, envir=xenv )
-  close(con)
-  on.exit()
-##
-## 6.  Was File created appropriately?  If no, try Sundar's original code
-##
+  ##
+  brew(template, File, envir = xenv)
+  if (!hasTemplate) {
+    close(template)
+  }
+  ##
+  ## 6.  Was File created appropriately?  If no, try Sundar's original code
+  ##
   FileInfo <- file.info(File)
-  if(is.na(FileInfo$size) || (FileInfo$size<=0)){
-    if(is.na(FileInfo$size))
+  if (is.na(FileInfo$size) || FileInfo$size <= 0) {
+    if (is.na(FileInfo$size)) {
       warning("Brew did not create file ", File)
-    else
+    } else {
       warning("Brew created a file of size 0")
+    }
     cat("Ignoring template.\n")
-# Sundar's original construction:
+    ## Sundar's original construction:
     con <- file(File, "wt")
     on.exit(close(con))
     .cat <- function(...)
       cat(..., "\n", sep = "", file = con, append = TRUE)
-# start
+    ## start
     cat("<html>", file = con)
     .cat("<head>")
     .cat("<title>", title, "</title>")
     .cat("<script src=sorttable.js type='text/javascript'></script>")
-# Set up ??? ... with a multiline quote :(  :(  :(
+    ## Set up ??? ... with a multiline quote :(  :(  :(
     .cat("<style>
 table.sortable thead {
   font: normal 10pt Tahoma, Verdana, Arial;
@@ -151,7 +144,7 @@ table.sortable .empty {
 }
 </style>
 </head>")
-#  Search results ... ???
+    ##  Search results ... ???
     .cat("<h1>RSiteSearch Results</h1>\n")
     .cat("<h2>call: <font color='#800'>",
          paste(deparse(ocall), collapse = ""), "</font></h2>\n")
@@ -160,10 +153,10 @@ table.sortable .empty {
     desc <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description))
     x$Link <- sprintf("<a href='%s' target='_blank'>%s</a>", link, desc)
     x$Description <- NULL
-# change "Link" to "Description and Link"
+    ## change "Link" to "Description and Link"
     ilk <- which(names(x)=='Link')
     names(x)[ilk] <- "Description and Link"
-#
+    ##
     .cat("<tr>\n  <th style='width:40px'>Id</th>")
     .cat(sprintf("  <th>%s</th>\n</tr>",
                  paste(names(x), collapse = "</th>\n  <th>")))
@@ -174,30 +167,26 @@ table.sortable .empty {
     tbody <- sprintf("<tr>\n  <td>%s</td>\n</tr>", tbody.list)
     tbody <- sub("<td><a", "<td class=link><a", tbody)
     .cat(tbody)
-# another (shorter) multiline thingy ???
+    ## another (shorter) multiline thingy ???
     .cat("</tbody>
 </table>
 </body>
 </html>")
-# Done ?????
-    close(con)
-    on.exit()
   }
-##
-## 7.  Display in a browser?
-##
-  if( openBrowser ) {
+  ##
+  ## 7.  Display in a browser?
+  ##
+  if (openBrowser) {
     FileInf2 <- file.info(File)
-    {
-      if(is.na(FileInf2$size))
-        warning("Did not create file ", File,
+    if (is.na(FileInf2$size)) {
+      warning("Did not create file ", File,
+              ";  nothing to give to a browser.")
+    } else {
+      if (FileInf2$size <= 0) {
+        warning("0 bytes in file ", File,
                 ";  nothing to give to a browser.")
-      else {
-        if(FileInf2$size<=0)
-          warning("0 bytes in file ", File,
-                  ";  nothing to give to a browser.")
-         else
-           browseURL(File)
+      } else {
+        browseURL(File)
       }
     }
   }
