@@ -1,9 +1,9 @@
 Package: RSiteSearch
 Title: RSiteSearch
-Version: 0.1-2
+Version: 0.1-3
 Author: Sundar Dorai-Raj, Romain Francois and Spencer Graves
 Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
 Description:  Alternative interfaces to RSiteSearch
-License: PDF Confidential
+License: GPL
 Depends: brew
 
