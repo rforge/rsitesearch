@@ -12,7 +12,15 @@ HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE, template,  ...)
   ## 2.  File, title, Dir?
   ##
   if (missing(file)) {
-    file <- sprintf("%s.html", paste(string, collapse = "_"))
+#    file <- sprintf("%s.html", paste(string, collapse = "_"))
+    f0 <- tempfile()
+    for(i in 1:111){
+      file <- paste(f0, '.html', sep='')
+      fInf <- file.info(file)
+      if(all(is.na(fInf)))break
+#     file exists so try another
+      f0 <- paste(f0, '1', sep='')
+    }
   }
   File <- file
   if (missing(title)) {

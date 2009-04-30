@@ -14,9 +14,7 @@ HTML(x, ...)
 \arguments{
   \item{x}{An object of class \code{RSiteSearch}}
   \item{file}{
-    An optional name for the file containing the HTML file to be
-    created.  The default is to use a collapsed version of the original
-    query string.
+    An optional name for the HTML file to be created.
   }
   \item{title}{
     An optional title to give the HTML file. Default is to use the
@@ -33,6 +31,7 @@ HTML(x, ...)
 \value{
   The full path and name of the file created is returned invisibly.
 }
+\author{Sundar Dorai-Raj, Spencer Graves, Romain Francois, Uwe Ligges}
 \seealso{
   \code{\link{RSiteSearch.function}},
   \code{\link[utils]{RSiteSearch}},
