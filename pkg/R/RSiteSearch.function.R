@@ -58,7 +58,15 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
   hits <- attr(ans, 'hits')
 #  hits <- max(0, attr(ans, 'hits'))
 #  If no hits, return
-  if(length(hits) < 1) return(ans)
+  if(length(hits) < 1) {
+    attr(ans, 'hits') <- 0
+    attr(ans, 'PackageSummary') <- matrix(NA, 0, 3, dimnames=
+                   list(NULL, c("Count", "MaxScore", "TotalScore")))
+    attr(ans, 'string') <- string
+    attr(ans, 'call') <- match.call()
+    class(ans) <- c("RSiteSearch", "data.frame")
+    return(ans)
+  }
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "hits")) {
