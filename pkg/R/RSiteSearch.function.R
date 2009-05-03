@@ -79,11 +79,12 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ##
 ## 2.  Compute Summary
 ##
-  Count <- tapply(rep(1,nrow(ans)), ans$Package, length)
+#  Count <- tapply(rep(1,nrow(ans)), ans$Package, length)
   ans$Score <- as.numeric(as.character(ans$Score))
-  maxSc <- with(ans, tapply(Score, Package, max))
-  totSc <- with(ans, tapply(Score, Package, sum))
-  pkgSum <- cbind(Count, MaxScore=maxSc, TotalScore=totSc)
+#  maxSc <- with(ans, tapply(Score, Package, max))
+#  totSc <- with(ans, tapply(Score, Package, sum))
+#  pkgSum <- cbind(Count, MaxScore=maxSc, TotalScore=totSc)
+  pkgSum <- PackageSummary(ans)
 ##
 ## 3.  Sort Summary
 ##
