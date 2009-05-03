@@ -1,0 +1,3 @@
+0.1-5:  With zero hits, RSiteSearch.function still returns
+an object of class c('RSiteSearch', 'data.frame');
+previously, it returned only a data.frame with zero rows.

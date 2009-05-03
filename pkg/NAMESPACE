@@ -1,3 +1,5 @@
+export(PackageSummary)
+
 importFrom( brew, brew )
 export(RSiteSearch.function,
        HTML)
