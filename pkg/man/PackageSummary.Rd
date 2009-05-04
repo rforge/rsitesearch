@@ -16,21 +16,24 @@ PackageSummary(x)
 }
 %\details{}
 \value{
-  a matrix with one row for each Package identified in the search and
-  columns for \code{Count}, \code{MaxScore}, \code{TotalScore}, with
-  \code{rownames} = the names of the Packages, sorted as in the
-  \code{sort} argument.
+  a data.frame with one row for each package and columns \code{Package},
+  \code{Count}, \code{MaxScore}, \code{TotalScore}, and \code{Date}.
 }
 \seealso{
   \code{\link[utils]{RSiteSearch}},
   \code{\link{RSiteSearch.function}}
 }
 \examples{
-tstdf <- data.frame(Package=letters[c(1,1,2)], Score=2:4)
-tstSum <- cbind(Count=c(a=2, b=1), MaxScore=c(3, 4),
-                TotalScore=c(5, 4))
+tstdf <- data.frame(Package=letters[c(1,1,2)], Score=2:4,
+                    Date=LETTERS[1:3], stringsAsFactors=FALSE)
+tstSum <- PackageSummary(tstdf)
+# The answer:
+tstSm <- data.frame(Package=letters[1:2], Count=c(a=2, b=1),
+            MaxScore=c(3, 4), TotalScore=c(5, 4),
+            Date=LETTERS[c(1, 3)], stringsAsFactors=FALSE)
+row.names(tstSm) <- 1:2
 \dontshow{stopifnot(}
-all.equal(PackageSummary(tstdf), tstSum)
+all.equal(tstSum, tstSm)
 \dontshow{)}
 }
 \keyword{misc}

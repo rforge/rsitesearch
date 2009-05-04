@@ -24,13 +24,10 @@
   elements:
 
   \item{PackageSummary}{
-    a numeric matrix with \code{rownames} = \code{Package} names and
-    columns for \code{Count} = total number of help pages identified,
-    \code{MaxScore} = the maximum of the scores assigned by
-    \code{RSiteSearch}, and \code{TotalScore} = the total of all the
-    \code{RSiteSearch} scores for that package.  This summary is
-    sorted per the \code{sort.} argument in the call to
-    \code{RSiteSearch.function}.
+    a data.frame with one row for each package and columns
+    \code{Package}, \code{Count}, \code{MaxScore}, \code{TotalScore},
+    and \code{Date}. This summary is sorted per the \code{sort.}
+    argument in the call to \code{RSiteSearch.function}.
   }
   \item{threshold}{
     the \code{threshold} argument in this call to

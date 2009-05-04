@@ -94,10 +94,9 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
 	an integer = total number of hits found by the search
       }
       \item{PackageSummary}{
-	a matrix with one row for each Package identified in the search
-	and columns for \code{Count}, \code{MaxScore}, \code{TotalScore},
-	with \code{rownames} = the names of the Packages, sorted as in the
-	\code{sort} argument.
+	a data.frame with one row for each package and columns
+	\code{Package}, \code{Count}, \code{MaxScore}, \code{TotalScore},
+	and \code{Date}, sorted as in the \code{sort.} argument.
       }
       \item{string}{
 	the \code{string} argument in the \code{call}.

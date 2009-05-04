@@ -60,8 +60,8 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 #  If no hits, return
   if(length(hits) < 1) {
     attr(ans, 'hits') <- 0
-    attr(ans, 'PackageSummary') <- matrix(NA, 0, 3, dimnames=
-                   list(NULL, c("Count", "MaxScore", "TotalScore")))
+    pkgSum <- PackageSummary(ans)
+    attr(ans, 'PackageSummary') <- pkgSum
     attr(ans, 'string') <- string
     attr(ans, 'call') <- match.call()
     class(ans) <- c("RSiteSearch", "data.frame")
@@ -102,7 +102,9 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
   }
   pkgSort <- sort.[sort. %in%
                    c('Count', 'MaxScore', 'TotalScore', 'Package')]
-  pkgKey <- data.frame(Package=rownames(pkgSum), as.data.frame(-pkgSum) )
+  pkgKey <- with(pkgSum,
+                 data.frame(Package, Count=-Count, MaxScore=-MaxScore,
+                            TotalScore=-TotalScore))
   o <- do.call('order', pkgKey[pkgSort])
   packageSum <- pkgSum[o, ]
 ##
