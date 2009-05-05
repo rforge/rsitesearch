@@ -67,10 +67,16 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
     \itemize{
       \item{Count}{Total number of hits downloaded in this package}
       \item{MaxScore}{
-	maximum of the hits downloaded in this \code{Package}
+	maximum of the \code{Score} over all help pages selected within
+	each \code{Package}.  See \code{Score} below or the Namazu
+	website (link below) for more information on how the score is
+	determined.
       }
       \item{TotalScore}{
-	Sum of Score over all hits downloaded in this \code{Package}
+	sum of the \code{Score} over all help pages selected within
+	each \code{Package}.  See \code{Score} below or the Namazu
+	website (link below) for more information on how the score is
+	determined.
       }
       \item{Package}{
 	Name of the package containing a help page meeting the search
@@ -81,7 +87,10 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
 	criterion.
       }
       \item{Date}{Date of the help page}
-      \item{Score}{Score returned by RSiteSearch}
+      \item{Score}{
+	Score returned by \code{RSiteSearch}, discussed in the Namazu
+	website (link below).
+      }
       \item{Description}{Title of the help page}
       \item{Link}{Universal Resource Locator (URL) for the help page}
     }
@@ -117,6 +126,10 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   \url{http://www.r-project.org/search.html} for a list of alternative R
   search capabilities, each of which may be best for different types of
   inquiries.
+}
+\references{
+  \url{http://www.namazu.org/doc/tips.html.en#weight} - reference on
+  determining \code{Score}
 }
 \examples{
   z <- RSiteSearch.function("spline", maxPages = 2)
