@@ -86,7 +86,7 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 #  pkgSum <- cbind(Count, MaxScore=maxSc, TotalScore=totSc)
   pkgSum <- PackageSummary(ans)
 ##
-## 3.  Sort Summary
+## 3.  Sort order
 ##
   s0 <-  c('Count', 'MaxScore', 'TotalScore', 'Package',
            'Score', 'Function', 'Date', 'Description', 'Link')
@@ -100,17 +100,20 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
       sort. <- s0[s1.]
     }
   }
-  pkgSort <- sort.[sort. %in%
-                   c('Count', 'MaxScore', 'TotalScore', 'Package')]
-  pkgKey <- with(pkgSum,
-                 data.frame(Package, Count=-Count, MaxScore=-MaxScore,
-                            TotalScore=-TotalScore))
-  o <- do.call('order', pkgKey[pkgSort])
-  packageSum <- pkgSum[o, ]
+#  pkgSort <- sort.[sort. %in%
+#                   c('Count', 'MaxScore', 'TotalScore', 'Package')]
+#  pkgKey <- with(pkgSum,
+#                 data.frame(Package, Count=-Count, MaxScore=-MaxScore,
+#                            TotalScore=-TotalScore))
+#  o <- do.call('order', pkgKey[pkgSort])
+#  packageSum <- pkgSum[o, ]
 ##
 ## 4.  Merge(packageSum, ans)
 ##
-  pkgS2 <- pkgSum[ans$Package,, drop=FALSE]
+  packageSum <- pkgSum
+  rownames(pkgSum) <- as.character(pkgSum$Package)
+  pkgSum$Package <- NULL
+  pkgS2 <- pkgSum[as.character(ans$Package), , drop=FALSE]
   rownames(pkgS2) <- NULL
   Ans <- cbind(as.data.frame(pkgS2), ans)
 ##
