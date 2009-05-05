@@ -1,4 +1,4 @@
-PackageSummary <- function(x){
+PackageSummary <- function(x, sort.=NULL){
 ##
 ## 1.  Convert Package to character to avoid corruption
 ##     from any unused levels
@@ -15,8 +15,30 @@ PackageSummary <- function(x){
 ##     which would be corrupted by tapply
 ##
   iP <- tapply(seq(1, length=nrow(x)), xP, function(x)x[1])
-  Sum <- data.frame(Package=xP[iP], Count=as.numeric(Count),
+  pkgSum <- data.frame(Package=xP[iP], Count=as.numeric(Count),
                     MaxScore=as.numeric(maxSc),
                     TotalScore=as.numeric(totSc), Date=x$Date[iP],
                     stringsAsFactors=FALSE)
+##
+## 4.  Sort
+##
+  s0 <-  c('Count', 'MaxScore', 'TotalScore', 'Package',
+           'Score', 'Function', 'Date', 'Description', 'Link')
+  s0. <- tolower(s0)
+  {
+    if(is.null(sort.)) sort. <-  s0
+    else {
+      s1 <- match.arg(tolower(sort.), s0., TRUE)
+      s1. <- c(s1, s0.[!(s0. %in% s1)])
+      names(s0) <- s0.
+      sort. <- s0[s1.]
+    }
+  }
+  pkgSort <- sort.[sort. %in%
+                   c('Count', 'MaxScore', 'TotalScore', 'Package')]
+  pkgKey <- with(pkgSum,
+                 data.frame(Package, Count=-Count, MaxScore=-MaxScore,
+                            TotalScore=-TotalScore))
+  o <- do.call('order', pkgKey[pkgSort])
+  pkgSum[o, ]
 }

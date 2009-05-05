@@ -7,17 +7,32 @@
   = max and total score for help pages found from that package.
 }
 \usage{
-PackageSummary(x)
+PackageSummary(x, sort.=NULL)
 }
 \arguments{
   \item{x}{
-    a data.frame with columns \code{Package} and \code{Score}.
+    a data.frame with columns \code{Package}, \code{Score}, and
+    \code{Date}.
+  }
+  \item{sort.}{
+    a character vector specifying how the \code{data.frame} returned
+    should be sorted.  Default = c('Count', 'MaxScore', 'TotalScore',
+    'Package') to sort descending on numerics and ascending on
+    alphnumerics.  Specifying sort. = c('c', 't', 'm') is equivalent to
+    c('Count', 'TotalScore', 'MaxScore', 'Package', 'Score',
+    'Function').
+
+    Components of \code{sort.} must match either this list or c('Score',
+    'Function', 'Date', 'Description', 'Link').  Any on this latter list
+    are ignored without a warning.  This allows the same \code{sort.}
+    used for \code{RSiteSearch.function} to be used here.
   }
 }
 %\details{}
 \value{
   a data.frame with one row for each package and columns \code{Package},
-  \code{Count}, \code{MaxScore}, \code{TotalScore}, and \code{Date}.
+  \code{Count}, \code{MaxScore}, \code{TotalScore}, and \code{Date},
+    sorted as specified by \code{sort.}.
 }
 \seealso{
   \code{\link[utils]{RSiteSearch}},
