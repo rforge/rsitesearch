@@ -1,4 +1,4 @@
-export(PackageSummary, PackageSum2)
+export(PackageSummary, PackageSum2, sortRSiteSearch)
 
 importFrom( brew, brew )
 export(RSiteSearch.function,
