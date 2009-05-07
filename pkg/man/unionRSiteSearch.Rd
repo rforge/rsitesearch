@@ -47,5 +47,9 @@ de1 <- RSiteSearch.function('differential equation', 1)
 
 de.s <- unionRSiteSearch(des1, de1)
 # combines the two, eliminating duplicates.
+
+# summary and HTML still work with the combined object.
+summary(de.s)
+HTML(de.s)
 }
 \keyword{misc}
