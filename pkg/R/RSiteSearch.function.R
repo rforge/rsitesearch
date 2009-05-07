@@ -70,7 +70,7 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "hits")) {
-    for(i in 2:n) {
+    for(i in seq(2, length=n-1)) {
       if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
       url.i <- sprintf("%s&whence=%d", url, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(url.i))

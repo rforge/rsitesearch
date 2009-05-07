@@ -1,6 +1,7 @@
 sortRSiteSearch <- function(x, sort.=NULL) {
 ##
 ## 1.  PackageSummary
+##
   x$Score <- as.numeric(as.character(x$Score))
   pkgSum <- PackageSummary(x, sort.)
 ##

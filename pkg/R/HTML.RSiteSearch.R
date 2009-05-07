@@ -2,12 +2,13 @@ HTML <- function(x, ...) {
   UseMethod("HTML")
 }
 
-HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE, template,  ...) {
+HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE,
+                             template,  ...) {
   ##
   ## 1.  Get call including search string
   ##
   ocall <- attr(x, "call")
-  string <- eval(ocall$string)
+  string <- attr(x, 'string')
   ##
   ## 2.  File, title, Dir?
   ##
