@@ -1,14 +1,18 @@
 \name{unionRSiteSearch}
 \alias{unionRSiteSearch}
+\alias{intersectRSiteSearch}
 \title{
-  Union of Two RSiteSearch Objects
+  Combine RSiteSearch Objects
 }
 \description{
   Combines to \code{RSiteSearch} objects into a new RSiteSearch object
   with only one row for any help page duplicated between the two.
+  \code{unionRSiteSearch} removed the duplicate entries.
+  \code{intersectRSiteSearch} keeps only the duplicates.
 }
 \usage{
 unionRSiteSearch(x, y, sort.=NULL)
+intersectRSiteSearch(x, y, sort.=NULL)
 }
 \arguments{
   \item{x, y}{
@@ -48,8 +52,14 @@ de1 <- RSiteSearch.function('differential equation', 1)
 de.s <- unionRSiteSearch(des1, de1)
 # combines the two, eliminating duplicates.
 
+# Keep only the common entries.
+de2 <- intersectRSiteSearch(des1, de1)
+
 # summary and HTML still work with the combined object.
 summary(de.s)
 HTML(de.s)
+
+summary(de2)
+HTML(de2)
 }
 \keyword{misc}

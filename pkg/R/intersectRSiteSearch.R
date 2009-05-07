@@ -1,0 +1,39 @@
+intersectRSiteSearch <- function(x, y, sort.=NULL) {
+##
+## 1.  rbind
+##
+  xy <- rbind(x, y)
+##
+## 2.  Find and merge duplicates
+##
+  if(!('Link' %in% names(xy)))
+    stop('Neither x nor y contain Link')
+  uL <- table(xy$Link)
+  dups <- names(uL[uL>1])
+  ndups <- length(dups)
+  keep <- rep(FALSE, nrow(xy))
+  Sc <- xy$Score
+  for(i in seq(1, ndups)){
+    whichi <- which(xy$Link == dups[i])
+    if(Sc[whichi[1]]>Sc[whichi[2]])
+      keep[whichi[1]] <- TRUE
+    else keep[whichi[2]] <- TRUE
+  }
+  xy. <- xy[keep, ]
+##
+## 3.  Rebuild summary and resort
+##
+  xys <- sortRSiteSearch(xy.[,
+     c('Package', 'Score', 'Function', 'Date', 'Description', 'Link')])
+##
+## 4.  Fix attributes
+##
+  attr(xys, 'hits') <- nrow(xys)
+  attr(xys, 'string') <- paste(attr(x, 'string'), attr(y, 'string'),
+                               sep=' & ')
+  attr(xys, 'call') <- c(attr(x, 'call'), '&', attr(y, 'call'))
+##
+## 5.  Done
+##
+  xys
+}
