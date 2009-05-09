@@ -1,3 +1,5 @@
+1.0-0:  Add unionRSiteSearch, intersectRSiteSearch and PackageSum2
+
 0.1-6:  Add function PackageSummary to compute the summary
 previously done inside RSiteSearch.function, convertinng it
 to a data.frame and adding the Date.
