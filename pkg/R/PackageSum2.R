@@ -1,5 +1,5 @@
 PackageSum2 <- function(x,
-      fields=c("Version", "Author", "Maintainer", "Packaged"),
+      fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
                         lib.loc=NULL){
 ##
 ## 1.  Create character matrix for fields

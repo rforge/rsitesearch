@@ -8,7 +8,8 @@
   columns from \code{attributes} of \code{packageDescription}.
 }
 \usage{
-PackageSum2(x, fields=c("Version", "Author", "Maintainer", "Packaged"),
+PackageSum2(x,
+        fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
             lib.loc=NULL )
 }
 \arguments{
