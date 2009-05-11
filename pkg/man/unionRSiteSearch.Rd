@@ -33,6 +33,8 @@ intersectRSiteSearch(x, y, sort.=NULL)
 
   3.  Apply \code{sortRSiteSearch} to the rebuild the summary and sort
   the result as desired.
+
+  4.  attr(xy, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
 }
 \value{
   an object with class c('RSiteSearch', 'data.frame') as returned by

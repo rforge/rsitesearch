@@ -1,5 +1,5 @@
 export(PackageSummary, PackageSum2, sortRSiteSearch,
-       unionRSiteSearch, intersectRSiteSearch)
+       unionRSiteSearch, intersectRSiteSearch, hits)
 
 importFrom( brew, brew )
 export(RSiteSearch.function,

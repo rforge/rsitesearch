@@ -28,7 +28,7 @@ intersectRSiteSearch <- function(x, y, sort.=NULL) {
 ##
 ## 4.  Fix attributes
 ##
-  attr(xys, 'hits') <- nrow(xys)
+  attr(xys, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
   attr(xys, 'string') <- paste(attr(x, 'string'), attr(y, 'string'),
                                sep=' & ')
   attr(xys, 'call') <- c(attr(x, 'call'), '&', attr(y, 'call'))

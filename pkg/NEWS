@@ -1,3 +1,7 @@
+1.0-2:  Add hits function
+
+1.0-1:  Fix a minor bug in unionRSiteSearch.
+
 1.0-0:  Add unionRSiteSearch, intersectRSiteSearch and PackageSum2
 
 0.1-6:  Add function PackageSummary to compute the summary
