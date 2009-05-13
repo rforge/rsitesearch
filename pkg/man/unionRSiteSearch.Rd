@@ -14,7 +14,10 @@
 \usage{
 unionRSiteSearch(x, y, sort.=NULL)
 intersectRSiteSearch(x, y, sort.=NULL)
+
 \S3method{Ops}{RSiteSearch}(e1,e2)
+# This supports "|" for "unionRSiteSearch"
+# and "&" for "intersectRSiteSearch".
 }
 \arguments{
   \item{x, y}{
@@ -42,7 +45,7 @@ intersectRSiteSearch(x, y, sort.=NULL)
   4.  attr(xy, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
 }
 \note{
-	Binary operators \samp{&} and \samp{|} are implemented 
+	Binary operators \samp{&} and \samp{|} are implemented
 	for the S3 class \samp{RSiteSearch}
 }
 \value{
@@ -63,7 +66,7 @@ de1 <- RSiteSearch.function('differential equation', 1)
 de.s <- unionRSiteSearch(des1, de1)
 # combines the two, eliminating duplicates.
 
-# or the sorter version: 
+# or the sorter version:
 de.s <- des1 | de1
 
 # Keep only the common entries.
