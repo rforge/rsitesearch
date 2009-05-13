@@ -13,7 +13,7 @@ intersectRSiteSearch <- function(x, y, sort.=NULL) {
   ndups <- length(dups)
   keep <- rep(FALSE, nrow(xy))
   Sc <- xy$Score
-  for(i in seq(1, ndups)){
+  for(i in seq(1, length=ndups)){
     whichi <- which(xy$Link == dups[i])
     if(Sc[whichi[1]]>Sc[whichi[2]])
       keep[whichi[1]] <- TRUE

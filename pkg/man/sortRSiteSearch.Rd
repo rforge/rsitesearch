@@ -15,7 +15,6 @@ sortRSiteSearch(x, sort.=NULL)
   \item{sort.}{
     sort information as for function \code{RSiteSearch.function}.
   }
-  \item{\dots}{ignored}
 }
 \details{
   1.  pkgSum <- PackageSummary(x, sort.)

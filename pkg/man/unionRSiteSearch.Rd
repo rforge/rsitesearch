@@ -63,5 +63,13 @@ HTML(de.s)
 
 summary(de2)
 HTML(de2)
+
+\dontshow{
+# The following gave an error;  now fixed 2009.05.12
+x <- RSiteSearch.function("spline", maxPages = 1, quiet = TRUE)
+y <- RSiteSearch.function("winbugs", maxPages = 1, quiet = TRUE)
+intersectRSiteSearch( x, y )
+}
+
 }
 \keyword{misc}
