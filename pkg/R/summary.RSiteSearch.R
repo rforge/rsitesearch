@@ -14,7 +14,7 @@ summary.RSiteSearch <- function(object, threshold = 1, ...) {
 print.summary.RSiteSearch <- function(x, ...) {
   cat("\nCall:\n")
   cat(paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-  cat("Total number of hits: ", x$hits, "\n", sep = "")
+  cat("Total number of hits: ", sum( x$hits) , "\n", sep = "")
   cat("Number of links downloaded: ", x$nrow, "\n\n", sep = "")
   string <- x$string
   cat("Packages with at least ", x$threshold, " hit",
