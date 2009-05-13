@@ -8,3 +8,5 @@ export(RSiteSearch.function,
 S3method(HTML, RSiteSearch)
 S3method(summary, RSiteSearch)
 S3method(print, summary.RSiteSearch)
+S3method(Ops, RSiteSearch )
+

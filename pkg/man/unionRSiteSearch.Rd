@@ -1,6 +1,7 @@
 \name{unionRSiteSearch}
 \alias{unionRSiteSearch}
 \alias{intersectRSiteSearch}
+\alias{Ops.RSiteSearch}
 \title{
   Combine RSiteSearch Objects
 }
@@ -13,6 +14,7 @@
 \usage{
 unionRSiteSearch(x, y, sort.=NULL)
 intersectRSiteSearch(x, y, sort.=NULL)
+\S3method{Ops}{RSiteSearch}(e1,e2)
 }
 \arguments{
   \item{x, y}{
@@ -22,6 +24,9 @@ intersectRSiteSearch(x, y, sort.=NULL)
     Optional \code{sort.} argument used by \code{sortRSiteSearch} and
     \code{RSiteSearch.function}.  Default is the \code{sort.} argument
     in \code{attr(x, 'call')}.
+  }
+  \item{e1, e2}{
+	  objects of class \code{RSiteSearch}.
   }
 }
 \details{
@@ -35,6 +40,10 @@ intersectRSiteSearch(x, y, sort.=NULL)
   the result as desired.
 
   4.  attr(xy, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
+}
+\note{
+	Binary operators \samp{&} and \samp{|} are implemented 
+	for the S3 class \samp{RSiteSearch}
 }
 \value{
   an object with class c('RSiteSearch', 'data.frame') as returned by
@@ -54,8 +63,12 @@ de1 <- RSiteSearch.function('differential equation', 1)
 de.s <- unionRSiteSearch(des1, de1)
 # combines the two, eliminating duplicates.
 
+# or the sorter version: 
+de.s <- des1 | de1
+
 # Keep only the common entries.
 de2 <- intersectRSiteSearch(des1, de1)
+de2 <- des1 & de1
 
 # summary and HTML still work with the combined object.
 summary(de.s)

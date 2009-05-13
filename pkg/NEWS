@@ -1,3 +1,6 @@
+1.0-3:  Add binary operators & and | as shorthands for unionRSiteSearch 
+and intersetRSiteSearch
+
 1.0-2:  Add hits function
 
 1.0-1:  Fix a minor bug in unionRSiteSearch.

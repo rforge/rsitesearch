@@ -31,7 +31,7 @@ intersectRSiteSearch <- function(x, y, sort.=NULL) {
   attr(xys, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
   attr(xys, 'string') <- paste(attr(x, 'string'), attr(y, 'string'),
                                sep=' & ')
-  attr(xys, 'call') <- c(attr(x, 'call'), '&', attr(y, 'call'))
+  attr(xys, 'call') <- call( "&", cx, cy )
 ##
 ## 5.  Done
 ##
