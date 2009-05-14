@@ -62,7 +62,7 @@ HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE,
   ##
   hasTemplate <- !missing(template)
   if (!hasTemplate) {
-    templateFile <- system.file("brew", "results.brew.html",
+    templateFile <- system.file("brew", "default", "results.brew.html",
                                 package = "RSiteSearch")
     template <- file(templateFile, encoding = "utf-8", open = "r" )
   }
