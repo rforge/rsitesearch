@@ -27,6 +27,7 @@ sortRSiteSearch(x, sort.=NULL)
   An object of class c('RSiteSearch', 'data.frame') with a
   "PackageSummary" attribute.
 }
+\author{Spencer Graves}
 \seealso{
   \code{\link{RSiteSearch.function}}
   \code{\link{sort}}

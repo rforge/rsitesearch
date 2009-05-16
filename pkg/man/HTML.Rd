@@ -31,7 +31,9 @@ HTML(x, ...)
 \value{
   The full path and name of the file created is returned invisibly.
 }
-\author{Sundar Dorai-Raj, Spencer Graves, Romain Francois, Uwe Ligges}
+\author{
+  Sundar Dorai-Raj, Spencer Graves, Romain Francois, Uwe Ligges
+}
 \seealso{
   \code{\link{RSiteSearch.function}},
   \code{\link[utils]{RSiteSearch}},

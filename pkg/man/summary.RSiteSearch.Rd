@@ -47,6 +47,9 @@
     the matched call to \code{RSiteSearch.function}.
   }
 }
+\author{
+  Spencer Graves
+}
 \seealso{
   \code{\link{RSiteSearch.function}},
   \code{\link[utils]{RSiteSearch}}

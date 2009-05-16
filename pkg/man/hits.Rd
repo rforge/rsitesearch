@@ -25,6 +25,7 @@ hits(x)
 \value{
   an integer vector
 }
+\author{Spencer Graves}
 \seealso{
   \code{\link{RSiteSearch.function}}
   \code{\link{unionRSiteSearch}}

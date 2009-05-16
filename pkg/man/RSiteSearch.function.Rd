@@ -114,6 +114,9 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
     }
   }
 }
+\author{
+  Spencer Graves and Sundar Dorai-Raj
+}
 \seealso{
   \code{\link[base]{help.search}} to search only installed packages.
   \code{\link[utils]{RSiteSearch}},

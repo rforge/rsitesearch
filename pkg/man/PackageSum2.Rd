@@ -40,6 +40,7 @@ PackageSum2(x,
   a data.frame with additional \code{fields} columns appended to
   \code{x}.
 }
+\author{Spencer Graves}
 \seealso{
   \code{\link{RSiteSearch.function}}
   \code{\link{PackageSummary}}

@@ -52,6 +52,9 @@ intersectRSiteSearch(x, y, sort.=NULL)
   an object with class c('RSiteSearch', 'data.frame') as returned by
   \code{sortRSiteSearch} and \code{RSiteSearch.function}.
 }
+\author{
+  Spencer Graves and Romain Francois
+}
 \seealso{
   \code{\link{RSiteSearch.function}}
   \code{\link{sortRSiteSearch}}

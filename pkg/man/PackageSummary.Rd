@@ -32,8 +32,9 @@ PackageSummary(x, sort.=NULL)
 \value{
   a data.frame with one row for each package and columns \code{Package},
   \code{Count}, \code{MaxScore}, \code{TotalScore}, and \code{Date},
-    sorted as specified by \code{sort.}.
+  sorted as specified by \code{sort.}.
 }
+\author{Spencer Graves}
 \seealso{
   \code{\link[utils]{RSiteSearch}},
   \code{\link{RSiteSearch.function}}
