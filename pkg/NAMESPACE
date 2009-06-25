@@ -5,6 +5,9 @@ importFrom( brew, brew )
 export(RSiteSearch.function,
        HTML)
 
+S3method(PackageSum2, RSiteSearch)
+S3method(PackageSum2, list)
+S3method(PackageSum2, data.frame)
 S3method(HTML, RSiteSearch)
 S3method(summary, RSiteSearch)
 S3method(print, summary.RSiteSearch)

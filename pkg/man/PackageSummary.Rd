@@ -2,9 +2,10 @@
 \alias{PackageSummary}
 \title{Summarize RSiteSearch Results by Package}
 \description{
-  Returns a matrix with one row for each package and columns Count =
-  number of rows in the search results for that package, maxSc and totSc
-  = max and total score for help pages found from that package.
+  Returns a matrix with one row for each package and columns
+  \code{Count} = number of rows in the search results for that package,
+  \code{maxScore} and \code{totalScore} = max and total score for help
+  pages found from that package.
 }
 \usage{
 PackageSummary(x, sort.=NULL)

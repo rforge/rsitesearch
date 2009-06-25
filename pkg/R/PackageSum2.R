@@ -1,6 +1,24 @@
 PackageSum2 <- function(x,
       fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
-                        lib.loc=NULL){
+                        lib.loc=NULL, ...){
+  UseMethod('PackageSum2')
+}
+
+PackageSum2.RSiteSearch <- function(x,
+      fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
+                        lib.loc=NULL, ...){
+  PackageSum2(attr(x, 'PackageSummary'), fields, lib.loc, ...)
+}
+
+PackageSum2.list <- function(x,
+      fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
+                        lib.loc=NULL, ...){
+  PackageSum2(x$PackageSummary, fields, lib.loc, ...)
+}
+
+PackageSum2.data.frame <- function(x,
+      fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
+                        lib.loc=NULL, ...){
 ##
 ## 1.  Create character matrix for fields
 ##
