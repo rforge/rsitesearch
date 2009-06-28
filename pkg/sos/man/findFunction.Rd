@@ -1,6 +1,8 @@
-\name{RSiteSearch.function}
-\alias{RSiteSearch.function}
-\title{Fast RSiteSearch}
+\name{findFunction}
+\alias{findFunction}
+\title{
+  Search Help Pages
+}
 \description{
   Returns a data.frame from
   \code{\link[utils]{RSiteSearch}(string, "function")} which can be
@@ -8,31 +10,39 @@
   table.
 }
 \usage{
-RSiteSearch.function(string, maxPages = 10, sort.=NULL,
-                     quiet = FALSE, ...)
+findFunction(string, maxPages = 20, sortby=NULL,
+                     verbose = 1, ...)
 }
 \arguments{
-  \item{string}{A character string. See
-    \code{\link[utils]{RSiteSearch}}.}
-  \item{maxPages}{The maximum number of pages to download assuming 20
-    links per page.}
-  \item{sort.}{
+  \item{string}{
+    A character string. See \code{\link[utils]{RSiteSearch}}.
+  }
+  \item{maxPages}{
+    The maximum number of pages to download assuming 20 links per page.
+  }
+  \item{sortby}{
     a character vector specifying how the \code{data.frame} returned
     should be sorted.  Default = c('Count', 'MaxScore', 'TotalScore',
     'Package', 'Score', 'Function') to sort descending on numerics and
-    ascending on alphnumerics.  Specifying sort. = c('c', 't', 'm')
+    ascending on alphnumerics.  Specifying sortby = c('c', 't', 'm')
     is equivalent to c('Count', 'TotalScore', 'MaxScore', 'Package',
     'Score', 'Function').
   }
-  \item{quiet}{
-    logical; if \code{TRUE} no output is printed to the console.  The
-    default \code{FALSE} displays a progress report with each page of
-    matches.
+  \item{verbose}{
+    an integer:  if 0, no output is printed to the console.  The
+    default 1 displays an initial line with the number of pages to be
+    retrieved and the number of matches obtained;  if the number of
+    matches to be downloaded is less, this also is displayed on the
+    initial line.  This is followed by a second line counting the pages
+    downloaded.
+
+    If greater than 1, additional information is provided on the
+    download process.
   }
   \item{\dots}{ignored}
 }
 \details{
-  \code{RSiteSearch.function} searchs the help pages of packages covered
+  \code{findFunction} searchs the help pages of packages covered
   by the \code{RSiteSearch} archives.  To restrict the search to only
   packages installed locally, use \code{help.search}.
 
@@ -46,26 +56,27 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   \code{PackageSummary}.
 
   3.  Sort \code{PackageSummary} in the order defined by the occurrance
-  of c('Count', 'MaxScore', 'TotalScore', 'Package') in \code{sort.}.
+  of c('Count', 'MaxScore', 'TotalScore', 'Package') in \code{sortby}.
 
   4.  Merge \code{PackageSummary} with the \code{data.frame} of search
-  hits.
+  matches.
 
   5.  Sort the combined \code{data.frame} as defined by \code{sort.}.
 
-  6.  Make the result have class c("RSiteSearch", "data.frame") and add
-  attributes \code{hits}, \code{summary}, and \code{call}.
+  6.  Make the result have class c("findFunction", "data.frame") and add
+  attributes \code{matches}, \code{PackageSummary}, \code{string}, and
+  \code{call}.
 
   7.  Done.
 }
 \value{
-  an object with class c('RSiteSearch', 'data.frame') with columns and
+  an object of class c('findFunction', 'data.frame') with columns and
   attributes as follows:
 
   \item{Columns}{
 
     \itemize{
-      \item{Count}{Total number of hits downloaded in this package}
+      \item{Count}{Total number of matches downloaded in this package}
       \item{MaxScore}{
 	maximum of the \code{Score} over all help pages selected within
 	each \code{Package}.  See \code{Score} below or the Namazu
@@ -99,8 +110,8 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   \item{Attributes}{
 
     \itemize{
-      \item{hits}{
-	an integer = total number of hits found by the search
+      \item{matches}{
+	an integer = total number of matches found by the search
       }
       \item{PackageSummary}{
 	a data.frame with one row for each package and columns
@@ -115,16 +126,20 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   }
 }
 \author{
-  Spencer Graves and Sundar Dorai-Raj
+  Spencer Graves, Sundar Dorai-Raj, Romain Francois, Duncan Murdoch.
+
+  Special thanks to Jonathan Baron and Andy Liaw.  Baron maintains the
+  RSiteSearch data base.  Liaw and Baron created the \code{RSiteSearch}
+  function in the \code{utils} package.
 }
 \seealso{
   \code{\link[base]{help.search}} to search only installed packages.
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{download.file}}
   \url{http://finzi.psych.upenn.edu/search.html} for a web interface to
-  this same search capability with more general options.  This function
-  searches only "Target:  Functions" from that site, ignoring the R-help
-  arcihves.
+  this same search capability with more general options.
+  \code{findFunction} searches only "Target:  Functions" from that site,
+  ignoring the R-help arcihves.
 
   \url{http://www.r-project.org/search.html} for a list of alternative R
   search capabilities, each of which may be best for different types of
@@ -135,12 +150,12 @@ RSiteSearch.function(string, maxPages = 10, sort.=NULL,
   determining \code{Score}
 }
 \examples{
-  z <- RSiteSearch.function("spline", maxPages = 2)
+  z <- findFunction("spline", maxPages = 2)
   str(z)
 # To search for 2 terms, not necessarily together:
-  RSS <- RSiteSearch.function('RSiteSearch function', 1)
+  RSS <- findFunction('RSiteSearch function', 1)
   str(RSS)
 # To search for an exact string, use braces:
-  RSS. <- RSiteSearch.function('{RSiteSearch function}', 1)
+  RSS. <- findFunction('{RSiteSearch function}', 1)
 }
 \keyword{misc}

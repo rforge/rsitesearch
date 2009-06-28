@@ -1,4 +1,10 @@
-1.0-3:  Add binary operators & and | as shorthands for unionRSiteSearch 
+
+1.0-5:  RSiteSearch package name changed to 'sos'
+
+1.0-4:  Make PackageSum2 generic to easily obtain an enhanced summary
+adding information from installed packages
+
+1.0-3:  Add binary operators & and | as shorthands for unionRSiteSearch
 and intersetRSiteSearch
 
 1.0-2:  Add hits function

@@ -5,5 +5,5 @@ Author: Spencer Graves, Sundar Dorai-Raj, and Romain Francois
 Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
 Description:  Alternative interfaces to RSiteSearch
 License: GPL
-Imports: brew
+Depends: brew
 

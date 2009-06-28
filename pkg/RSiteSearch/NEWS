@@ -1,4 +1,8 @@
-1.0-3:  Add binary operators & and | as shorthands for unionRSiteSearch 
+1.0-4:  To be obsoleted in favor of the 'sos' package.
+Make the 'PackageSum2' function generic to easily obtain an enhanced
+summary adding information from installed packages
+
+1.0-3:  Add binary operators & and | as shorthands for unionRSiteSearch
 and intersetRSiteSearch
 
 1.0-2:  Add hits function

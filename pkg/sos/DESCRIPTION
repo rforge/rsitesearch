@@ -5,5 +5,5 @@ Author: Spencer Graves, Sundar Dorai-Raj, and Romain Francois
 Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
 Description: R related Search Engines
 License: GPL >= 2
-Imports: brew
+Depends: brew
 

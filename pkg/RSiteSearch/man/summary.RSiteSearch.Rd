@@ -1,5 +1,6 @@
 \name{summary.RSiteSearch}
 \alias{summary.RSiteSearch}
+\alias{print.summary.RSiteSearch}
 \title{Summary Method for RSiteSearch}
 \description{Summary Method for RSiteSearch}
 \usage{

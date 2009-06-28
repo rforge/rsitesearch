@@ -1,5 +1,5 @@
-RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
-                                 quiet = FALSE, ...) {
+findFunction <- function(string, maxPages = 10, sort.=NULL,
+                                 verbose = 1, ...) {
 ##
 ## RSiteSearch(string, 'fun')
 ##
@@ -8,7 +8,7 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ## sorted with the most frequently selected package first
 ##
 ## with the following attributes
-## hits = total number of hits found by the search
+## matches = total number of hits found by the search
 ## summary = sort(table(ans$Package));
 ##      summary contains results for only the first maxPages,
 ##      so sum(summary) may be less than hits.
@@ -16,10 +16,11 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ##
 ## 0.  Set up
 ##
+  quiet <- (verbose<2)
   parseHTML <- function(url) {
     code <- download.file(url, tmpfile, quiet = quiet)
     if(code != 0) stop("error downloading file")
-    html <- scan(tmpfile, what = "", quiet = TRUE, sep = "\n")
+    html <- scan(tmpfile, what = "", quiet = quiet, sep = "\n")
     hits <- as.numeric(sub("^.*<!-- HIT -->(.*)<!-- HIT -->.*$", "\\1",
                            html[grep("<!-- HIT -->", html)]))
     links <- html[grep("http://finzi.psych.upenn.edu/R/library.*R:",
@@ -39,7 +40,7 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
     ans <- data.frame(Package = pac, Function = fun,
                       Date = strptime(date, "%a, %d %b %Y %T"),
                       Score = score, Description = desc, Link = lnk)
-    attr(ans, "hits") <- hits
+    attr(ans, "matches") <- hits
     ans
   }
 # if substring(string, 1,1) != "{":
@@ -53,25 +54,34 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ## 1.  Query
 ##
 #  1.1.  Set up
-  if(!quiet) cat("retrieving page 1\n")
+  if(verbose) cat("retrieving page 1: ")
   ans <- parseHTML(url)
-  hits <- attr(ans, 'hits')
+  hits <- attr(ans, 'matches')
+  cat(' found', hits, 'matches')
 #  hits <- max(0, attr(ans, 'hits'))
 #  If no hits, return
   if(length(hits) < 1) {
-    attr(ans, 'hits') <- 0
+    attr(ans, 'matches') <- 0
     pkgSum <- PackageSummary(ans)
     attr(ans, 'PackageSummary') <- pkgSum
     attr(ans, 'string') <- string
     attr(ans, 'call') <- match.call()
-    class(ans) <- c("RSiteSearch", "data.frame")
+    class(ans) <- c("findFunction", "data.frame")
     return(ans)
   }
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
-  if(nrow(ans) < attr(ans, "hits")) {
+  if(nrow(ans) < attr(ans, "matches")) {
+    cat('; retrieving', n, 'pages')
+    {
+      if((20*n)<hits) cat(', ', 20*n, 'matches.\n')
+      else cat('\n')
+    }
     for(i in seq(2, length=n-1)) {
-      if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
+      {
+        if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
+        else cat(i, '')
+      }
       url.i <- sprintf("%s&whence=%d", url, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(url.i))
     }
@@ -132,10 +142,10 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ##
   rownames(AnSort) <- NULL
 #
-  attr(AnSort, "hits") <- hits
+  attr(AnSort, "matches") <- hits
   attr(AnSort, 'PackageSummary') <- packageSum
   attr(AnSort, 'string') <- string
   attr(AnSort, "call") <- match.call()
-  class(AnSort) <- c("RSiteSearch", "data.frame")
+  class(AnSort) <- c("findFunction", "data.frame")
   AnSort
 }
