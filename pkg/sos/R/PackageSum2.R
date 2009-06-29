@@ -4,7 +4,7 @@ PackageSum2 <- function(x,
   UseMethod('PackageSum2')
 }
 
-PackageSum2.RSiteSearch <- function(x,
+PackageSum2.findFunction <- function(x,
       fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
                         lib.loc=NULL, ...){
   PackageSum2(attr(x, 'PackageSummary'), fields, lib.loc, ...)
