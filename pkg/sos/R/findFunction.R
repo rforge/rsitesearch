@@ -1,4 +1,4 @@
-findFunction <- function(string, maxPages = 10, sort.=NULL,
+findFunction <- function(string, maxPages = 20, sortby=NULL,
                                  verbose = 1, ...) {
 ##
 ## RSiteSearch(string, 'fun')
@@ -57,7 +57,7 @@ findFunction <- function(string, maxPages = 10, sort.=NULL,
   if(verbose) cat("retrieving page 1: ")
   ans <- parseHTML(url)
   hits <- attr(ans, 'matches')
-  cat(' found', hits, 'matches')
+  if(verbose)cat(' found', hits, 'matches')
 #  hits <- max(0, attr(ans, 'hits'))
 #  If no hits, return
   if(length(hits) < 1) {
@@ -72,15 +72,17 @@ findFunction <- function(string, maxPages = 10, sort.=NULL,
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {
-    cat('; retrieving', n, 'pages')
+    if(verbose)cat('; retrieving', n, c('page', 'pages')[1+(n>1)])
     {
-      if((20*n)<hits) cat(', ', 20*n, 'matches.\n')
-      else cat('\n')
+      if(verbose){
+        if((20*n)<hits) cat(',', 20*n, 'matches.\n')
+        else cat('\n')
+      }
     }
     for(i in seq(2, length=n-1)) {
       {
         if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
-        else cat(i, '')
+        else if(verbose>0) cat(i, '')
       }
       url.i <- sprintf("%s&whence=%d", url, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(url.i))
@@ -102,12 +104,12 @@ findFunction <- function(string, maxPages = 10, sort.=NULL,
            'Score', 'Function', 'Date', 'Description', 'Link')
   s0. <- tolower(s0)
   {
-    if(is.null(sort.)) sort. <-  s0
+    if(is.null(sortby)) sortby <-  s0
     else {
-      s1 <- match.arg(tolower(sort.), s0., TRUE)
+      s1 <- match.arg(tolower(sortby), s0., TRUE)
       s1. <- c(s1, s0.[!(s0. %in% s1)])
       names(s0) <- s0.
-      sort. <- s0[s1.]
+      sortby <- s0[s1.]
     }
   }
 #  pkgSort <- sort.[sort. %in%
@@ -135,7 +137,7 @@ findFunction <- function(string, maxPages = 10, sort.=NULL,
   ans.ch <- as.data.frame(as.matrix(Ans.ch))
   ansKey <- cbind(as.data.frame(-ans.num), ans.ch)
 #
-  oSch <- do.call('order', ansKey[sort.])
+  oSch <- do.call('order', ansKey[sortby])
   AnSort <- Ans[oSch,]
 ##
 ## 6.  attributes

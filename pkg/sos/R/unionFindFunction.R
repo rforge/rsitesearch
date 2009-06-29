@@ -1,8 +1,8 @@
-unionRSiteSearch <- function(x, y, sort.=NULL) {
+unionFindFunction <- function(e1, e2, sortby=NULL) {
 ##
 ## 1.  rbind
 ##
-  xy <- rbind(x, y)
+  xy <- rbind(e1, e2)
 ##
 ## 2.  Find and merge duplicates
 ##
@@ -23,15 +23,17 @@ unionRSiteSearch <- function(x, y, sort.=NULL) {
 ##
 ## 3.  Rebuild summary and resort
 ##
-  xys <- sortRSiteSearch(xy.[,
-     c('Package', 'Score', 'Function', 'Date', 'Description', 'Link')])
+  xys <- sortFindFunction(xy.[,
+     c('Package', 'Score', 'Function', 'Date', 'Description', 'Link')],
+                          sortby)
 ##
 ## 4.  Fix attributes
 ##
-  attr(xys, 'hits') <- c(attr(x, 'hits'), attr(y, 'hits'))
-  attr(xys, 'string') <- paste(attr(x, 'string'), attr(y, 'string'),
+  attr(xys, 'matches') <- c(attr(e1, 'matches'), attr(e2, 'matches'))
+  attr(xys, 'string') <- paste(attr(e1, 'string'), attr(e2, 'string'),
                                sep=' | ')
-  attr(xys, 'call') <- call( "(", call( "|", attr(x, "call"), attr(y, "call") ) )
+  attr(xys, 'call') <- call( "(", call( "|",
+                    attr(e1, "call"), attr(e2, "call") ) )
 ##
 ## 5.  Done
 ##

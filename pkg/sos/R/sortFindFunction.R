@@ -1,9 +1,9 @@
-sortRSiteSearch <- function(x, sort.=NULL) {
+sortFindFunction <- function(x, sortby=NULL) {
 ##
 ## 1.  PackageSummary
 ##
   x$Score <- as.numeric(as.character(x$Score))
-  pkgSum <- PackageSummary(x, sort.)
+  pkgSum <- PackageSummary(x, sortby)
 ##
 ## 2.  Sort order
 ##
@@ -11,12 +11,12 @@ sortRSiteSearch <- function(x, sort.=NULL) {
            'Score', 'Function', 'Date', 'Description', 'Link')
   s0. <- tolower(s0)
   {
-    if(is.null(sort.)) sort. <-  s0
+    if(is.null(sortby)) sortby <-  s0
     else {
-      s1 <- match.arg(tolower(sort.), s0., TRUE)
+      s1 <- match.arg(tolower(sortby), s0., TRUE)
       s1. <- c(s1, s0.[!(s0. %in% s1)])
       names(s0) <- s0.
-      sort. <- s0[s1.]
+      sortby <- s0[s1.]
     }
   }
 ##
@@ -37,7 +37,7 @@ sortRSiteSearch <- function(x, sort.=NULL) {
   ans.ch <- as.data.frame(as.matrix(Ans.ch))
   ansKey <- cbind(as.data.frame(-ans.num), ans.ch)
 #
-  oSch <- do.call('order', ansKey[sort.])
+  oSch <- do.call('order', ansKey[sortby])
   AnSort <- Ans[oSch,]
 ##
 ## 5.  attributes
