@@ -1,4 +1,4 @@
-PackageSummary <- function(x, sort.=NULL){
+PackageSummary <- function(x, sortby=NULL){
 ##
 ## 1.  Convert Package to character to avoid corruption
 ##     from any unused levels
@@ -26,15 +26,15 @@ PackageSummary <- function(x, sort.=NULL){
            'Score', 'Function', 'Date', 'Description', 'Link')
   s0. <- tolower(s0)
   {
-    if(is.null(sort.)) sort. <-  s0
+    if(is.null(sortby)) sortby <-  s0
     else {
-      s1 <- match.arg(tolower(sort.), s0., TRUE)
+      s1 <- match.arg(tolower(sortby), s0., TRUE)
       s1. <- c(s1, s0.[!(s0. %in% s1)])
       names(s0) <- s0.
-      sort. <- s0[s1.]
+      sortby <- s0[s1.]
     }
   }
-  pkgSort <- sort.[sort. %in%
+  pkgSort <- sortby[sortby %in%
                    c('Count', 'MaxScore', 'TotalScore', 'Package')]
   pkgKey <- with(pkgSum,
                  data.frame(Package, Count=-Count, MaxScore=-MaxScore,

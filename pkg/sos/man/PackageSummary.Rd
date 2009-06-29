@@ -1,6 +1,6 @@
 \name{PackageSummary}
 \alias{PackageSummary}
-\title{Summarize RSiteSearch Results by Package}
+\title{Summarize findFunction Results by Package}
 \description{
   Returns a matrix with one row for each package and columns
   \code{Count} = number of rows in the search results for that package,
@@ -8,25 +8,25 @@
   pages found from that package.
 }
 \usage{
-PackageSummary(x, sort.=NULL)
+PackageSummary(x, sortby=NULL)
 }
 \arguments{
   \item{x}{
     a data.frame with columns \code{Package}, \code{Score}, and
     \code{Date}.
   }
-  \item{sort.}{
+  \item{sortby}{
     a character vector specifying how the \code{data.frame} returned
     should be sorted.  Default = c('Count', 'MaxScore', 'TotalScore',
     'Package') to sort descending on numerics and ascending on
-    alphnumerics.  Specifying sort. = c('c', 't', 'm') is equivalent to
+    alphnumerics.  Specifying sortby = c('c', 't', 'm') is equivalent to
     c('Count', 'TotalScore', 'MaxScore', 'Package', 'Score',
     'Function').
 
-    Components of \code{sort.} must match either this list or c('Score',
-    'Function', 'Date', 'Description', 'Link').  Any on this latter list
-    are ignored without a warning.  This allows the same \code{sort.}
-    used for \code{RSiteSearch.function} to be used here.
+    Components of \code{sortby} must match either this list or
+    c('Score', 'Function', 'Date', 'Description', 'Link').  Any on this
+    latter list are ignored without a warning.  This allows the same
+    \code{sortby} used for \code{findFunction} to be used here.
   }
 }
 %\details{}
@@ -38,7 +38,7 @@ PackageSummary(x, sort.=NULL)
 \author{Spencer Graves}
 \seealso{
   \code{\link[utils]{RSiteSearch}},
-  \code{\link{RSiteSearch.function}}
+  \code{\link{findFunction}}
 }
 \examples{
 tstdf <- data.frame(Package=letters[c(1,1,2)], Score=2:4,
