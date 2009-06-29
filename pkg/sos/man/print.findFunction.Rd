@@ -40,7 +40,7 @@
   Sundar Dorai-Raj, Spencer Graves, Romain Francois, Uwe Ligges
 }
 \seealso{
-  \code{\link{RSiteSearch.function}},
+  \code{\link{findFunction}},
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{browseURL}}
   \code{\link[brew]{brew}}
