@@ -1,18 +1,14 @@
-HTML <- function(x, ...) {
-  UseMethod("HTML")
-}
-
-HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE,
+print.findFunction <- function(x, file, title, openBrowser = TRUE,
                              template,  ...) {
-  ##
-  ## 1.  Get call including search string
-  ##
+##
+## 1.  Get call including search string
+##
   ocall <- attr(x, "call")
   string <- attr(x, 'string')
-  ##
-  ## 2.  File, title, Dir?
-  ##
-  if (missing(file)) {
+##
+## 2.  File, title, Dir?
+##
+  if(missing(file)) {
 #    file <- sprintf("%s.html", paste(string, collapse = "_"))
     f0 <- tempfile()
     for(i in 1:111){
@@ -24,50 +20,52 @@ HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE,
     }
   }
   File <- file
-  if (missing(title)) {
+  if(missing(title)){
     title <- string
   }
   Dir <- dirname(File)
-  if (Dir == '.') {
-    Dir <- getwd()
-    File <- file.path(Dir, File)
-  } else {
-    dc0 <- dir.create(Dir, FALSE, TRUE)
+  {
+    if (Dir == '.') {
+      Dir <- getwd()
+      File <- file.path(Dir, File)
+    } else {
+      dc0 <- dir.create(Dir, FALSE, TRUE)
+    }
   }
-  ##
-  ## 3.  sorttable.js?
-  ##
-  ##  Dir <- tools:::file_path_as_absolute( dirname(File) )
-  ##  This line is NOT ENOUGH:
-  ##           browseURL(File) needs the full path in File
-  js <- system.file("js", "sorttable.js", package = "RSiteSearch")
+##
+## 3.  sorttable.js?
+##
+##  Dir <- tools:::file_path_as_absolute( dirname(File) )
+##  This line is NOT ENOUGH:
+##           browseURL(File) needs the full path in File
+  js <- system.file("js", "sorttable.js", package = "sos")
   if (!file.exists(js)) {
     warning("Unable to locate 'sorttable.js' file")
   } else {
-    ##*** Future:
-    ## Replace 'Dir\js' with a temp file
-    ## that does not exist, then delete it on.exit
+##*** Future:
+## Replace 'Dir\js' with a temp file
+## that does not exist, then delete it on.exit
     file.copy(js, Dir)
   }
-  ##
-  ## 4.  Modify x$Description
-  ##
-  ## save 'x' as 'xin' for debugging
+##
+## 4.  Modify x$Description
+##
+## save 'x' as 'xin' for debugging
   xin <- x
   x$Description <- gsub("(^[ ]+)|([ ]+$)", "",
                         as.character(x$Description))
   x[] <- lapply(x, as.character)
-  ##
-  ## 5.  template for brew?
-  ##
+##
+## 5.  template for brew?
+##
   hasTemplate <- !missing(template)
   if (!hasTemplate) {
     templateFile <- system.file("brew", "default", "results.brew.html",
-                                package = "RSiteSearch")
+                                package = "sos")
     template <- file(templateFile, encoding = "utf-8", open = "r" )
   }
-  ## 'brew( template,  File )' malfunctioned;
-  ## try putting what we need in a special environment
+## 'brew( template,  File )' malfunctioned;
+## try putting what we need in a special environment
   xenv <- new.env()
   assign('ocall', ocall, envir=xenv)
   assign('x', x, envir=xenv)
@@ -76,9 +74,9 @@ HTML.RSiteSearch <- function(x, file, title, openBrowser = TRUE,
   if (!hasTemplate) {
     close(template)
   }
-  ##
-  ## 6.  Was File created appropriately?  If no, try Sundar's original code
-  ##
+##
+## 6.  Was File created appropriately?  If no, try Sundar's original code
+##
   FileInfo <- file.info(File)
   if (is.na(FileInfo$size) || FileInfo$size <= 0) {
     if (is.na(FileInfo$size)) {
@@ -154,7 +152,7 @@ table.sortable .empty {
 </style>
 </head>")
     ##  Search results ... ???
-    .cat("<h1>RSiteSearch Results</h1>\n")
+    .cat("<h1>findFunction Results</h1>\n")
     .cat("<h2>call: <font color='#800'>",
          paste(deparse(ocall), collapse = ""), "</font></h2>\n")
     .cat("<table class='sortable'>\n<thead>")
@@ -182,9 +180,9 @@ table.sortable .empty {
 </body>
 </html>")
   }
-  ##
-  ## 7.  Display in a browser?
-  ##
+##
+## 7.  Display in a browser?
+##
   if (openBrowser) {
     FileInf2 <- file.info(File)
     if (is.na(FileInf2$size)) {

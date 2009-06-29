@@ -1,20 +1,23 @@
-\name{HTML}
-\alias{HTML}
-\alias{HTML.RSiteSearch}
-\title{RSiteSearch HTML Tables}
+\name{print.findFunction}
+\alias{print.findFunction}
+\title{
+  print a findFunction object
+}
 \description{
-  Create and view an HTML table from the result of calling
-  \code{\link{RSiteSearch.function}}.
+  Print a \code{findFunction} object to a file and pass it to a web
+  browser
 }
 \usage{
-HTML(x, ...)
-\method{HTML}{RSiteSearch}(x, file, title, openBrowser = TRUE,
+\method{print}{findFunction}(x, file, title, openBrowser = TRUE,
 	template, ...)
 }
 \arguments{
-  \item{x}{An object of class \code{RSiteSearch}}
+  \item{x}{
+    An object of class \code{findFunction}
+  }
   \item{file}{
-    An optional name for the HTML file to be created.
+    An optional name for the HTML file to be created and then passed to
+    a web browser
   }
   \item{title}{
     An optional title to give the HTML file. Default is to use the
@@ -24,7 +27,9 @@ HTML(x, ...)
     logical; if \code{TRUE} then launch default browser after building
     table.
   }
-  \item{template}{ Template file used by \code{brew} }
+  \item{template}{
+    Template file used by \code{brew}
+  }
   \item{\dots}{ignored}
 }
 %\details{ more later}
@@ -41,8 +46,8 @@ HTML(x, ...)
   \code{\link[brew]{brew}}
 }
 \examples{
-  splineSearch <- RSiteSearch.function("spline", maxPages = 2)
-  HTML(splineSearch )
+  splineSearch <- findFunction("spline", maxPages = 2)
+  splineSearch
 }
 \keyword{print}
 \keyword{methods}
