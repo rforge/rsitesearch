@@ -144,6 +144,9 @@ findFn(string, maxPages = 20, sortby=NULL,
   \url{http://www.r-project.org/search.html} for a list of alternative R
   search capabilities, each of which may be best for different types of
   inquiries.
+
+  \code{\link[methods]{findFunction}} for a completely different
+  function with a similar name.
 }
 \references{
   \url{http://www.namazu.org/doc/tips.html.en#weight} - reference on
