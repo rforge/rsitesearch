@@ -1,6 +1,6 @@
 \name{PackageSummary}
 \alias{PackageSummary}
-\title{Summarize findFunction Results by Package}
+\title{Summarize findFn Results by Package}
 \description{
   Returns a matrix with one row for each package and columns
   \code{Count} = number of rows in the search results for that package,
@@ -26,7 +26,7 @@ PackageSummary(x, sortby=NULL)
     Components of \code{sortby} must match either this list or
     c('Score', 'Function', 'Date', 'Description', 'Link').  Any on this
     latter list are ignored without a warning.  This allows the same
-    \code{sortby} used for \code{findFunction} to be used here.
+    \code{sortby} used for \code{findFn} to be used here.
   }
 }
 %\details{}
@@ -38,7 +38,7 @@ PackageSummary(x, sortby=NULL)
 \author{Spencer Graves}
 \seealso{
   \code{\link[utils]{RSiteSearch}},
-  \code{\link{findFunction}}
+  \code{\link{findFn}}
 }
 \examples{
 tstdf <- data.frame(Package=letters[c(1,1,2)], Score=2:4,

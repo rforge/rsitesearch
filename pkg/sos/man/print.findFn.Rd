@@ -1,19 +1,19 @@
-\name{print.findFunction}
-\alias{print.findFunction}
+\name{print.findFn}
+\alias{print.findFn}
 \title{
-  print a findFunction object
+  print a findFn object
 }
 \description{
-  Print a \code{findFunction} object to a file and pass it to a web
+  Print a \code{findFn} object to a file and pass it to a web
   browser
 }
 \usage{
-\method{print}{findFunction}(x, file, title, openBrowser = TRUE,
+\method{print}{findFn}(x, file, title, openBrowser = TRUE,
 	template, ...)
 }
 \arguments{
   \item{x}{
-    An object of class \code{findFunction}
+    An object of class \code{findFn}
   }
   \item{file}{
     An optional name for the HTML file to be created and then passed to
@@ -40,13 +40,13 @@
   Sundar Dorai-Raj, Spencer Graves, Romain Francois, Uwe Ligges
 }
 \seealso{
-  \code{\link{findFunction}},
+  \code{\link{findFn}},
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{browseURL}}
   \code{\link[brew]{brew}}
 }
 \examples{
-  splineSearch <- findFunction("spline", maxPages = 2)
+  splineSearch <- findFn("spline", maxPages = 2)
   splineSearch
 }
 \keyword{print}

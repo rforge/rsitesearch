@@ -1,6 +1,6 @@
 \name{PackageSum2}
 \alias{PackageSum2}
-\alias{PackageSum2.findFunction}
+\alias{PackageSum2.findFn}
 \alias{PackageSum2.data.frame}
 \alias{PackageSum2.list}
 \title{
@@ -8,13 +8,13 @@
 }
 \description{
   Add information on installed packages to the \code{PackageSummary} of
-  a \code{findFunction} object.
+  a \code{findFn} object.
 }
 \usage{
 PackageSum2(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
             lib.loc=NULL, ...)
-\method{PackageSum2}{findFunction}(x,
+\method{PackageSum2}{findFn}(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
             lib.loc=NULL, ...)
 \method{PackageSum2}{data.frame}(x,
@@ -51,14 +51,14 @@ PackageSum2(x,
   }
 }
 \details{
-  With an object of class \code{findFunction}, extract the
+  With an object of class \code{findFn}, extract the
   \code{PackageSummary} attribute and pass it to the \code{data.frame}
   method.
 
   With an object of class \code{list}, extract the \code{PackageSummary}
   component and pass it to the \code{data.frame} method.
 
-  For a \code{data.frame} that is not an \code{findFunction} object, add
+  For a \code{data.frame} that is not an \code{findFn} object, add
   other columns from \code{attributes} of \code{packageDescription} for
   installed packages named in the column \code{Package}.
 }
@@ -68,7 +68,7 @@ PackageSum2(x,
 }
 \author{Spencer Graves}
 \seealso{
-  \code{\link{findFunction}}
+  \code{\link{findFn}}
   \code{\link{PackageSummary}}
 }
 \examples{
@@ -92,7 +92,7 @@ all.equal(tst2, PackageSum2(tstList))
 tstRSearch <- data.frame(Package=c('fda', 'base')[c(1,1,2)], Score=2:4,
                     Date=LETTERS[1:3], stringsAsFactors=FALSE)
 attr(tstRSearch, 'PackageSummary') <- PackageSummary(tstRSearch)
-class(tstRSearch) <- c('findFunction', 'data.frame')
+class(tstRSearch) <- c('findFn', 'data.frame')
 tst2. <- PackageSum2(tstRSearch)
 
 # row names are different from tst2, so fix ...

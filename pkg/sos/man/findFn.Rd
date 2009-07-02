@@ -1,5 +1,5 @@
-\name{findFunction}
-\alias{findFunction}
+\name{findFn}
+\alias{findFn}
 \title{
   Search Help Pages
 }
@@ -10,7 +10,7 @@
   table.
 }
 \usage{
-findFunction(string, maxPages = 20, sortby=NULL,
+findFn(string, maxPages = 20, sortby=NULL,
                      verbose = 1, ...)
 }
 \arguments{
@@ -42,7 +42,7 @@ findFunction(string, maxPages = 20, sortby=NULL,
   \item{\dots}{ignored}
 }
 \details{
-  \code{findFunction} searchs the help pages of packages covered
+  \code{findFn} searchs the help pages of packages covered
   by the \code{RSiteSearch} archives.  To restrict the search to only
   packages installed locally, use \code{help.search}.
 
@@ -63,14 +63,14 @@ findFunction(string, maxPages = 20, sortby=NULL,
 
   5.  Sort the combined \code{data.frame} as defined by \code{sort.}.
 
-  6.  Make the result have class c("findFunction", "data.frame") and add
+  6.  Make the result have class c("findFn", "data.frame") and add
   attributes \code{matches}, \code{PackageSummary}, \code{string}, and
   \code{call}.
 
   7.  Done.
 }
 \value{
-  an object of class c('findFunction', 'data.frame') with columns and
+  an object of class c('findFn', 'data.frame') with columns and
   attributes as follows:
 
   \item{Columns}{
@@ -138,7 +138,7 @@ findFunction(string, maxPages = 20, sortby=NULL,
   \code{\link[utils]{download.file}}
   \url{http://finzi.psych.upenn.edu/search.html} for a web interface to
   this same search capability with more general options.
-  \code{findFunction} searches only "Target:  Functions" from that site,
+  \code{findFn} searches only "Target:  Functions" from that site,
   ignoring the R-help arcihves.
 
   \url{http://www.r-project.org/search.html} for a list of alternative R
@@ -150,12 +150,12 @@ findFunction(string, maxPages = 20, sortby=NULL,
   determining \code{Score}
 }
 \examples{
-  z <- findFunction("spline", maxPages = 2)
+  z <- findFn("spline", maxPages = 2)
   str(z)
 # To search for 2 terms, not necessarily together:
-  RSS <- findFunction('RSiteSearch function', 1)
+  RSS <- findFn('RSiteSearch function', 1)
   str(RSS)
 # To search for an exact string, use braces:
-  RSS. <- findFunction('{RSiteSearch function}', 1)
+  RSS. <- findFn('{RSiteSearch function}', 1)
 }
 \keyword{misc}

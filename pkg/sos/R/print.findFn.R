@@ -1,4 +1,4 @@
-print.findFunction <- function(x, file, title, openBrowser = TRUE,
+print.findFn <- function(x, file, title, openBrowser = TRUE,
                              template,  ...) {
 ##
 ## 1.  Get call including search string
@@ -152,7 +152,7 @@ table.sortable .empty {
 </style>
 </head>")
     ##  Search results ... ???
-    .cat("<h1>findFunction Results</h1>\n")
+    .cat("<h1>findFn Results</h1>\n")
     .cat("<h2>call: <font color='#800'>",
          paste(deparse(ocall), collapse = ""), "</font></h2>\n")
     .cat("<table class='sortable'>\n<thead>")

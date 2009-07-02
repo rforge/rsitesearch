@@ -1,4 +1,4 @@
-findFunction <- function(string, maxPages = 20, sortby=NULL,
+findFn <- function(string, maxPages = 20, sortby=NULL,
                                  verbose = 1, ...) {
 ##
 ## RSiteSearch(string, 'fun')
@@ -66,7 +66,7 @@ findFunction <- function(string, maxPages = 20, sortby=NULL,
     attr(ans, 'PackageSummary') <- pkgSum
     attr(ans, 'string') <- string
     attr(ans, 'call') <- match.call()
-    class(ans) <- c("findFunction", "data.frame")
+    class(ans) <- c("findFn", "data.frame")
     return(ans)
   }
 #  1.2.  Retrieve
@@ -148,6 +148,6 @@ findFunction <- function(string, maxPages = 20, sortby=NULL,
   attr(AnSort, 'PackageSummary') <- packageSum
   attr(AnSort, 'string') <- string
   attr(AnSort, "call") <- match.call()
-  class(AnSort) <- c("findFunction", "data.frame")
+  class(AnSort) <- c("findFn", "data.frame")
   AnSort
 }

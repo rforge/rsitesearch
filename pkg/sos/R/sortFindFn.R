@@ -1,4 +1,4 @@
-sortFindFunction <- function(x, sortby=NULL) {
+sortFindFn <- function(x, sortby=NULL) {
 ##
 ## 1.  PackageSummary
 ##

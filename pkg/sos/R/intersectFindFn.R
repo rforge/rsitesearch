@@ -1,4 +1,4 @@
-intersectFindFunction <- function(e1, e2, sortby=NULL) {
+intersectFindFn <- function(e1, e2, sortby=NULL) {
 ##
 ## 1.  rbind
 ##
@@ -23,7 +23,7 @@ intersectFindFunction <- function(e1, e2, sortby=NULL) {
 ##
 ## 3.  Rebuild summary and resort
 ##
-  xys <- sortFindFunction(xy.[,
+  xys <- sortFindFn(xy.[,
      c('Package', 'Score', 'Function', 'Date', 'Description', 'Link')],
                           sortby)
 ##

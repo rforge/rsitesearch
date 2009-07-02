@@ -1,4 +1,4 @@
-summary.findFunction <- function(object, threshold = 1, ...) {
+summary.findFn <- function(object, threshold = 1, ...) {
   Sum <- attr(object, 'PackageSummary')
   sel <- (Sum[, 'Count'] >= threshold)
   sumTh <- Sum[sel,, drop=FALSE]
@@ -9,10 +9,10 @@ summary.findFunction <- function(object, threshold = 1, ...) {
                  nPackages = length(sel),
                  string = attr(object, 'string'),
                  call = attr(object, "call")),
-            class = c("summary.findFunction", "list"))
+            class = c("summary.findFn", "list"))
 }
 
-print.summary.findFunction <- function(x, ...) {
+print.summary.findFn <- function(x, ...) {
   cat("\nCall:\n")
   cat(paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
