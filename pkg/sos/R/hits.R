@@ -1,3 +1,7 @@
-matches <- function(x)attr(x, 'matches')
-hits <- function(x)attr(x, 'matches')
+matches <- function(x){
+  list(nrow=nrow(x), matches=attr(x, 'matches'))
+}
+hits <- function(x){
+  list(nrow=nrow(x), matches=attr(x, 'matches'))
+}
 

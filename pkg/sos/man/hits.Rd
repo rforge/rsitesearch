@@ -22,10 +22,11 @@ hits(x)
   }
 }
 \details{
+  nrow(x)
   attr(x, 'matches')
 }
 \value{
-  an integer vector
+  a list with components \code{nrows} and \code{matches}
 }
 \author{Spencer Graves}
 \seealso{
@@ -36,8 +37,11 @@ hits(x)
 %\references{}
 \examples{
 des1 <- findFn('differential equations', 1)
+
+des1. <- matches(des1)
+des. <- list(nrow=nrow(des1), matches=attr(des1, 'matches'))
 \dontshow{stopifnot(}
-all.equal(matches(des1), attr(des1, 'matches'))
+all.equal(des1, des.)
 \dontshow{)}
 }
 \keyword{misc}
