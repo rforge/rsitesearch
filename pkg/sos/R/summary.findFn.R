@@ -1,9 +1,21 @@
-summary.findFn <- function(object, threshold = 1, ...) {
+summary.findFn <- function(object, minPackages = 12,
+                           minCount=NA, ...) {
+##
+## 1.  Retrieve the summary attribute
+##
   Sum <- attr(object, 'PackageSummary')
-  sel <- (Sum[, 'Count'] >= threshold)
+##
+## 2.  Limit it
+##
+  nrows <- nrow(Sum)
+  minPackages <- min(nrows, minPackages, na.rm=TRUE)
+  minCount <- min(minCount, Sum$Count[minPackages], na.rm=TRUE)
+#
+  sel <- (Sum[, 'Count'] >= minCount)
   sumTh <- Sum[sel,, drop=FALSE]
   structure(list(PackageSummary = sumTh,
-                 threshold = threshold,
+                 minPackages = minPackages,
+                 minCount = minCount,
                  matches = attr(object, "matches"),
                  nrow = nrow(object),
                  nPackages = length(sel),
@@ -20,8 +32,8 @@ print.summary.findFn <- function(x, ...) {
   cat('Downloaded ', x$nrow, ' links in ', x$nPackages,
       " package", c('.', 's.')[1+(x$nPackages>1)], "\n\n", sep='')
   string <- x$string
-  cat("Packages with at least ", x$threshold, " match",
-      if(x$threshold == 1) "" else "es",
+  cat("Packages with at least ", x$minCount, " match",
+      if(x$minCount == 1) "" else "es",
       " using search pattern '", string, "':\n", sep = "")
   packSum <- x$PackageSummary
   row.names(packSum) <- NULL
