@@ -1,6 +1,14 @@
 print.findFn <- function(x, file, title, openBrowser = TRUE,
                              template,  ...) {
 ##
+## 0.  If x has 0 rows, don't go further ...
+##
+  if(nrow(x)<1){
+    cat('x has zero rows;  nothing to display.\n')
+    if(missing(file))file <- ''
+    return(file)
+  }
+##
 ## 1.  Get call including search string
 ##
   ocall <- attr(x, "call")

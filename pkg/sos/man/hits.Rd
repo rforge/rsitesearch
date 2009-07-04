@@ -41,7 +41,7 @@ des1 <- findFn('differential equations', 1)
 des1. <- matches(des1)
 des. <- list(nrow=nrow(des1), matches=attr(des1, 'matches'))
 \dontshow{stopifnot(}
-all.equal(des1, des.)
+all.equal(des1., des.)
 \dontshow{)}
 }
 \keyword{misc}

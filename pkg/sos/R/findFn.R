@@ -44,8 +44,7 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     ans
   }
 # if substring(string, 1,1) != "{":
-  if(substr(string, 1, 1) != "{")
-    string <- gsub(" ", "+", string)
+  if(substr(string, 1, 1) != "{") string <- gsub(" ", "+", string)
   tmpfile <- tempfile()
   url <- sprintf(
    "http://search.r-project.org/cgi-bin/namazu.cgi?query=%s&max=20&result=normal&sort=score&idxname=functions",
@@ -57,7 +56,6 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
   if(verbose) cat("retrieving page 1: ")
   ans <- parseHTML(url)
   hits <- attr(ans, 'matches')
-  if(verbose)cat(' found', hits, 'matches')
 #  hits <- max(0, attr(ans, 'hits'))
 #  If no hits, return
   if(length(hits) < 1) {
@@ -69,6 +67,7 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     class(ans) <- c("findFn", "data.frame")
     return(ans)
   }
+  if(verbose)cat(' found', hits, 'matches')
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {

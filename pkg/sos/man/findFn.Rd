@@ -1,5 +1,6 @@
 \name{findFn}
 \alias{findFn}
+\alias{?}
 \title{
   Search Help Pages
 }
@@ -10,8 +11,8 @@
   table.
 }
 \usage{
-findFn(string, maxPages = 20, sortby=NULL,
-                     verbose = 1, ...)
+findFn(string, maxPages = 20, sortby=NULL, verbose = 1, ...)
+???e1(e2)
 }
 \arguments{
   \item{string}{
@@ -39,6 +40,8 @@ findFn(string, maxPages = 20, sortby=NULL,
     If greater than 1, additional information is provided on the
     download process.
   }
+  \item{e1}{ \code{string} }
+  \item{e2}{ \code{maxPages} }
   \item{\dots}{ignored}
 }
 \details{
@@ -153,12 +156,22 @@ findFn(string, maxPages = 20, sortby=NULL,
   determining \code{Score}
 }
 \examples{
-  z <- findFn("spline", maxPages = 2)
-  str(z)
+z <- findFn("spline", maxPages = 2)
+# alternative
+zq <- ???spline(2)
+
+# z and zq are identical
+# except for the 'call' atributes
+attr(zq, 'call') <- attr(z, 'call')
+\dontshow{stopifnot(}
+all.equal(z, zq)
+\dontshow{)}
+
 # To search for 2 terms, not necessarily together:
-  RSS <- findFn('RSiteSearch function', 1)
-  str(RSS)
+RSS <- findFn('RSiteSearch function', 1)
+matches(RSS) # list(nrow=15, matches=15)
 # To search for an exact string, use braces:
-  RSS. <- findFn('{RSiteSearch function}', 1)
+RSS. <- findFn('{RSiteSearch function}', 1)
+matches(RSS.) # list(nrow=0, matches=0)
 }
 \keyword{misc}
