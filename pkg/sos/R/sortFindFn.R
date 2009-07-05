@@ -48,6 +48,6 @@ sortFindFn <- function(x, sortby=NULL) {
   attr(AnSort, 'PackageSummary') <- packageSum
 #  attr(AnSort, 'string') <- string
 #  attr(AnSort, "call") <- match.call()
-  class(AnSort) <- c("RSiteSearch", "data.frame")
+  class(AnSort) <- c("findFn", "data.frame")
   AnSort
 }

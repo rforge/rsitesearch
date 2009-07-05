@@ -22,12 +22,13 @@ Ops.findFn <- function( e1, e2 ){
   }
   e1 <- rework( e1 )
   e2 <- rework( e2 )
-  switch( .Generic,
+  e12 <- switch( .Generic,
          "&" = intersectFindFn( e1, e2 ),
          "|" = unionFindFn( e1, e2),
          stop( sprintf(
            "operator '%s' not implemented for findFn objects",
                        .Generic)  )
          )
+  e12
 }
 
