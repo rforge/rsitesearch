@@ -1,33 +1,52 @@
-print.findFn <- function(x, file, title, openBrowser = TRUE,
+print.findFn <- function(x, where, title, openBrowser = TRUE,
                              template,  ...) {
 ##
 ## 0.  If x has 0 rows, don't go further ...
 ##
   if(nrow(x)<1){
     cat('x has zero rows;  nothing to display.\n')
-    if(missing(file))file <- ''
-    return(file)
+    if(missing(where))where <- ''
+    return(invisible(where))
   }
 ##
-## 1.  Get call including search string
+## 1.  where?
+##
+  if(missing(where)) where <- 'HTML'
+#
+  if((length(where)==1) && (where=='console'))
+    where <-  c('Count', 'Package', 'Function', 'Score', 'Date')
+#
+  if(all(where %in% names(x))){
+    print.data.frame(x[, where])
+    return(invisible(''))
+    stop('Impossible execution.')
+  }
+  if(length(where)>1)
+    stop('if length(where)>1, where must names columns of x; ',
+         ' they do not.  where = ', paste(where, collapse=', '))
+  {
+    if(toupper(where) == 'HTML') {
+#    file <- sprintf("%s.html", paste(string, collapse = "_"))
+      f0 <- tempfile()
+      for(i in 1:111){
+        File <- paste(f0, '.html', sep='')
+        fInf <- file.info(File)
+        if(all(is.na(fInf)))break
+#     file exists so try another
+        f0 <- paste(f0, '1', sep='')
+      }
+    }
+    else
+      File <- where
+  }
+##
+## 2.  Get call including search string
 ##
   ocall <- attr(x, "call")
   string <- attr(x, 'string')
 ##
-## 2.  File, title, Dir?
+## 3.  title, Dir?
 ##
-  if(missing(file)) {
-#    file <- sprintf("%s.html", paste(string, collapse = "_"))
-    f0 <- tempfile()
-    for(i in 1:111){
-      file <- paste(f0, '.html', sep='')
-      fInf <- file.info(file)
-      if(all(is.na(fInf)))break
-#     file exists so try another
-      f0 <- paste(f0, '1', sep='')
-    }
-  }
-  File <- file
   if(missing(title)){
     title <- string
   }
@@ -41,7 +60,7 @@ print.findFn <- function(x, file, title, openBrowser = TRUE,
     }
   }
 ##
-## 3.  sorttable.js?
+## 4.  sorttable.js?
 ##
 ##  Dir <- tools:::file_path_as_absolute( dirname(File) )
 ##  This line is NOT ENOUGH:
@@ -56,7 +75,7 @@ print.findFn <- function(x, file, title, openBrowser = TRUE,
     file.copy(js, Dir)
   }
 ##
-## 4.  Modify x$Description
+## 5.  Modify x$Description
 ##
 ## save 'x' as 'xin' for debugging
   xin <- x
@@ -64,7 +83,7 @@ print.findFn <- function(x, file, title, openBrowser = TRUE,
                         as.character(x$Description))
   x[] <- lapply(x, as.character)
 ##
-## 5.  template for brew?
+## 6.  template for brew?
 ##
   hasTemplate <- !missing(template)
   if (!hasTemplate) {
@@ -83,7 +102,7 @@ print.findFn <- function(x, file, title, openBrowser = TRUE,
     close(template)
   }
 ##
-## 6.  Was File created appropriately?  If no, try Sundar's original code
+## 7.  Was File created appropriately?  If no, try Sundar's original code
 ##
   FileInfo <- file.info(File)
   if (is.na(FileInfo$size) || FileInfo$size <= 0) {
@@ -189,7 +208,7 @@ table.sortable .empty {
 </html>")
   }
 ##
-## 7.  Display in a browser?
+## 8.  Display in a browser?
 ##
   if (openBrowser) {
     FileInf2 <- file.info(File)
