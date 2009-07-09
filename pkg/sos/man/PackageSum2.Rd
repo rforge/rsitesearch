@@ -12,26 +12,27 @@
 }
 \usage{
 PackageSum2(x,
-        fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
-            lib.loc=NULL, ...)
+        fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
+                 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{findFn}(x,
-        fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
-            lib.loc=NULL, ...)
+        fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
+                 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{data.frame}(x,
-        fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
-            lib.loc=NULL, ...)
+        fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
+                 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{list}(x,
-        fields=c("Title", "Version", "Author", "Maintainer", "Packaged"),
-            lib.loc=NULL, ...)
+        fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
+                 'vignette'), lib.loc=NULL, ...)
 }
 \arguments{
   \item{x}{
     a data.frame with columns \code{Package} and \code{Score}.
   }
   \item{fields}{
-    character vector of names to look for in components of
-    \code{packageDescription(x$Package[i])} and return as additional
-    columns of \code{x} if found.
+    character vector of names of columns to add to \code{x}.  The
+    function first looks  in the components of
+    \code{packageDescription(x$Package[i])}.  'vignette' is obtained via
+    the function of that name.
 
     Component 'Packaged' receives special treatment.  If present, only
     the portion preceding ';' will be retained.  This seems to be a time
@@ -75,7 +76,7 @@ PackageSum2(x,
 ##
 ## data.frame method
 ##
-tstdf <- data.frame(Package=c('fda', 'base'), stringsAsFactors=FALSE)
+tstdf <- data.frame(Package=c('grid', 'base'), stringsAsFactors=FALSE)
 tst2 <- PackageSum2(tstdf)
 
 ##
@@ -87,13 +88,13 @@ all.equal(tst2, PackageSum2(tstList))
 \dontshow{)}
 
 ##
-## RSiteSearch method
+## findFn method
 ##
-tstRSearch <- data.frame(Package=c('fda', 'base')[c(1,1,2)], Score=2:4,
+tst.findFn <- data.frame(Package=c('grid', 'base')[c(1,1,2)], Score=2:4,
                     Date=LETTERS[1:3], stringsAsFactors=FALSE)
-attr(tstRSearch, 'PackageSummary') <- PackageSummary(tstRSearch)
-class(tstRSearch) <- c('findFn', 'data.frame')
-tst2. <- PackageSum2(tstRSearch)
+attr(tst.findFn, 'PackageSummary') <- PackageSummary(tst.findFn)
+class(tst.findFn) <- c('findFn', 'data.frame')
+tst2. <- PackageSum2(tst.findFn)
 
 # row names are different from tst2, so fix ...
 row.names(tst2.) <- row.names(tst2)
