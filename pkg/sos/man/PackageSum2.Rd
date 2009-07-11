@@ -13,16 +13,16 @@
 \usage{
 PackageSum2(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
-                 'vignette'), lib.loc=NULL, ...)
+                 'helpPages', 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{findFn}(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
-                 'vignette'), lib.loc=NULL, ...)
+                 'helpPages', 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{data.frame}(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
-                 'vignette'), lib.loc=NULL, ...)
+                 'helpPages', 'vignette'), lib.loc=NULL, ...)
 \method{PackageSum2}{list}(x,
         fields=c("Title", "Version", "Author", "Maintainer", "Packaged",
-                 'vignette'), lib.loc=NULL, ...)
+                 'helpPages', 'vignette'), lib.loc=NULL, ...)
 }
 \arguments{
   \item{x}{

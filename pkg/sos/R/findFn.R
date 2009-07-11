@@ -67,7 +67,8 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     class(ans) <- c("findFn", "data.frame")
     return(ans)
   }
-  if(verbose)cat(' found', hits, 'matches')
+  if(verbose)cat(' found ', hits, ' match', c('', 'es')[1+(hits>1)],
+                 sep='')
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {
