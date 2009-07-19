@@ -1,33 +1,26 @@
-\name{install.packages}
-\alias{install.packages}
-\alias{install.packages.default}
-\alias{install.packages.findFn}
+\name{installPackages}
+\alias{installPackages}
 \title{
   install packages with minimum count
 }
 \description{
   \code{install.packages} identifed in a \code{findFn} object with
-  \code{Count} exceeding \code{minCount}.  (The present package makes
-  \code{install.packages} a generic function with the default method
-  referring to \code{\link[utils]{install.packages}}.)
+  \code{Count} exceeding \code{minCount}.
 }
 \usage{
-%install.packages(x, ...)
-\method{install.packages}{default}(x, ...)
-\method{install.packages}{findFn}(x, minCount=sqrt(x[['Count']][1]), ...)
+installPackages(x, minCount=sqrt(x[['Count']][1]), ...)
 }
 \arguments{
   \item{x}{
     either a character vector to be passed to
-    \code{utils:::install.package} of a \code{findFn} object
+    \code{\link[utils]{install.package}} or a \code{findFn} object
   }
   \item{minCount}{
     Install all packages identified in \code{x[['Packages']]} with
     \code{x[['Count']]} exceeding \code{minCount}.
   }
   \item{\dots}{
-    optional arguments passed to other methods; see
-    \code{\link[utils]{install.packages}}
+    optional arguments passed to \code{\link[utils]{install.packages}}
   }
 }
 \details{
