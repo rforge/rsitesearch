@@ -23,22 +23,42 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     html <- scan(tmpfile, what = "", quiet = quiet, sep = "\n")
     hits <- as.numeric(sub("^.*<!-- HIT -->(.*)<!-- HIT -->.*$", "\\1",
                            html[grep("<!-- HIT -->", html)]))
-    links <- html[grep("http://finzi.psych.upenn.edu/R/library.*R:",
-                       html)]
-    dates <- html[grep("<strong>Date</strong>", html)]
+#    findLinks <- grep("http://finzi.psych.upenn.edu/R/library.*R:",
+#                       html)
+#    links <- html[grep("http://finzi.psych.upenn.edu/R/library.*R:",
+#                       html)]
+    findDates <- grep("<strong>Date</strong>", html)
+    dates <- html[findDates]
+    links <- html[findDates-2]
     pattern <-
       "^.*http://finzi.psych.upenn.edu/R/library/(.*)/html/(.*)\\.html.*$"
     pac <- sub(pattern, "\\1", links)
     fun <- sub(pattern, "\\2", links)
-    score <- sub("<dt>.*<strong><a href=.*>R:.*\\(score: (.*)\\).*$",
-                 "\\1", links)
-    date <- sub("^.*<em>(.*)</em>.*$", "\\1", dates)
+#    score <- sub("<dt>.*<strong><a href=.*>R:.*\\(score: (.*)\\).*$",
+#                 "\\1", links)
+    scoreLoc <- regexpr('score:', links)
+    scoreCh <- substring(links, scoreLoc+6)
+    score <- as.numeric(substring(scoreCh, 1, nchar(scoreCh)-1))
+#
+    Date <- sub("^.*<em>(.*)</em>.*$", "\\1", dates)
     lnk <- sub("<dt>.*<strong><a href=\\\"(.*)\\\">R:.*$", "\\1", links)
-    desc <- sub("<dt>.*<strong><a href=\\\".*\\\">R:(.*)</a>.*$", "\\1",
+    desc0 <- sub("<dt>.*<strong><a href=\\\".*\\\">R:(.*)</a>.*$", "\\1",
                 links)
-    desc <- gsub("(<strong.*>)|(</strong>)", "", desc)
+    desc <- gsub("(<strong.*>)|(</strong>)", "", desc0)
+    if((length(pac)<1) && (length(Date)>0)){
+      tooMany <- (length(grep("Too many documents hit.  Ignored",
+                              html))>0)
+      {
+        if(tooMany)
+          warning("Too many documents hit.  Ignored")
+        else
+          warning('SOFTWARE PROBLEM:  dates found without ',
+                  'content;  ignored.')
+      }
+      Date <- Date[numeric(0)]
+    }
     ans <- data.frame(Package = pac, Function = fun,
-                      Date = strptime(date, "%a, %d %b %Y %T"),
+                      Date = strptime(Date, "%a, %d %b %Y %T"),
                       Score = score, Description = desc, Link = lnk)
     attr(ans, "matches") <- hits
     ans
@@ -125,6 +145,7 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
   packageSum <- pkgSum
   rownames(pkgSum) <- as.character(pkgSum$Package)
   pkgSum$Package <- NULL
+  pkgSum$Date <- NULL
   pkgS2 <- pkgSum[as.character(ans$Package), , drop=FALSE]
   rownames(pkgS2) <- NULL
   Ans <- cbind(as.data.frame(pkgS2), ans)

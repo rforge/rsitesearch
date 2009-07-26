@@ -70,7 +70,7 @@ PackageSum2.data.frame <- function(x,
                   xnew[ip, ic] <- paste(nrow(vig), clps, sep=':  ')
                 }
                 else if(nrow(vig)>0)
-                  xnew[ip, ic] <- vig[, 1, 'Title']
+                  xnew[ip, ic] <- vig[ 1, 'Title']
               }
             }
           }

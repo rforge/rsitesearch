@@ -46,10 +46,10 @@ installPackages(x, minCount=sqrt(x[['Count']][1]), ...)
 \dontrun{
 spl <- findFn("spline", maxPages = 2)
 # install all the most frequently cited packages
-install.packages(spl)
+installPackages(spl)
 
 # install ALL packages found
-install.packages(spl, 1)
+installPackages(spl, 1)
 }
 
 }
