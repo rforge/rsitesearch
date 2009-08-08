@@ -27,7 +27,8 @@ sortFindFn <- function(x, sortby=NULL) {
   pkgSum$Package <- NULL
   pkgS2 <- pkgSum[as.character(x$Package), , drop=FALSE]
   rownames(pkgS2) <- NULL
-  Ans <- cbind(as.data.frame(pkgS2), x)
+  xInS2 <- (names(x) %in% names(pkgS2))
+  Ans <- cbind(as.data.frame(pkgS2), x[, !xInS2])
 ##
 ## 4.  Sort Ans by 'sort.'
 ##
