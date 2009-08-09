@@ -4,7 +4,7 @@ installPackages <- function(x, minCount=sqrt(x[['Count']][1]),
 ## 1.  pkgs needed
 ##
   pkgsum <- attr(x, 'PackageSummary')
-  sel <- (pkgsum$Count > minCount)
+  sel <- (pkgsum$Count >= minCount)
   toget <- pkgsum$Package[sel]
 ##
 ## 2.  Installed pkgs?

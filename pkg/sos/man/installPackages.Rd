@@ -5,7 +5,7 @@
 }
 \description{
   \code{install.packages} identifed in a \code{findFn} object with
-  \code{Count} exceeding \code{minCount}.
+  \code{Count} at least \code{minCount}.
 }
 \usage{
 installPackages(x, minCount=sqrt(x[['Count']][1]), ...)
