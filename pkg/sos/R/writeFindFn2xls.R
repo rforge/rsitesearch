@@ -3,7 +3,9 @@ writeFindFn2xls <- function(x,
 ##
 ## 1.  open connection
 ##
-  if(!require(RODBC))stop('Need the RRODBC package.')
+  if(!require(RODBC))stop('Need the RODBC package.')
+  if(!(.Platform$OS.type=="windows"))
+    stop('Does not work on non-Windows platform:(')
   xlsFile <- odbcConnectExcel(file., readOnly=FALSE)
 ##
 ## 2.  Create the sheets

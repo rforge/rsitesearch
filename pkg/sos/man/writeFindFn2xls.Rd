@@ -20,7 +20,7 @@ writeFindFn2xls(x, file.=paste(deparse(substitute(x)), 'xls', sep='.'))
   }
 }
 \details{
-  Uses \code{library(RODBC)}.
+  Uses \code{library(RODBC)} and only works under Windows.
 }
 \value{
   The name of the file created is returned invisibly.
@@ -35,8 +35,10 @@ writeFindFn2xls(x, file.=paste(deparse(substitute(x)), 'xls', sep='.'))
   \code{\link[RODBC]{odbcClose}}
 }
 \examples{
-splineSearch <- findFn("spline", maxPages = 2)
-writeFindFn2xls(splineSearch)
+splineSearch <- findFn("spline", maxPages = 1)
+
+if(.Platform$OS.type=="windows")writeFindFn2xls(splineSearch)
+
 }
 \keyword{print}
 
