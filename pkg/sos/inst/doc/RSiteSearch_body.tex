@@ -1,41 +1,71 @@
-\title{Searching R Packages}
-\author{by Spencer Graves and Sundar Dorai-Raj}
+\title{Searching help pages of R packages}
+\author{by Spencer Graves, Sundar Dorai-Raj, and Romain Francois}
 
 \maketitle
 
-The {\tt RSiteSearch} package provides a means to quickly and
+The {\tt sos} package provides a means to quickly and
 flexibly search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
-The results are returned in a {\tt data.frame} of class {\tt
-RSiteSearch}.  Other \R{} functions can then be used to quickly find
-what you want among possibly hundreds or thousands of hits.
+The main capability of this package is the {\tt findFn} function,
+which queries only the "function" help pages in Jonathan Baron's
+RSiteSearch data base and returns the results in a {\tt data.frame}
+of class {\tt findFn}.  The corresponding {\tt print} method
+displays the results as a table in a web browser with links to the
+individual help pages, sorted by package displaying the one with the
+most matches first.  Other {\tt sos} functions provide a summary
+with one line for each package, support the union and intersection
+of {\tt findFn} objects, and allows the results to be
+written to an Excel file with three sheets for (1) {\tt PackageSum2}, which
+provides an enhanced summary of the packages with matches, (2) the
+{\tt findFn} table itself, and (3) the {\tt call} used to produce it.
+
+Other \R{} functions can then be used to
+quickly find what you want among possibly hundreds or thousands of
+hits or produce
 
 Two examples are considered below:  First we find a dataset containing
-a variable {\tt Petal.Length}.  Second, we find packages with {\tt
-  spline} capabilities, including looking for a function named {\tt
-  spline}.
+a variable {\tt Petal.Length}, used without indicating the source 
+by Chambers (2009, pp. 282-3).  Second, we study \R{} capabilities 
+for splines, including looking for a function named {\tt spline}.
 
 \section*{Petal.Length}
 
-For example, a document discussing \R{} provides an example using a
-variable {\tt Petal.Length} from a famous Fisher data set but without
-naming the dataset nor where it can be found nor even if it exists in
-\R{}.
+Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a 
+famous Fisher data set but without naming the dataset nor indicating 
+where it can be found nor even if it exists in \R{}.  The sample 
+code he provides does not work by itself.  To reproduce his 
+Figure 7.2, we must first obtain a copy of this famous data set 
+in a format compatible with Chambers' code.  
+
+How to add Bibliography ?
+Chambers, John (2009) Software for Data Analysis (Springer) 
+
+Some users might try the following:  
 \begin{verbatim}
 > help.search('Petal.Length')
 No help files found ...
 \end{verbatim}
-{\tt RSiteSearch('Petal.Length')} produced 80 hits.
-{\tt RSiteSearch('Petal.Length', 'function')} will identify only
-the help pages on this list, but we can get the same thing as a
-{\tt data.frame} as follows:
+When this failed, many users might then try 
+{\tt RSiteSearch('Petal.Length')}.  This produced 80 hits.  
+{\tt RSiteSearch('Petal.Length', 'function')} will identify 
+only the help pages on this list, but we can get something 
+similar and more useful as follows:
 \begin{verbatim}
-> PL <- RSiteSearch.function('Petal.Length')
+> library(sos) 
+> PL <- findFn('Petal.Length')
 \end{verbatim}
-The {\tt summary.RSiteSearch} method returns the number of hits, {\tt
-max(Score)}, and {\tt sum(Score)} by {\tt Package}:
+{\tt PL} is a {\tt data.frame} of class {\tt findFn} identifying 
+all the help pages in Jonathan Baron's data base matching the 
+search term.  
+
+The {\tt summary} method for such an object returns 
+the number of matches with a table giving for each {\tt Package} 
+the {\tt Count} (number of matches), {\tt MaxScore} (max of the 
+{\tt Score}), {\tt TotalScore} (sum of {\tt Score}), and {\tt Date}, 
+sorted like a Pareto chart to place the {\tt Package} with the most 
+help pages first:  
 \begin{verbatim}
 > summary(PL)
 
@@ -50,6 +80,9 @@ yaImpute      8        1          8
 datasets      1        2          2
 <...>
 \end{verbatim}
+
+REDO to add the Date  
+
 One of the listed packages is {\tt datasets}.  Since it's part of the
 default \R{} distribution, we decide to look there first.  We can
 select that row of PL just like we would select a row from any other
@@ -58,7 +91,12 @@ data.frame:
 > PL[PL$Package=='datasets', 'Function']
 [1] iris
 \end{verbatim}
-Problem solved in less than a minute!
+The {\tt print} method for an object of class {\tt findFn} 
+opens the result in a browser with the last column being linked 
+to the associated help page.  
+
+Problem solved in less than a minute!  Any other method known 
+to the present authors would have taken substantially more time.  
 
 \section*{spline}
 
@@ -72,20 +110,41 @@ documents.  That is too much, so I restricted it to functions:
 \begin{verbatim}
 RSiteSearch('spline', 'fun')
 \end{verbatim}
-This identified only 631.  That's an improvement over 1526 but is too
-much.  To get a quick overview of these 631, we can proceed as
-follows:
+This identified only 631.  That's an improvement over 1526 but is 
+still too much.  To get a quick overview of these 631, we can 
+proceed as follows:
 \begin{verbatim}
-splinePacs <- RSiteSearch.function('spline')
+splinePacs <- findFn('spline')
 \end{verbatim}
-This downloaded a summary of the 200 highest-scoring help pages in
-the 'RSiteSearch' data base in roughly 5-10 seconds, depending on the
+This downloaded a summary of the 400 highest-scoring help pages in
+the 'RSiteSearch' data base in roughly 5-15 seconds, depending on the
 speed of the Internet connection.  To get all 631 hits, increase
-maxPages:
+{\tt maxPages}:
 \begin{verbatim}
-splineAll <- RSiteSearch.function('spline',
-                              maxPages=999)
+splineAll <- findFn('spline', maxPages=999)
 \end{verbatim}
+As noted above, the {\tt print} method will open the result in 
+a web browser.  
+
+However, a table with 631 rows is rather large to digest easily.  
+We could try the {\\ summary} method, but that produces a table 
+with 
+
+HOW MANY?  
+
+rows.  The simplest thing to do from here is to create an Excel 
+file as follows:  
+\begin{verbatim} 
+writeFindFn2xls(splineAll) 
+\end{verbatim} 
+This produces an Excel file (which can be opened with Open Office 
+Calc 
+
+citation for Open Office Calc?
+
+asdf, which can be useful for people who do not have Excel) with 
+three sheets:  
+
 To find a function named {\tt spline} from this, we can proceed as
 follows:
 \begin{verbatim}
@@ -95,27 +154,26 @@ splineAll[selSpl, ]
 This has 0 rows, because there is no help page named {\tt spline}.
 
 We can expand this to include any help page containing {\tt spline} in
-the name using {\tt grep}:
+the name using {\tt grepFn}:
 \begin{verbatim}
-> fns <- tolower(splineAll[,'Function'])
-> select <- grep('spline', fns)
-> splineAll[select, c(1, 4, 5, 7)]
-  Count Package             Function Score
-31   34  assist              lspline     1
-35   30     fda create.bspline.basis    48
-<...>
+> grepFn('spline', splineAll, ignore.case=TRUE) 
 \end{verbatim}
-This identified 66 help pages, the first of which is 'lspline' in the
+This returned a {\tt findFn} object identifying 66 help pages.  
+The {\tt print} method for an object of class {\tt findFn} 
+presents the result in a web browser, 
+
+asdf, 
+the first of which is 'lspline' in the
 'assist' package.  The {\tt RSiteSearch} engine assigned it a {\tt
 Score} of 1.  Evidently, that search engine found only minimal
 evidence of its relevance to the requested search {\tt string}.  It
 appeared at the top of this list, because the {\tt assist} package had
 34 help pages identifed as potentially relevant to that search {\tt
-string}.
+string}, none of which had a {\tt Score} exceeding 1.  
 
 To establish priorities among different packages for further study, it
-might be nice to have a Pareto of the 10 packages with the most help
-pages relevant to our search {\tt string}.  We can get this as
+might be nice to have a Pareto chart showing the 10 packages with the 
+most help pages relevant to our search {\tt string}.  We can get this as
 follows:
 \begin{verbatim}
 > spSm <- attr(splineAll,'PackageSummary')
@@ -170,12 +228,7 @@ finding things in contributed packages.
 The {\tt RSiteSearch} capabilities here extend the power of the
 {\tt RSiteSearch} search engine maintained by Jonathan Baron.
 Without Prof. Baron's support, it would not have been feasible
-to develop the features described here.  We also wish to thank
-Romain Francois, who had an {\tt RSiteSearch} project on R-Forge
-before we did.  He not only agreed to merge his "R Site Search
-extension for firefox" project with ours, he also added the
-{\tt template} argument to our {\tt HTML} function, thereby
-providing added flexibility.
+to develop the features described here.
 \newline \newline
 \emph{Spencer Graves \newline
 Productive Systems Engineering \newline
@@ -183,7 +236,12 @@ San Jose, CA \newline
 email:  {\tt spencer.graves@prodsyse.com} }
 \newline \newline
 \emph{Sundar Dorai-Raj \newline
-Google \newline 
-Mountain View, CA \newline 
+Google \newline
+Mountain View, CA \newline
 email:  {\tt sdorairaj@google.com} }
+\newline \newline
+\emph{Romain Francois \newline
+\newline
+\newline
+email:  {\tt romain.francois@dbmail.com} }
 

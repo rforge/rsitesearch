@@ -9,7 +9,9 @@
   \code{call} attribute of the \code{findFn} object.
 }
 \usage{
-writeFindFn2xls(x, file.=paste(deparse(substitute(x)), 'xls', sep='.'))
+writeFindFn2xls(x,
+       file.=paste(deparse(substitute(x)), 'xls', sep='.'),
+       csv, ...)
 }
 \arguments{
   \item{x}{
@@ -18,9 +20,28 @@ writeFindFn2xls(x, file.=paste(deparse(substitute(x)), 'xls', sep='.'))
   \item{file.}{
     Name of Excel file to create.
   }
+  \item{csv}{
+    logical:  if TRUE, write three *.csv files rather than one
+    *.xls file.  Default is FALSE if software is available to
+    write a *.xls file and TRUE otherwise.
+  }
+  \item{\dots}{
+    optional arguments to \code{write.csv} used if
+  }
 }
 \details{
-  Uses \code{library(RODBC)} and only works under Windows.
+  1.  Create the sheets
+
+  2.  if(csv | \code{!require(RODBC)} | cannot otherwise
+  create an Excel file) write.csv with names ending '-sum.csv' for
+  \code{PackageSum2}, '.csv' for the main table, and '-call.csv' for the
+  \code{call} sheet.
+
+  3.  Open connection
+
+  4.  Write the sheets
+
+  5.  Done.
 }
 \value{
   The name of the file created is returned invisibly.
@@ -37,8 +58,9 @@ writeFindFn2xls(x, file.=paste(deparse(substitute(x)), 'xls', sep='.'))
 \examples{
 splineSearch <- findFn("spline", maxPages = 1)
 
-if(.Platform$OS.type=="windows")writeFindFn2xls(splineSearch)
+writeFindFn2xls(splineSearch)
 
+writeFindFn2xls(splineSearch, csv=TRUE)
 }
 \keyword{print}
 
