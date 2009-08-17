@@ -16,74 +16,73 @@ displays the results as a table in a web browser with links to the
 individual help pages, sorted by package displaying the one with the
 most matches first.  Other {\tt sos} functions provide a summary
 with one line for each package, support the union and intersection
-of {\tt findFn} objects, and allows the results to be
-written to an Excel file with three sheets for (1) {\tt PackageSum2}, which
+of {\tt findFn} objects, and write the results to an Excel file
+with three sheets:  (1) {\tt PackageSum2}, which
 provides an enhanced summary of the packages with matches, (2) the
 {\tt findFn} table itself, and (3) the {\tt call} used to produce it.
 
-Other \R{} functions can then be used to
-quickly find what you want among possibly hundreds or thousands of
-hits or produce
+Other \R{} functions can then be used to quickly find what you want
+among possibly hundreds of matches.
 
 Two examples are considered below:  First we find a dataset containing
-a variable {\tt Petal.Length}, used without indicating the source 
-by Chambers (2009, pp. 282-3).  Second, we study \R{} capabilities 
+a variable {\tt Petal.Length}, used without indicating the source
+by 
+%\citeauthoryear{JC09}.
+
+\cite[pp. 282-283]{JC09}.  Second, we study \R{} capabilities
 for splines, including looking for a function named {\tt spline}.
 
 \section*{Petal.Length}
 
-Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a 
-famous Fisher data set but without naming the dataset nor indicating 
-where it can be found nor even if it exists in \R{}.  The sample 
-code he provides does not work by itself.  To reproduce his 
-Figure 7.2, we must first obtain a copy of this famous data set 
-in a format compatible with Chambers' code.  
+Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a
+famous Fisher data set but without naming the dataset nor indicating
+where it can be found nor even if it exists in \R{}.  The sample
+code he provides does not work by itself.  To reproduce his
+Figure 7.2, we must first obtain a copy of this famous data set
+in a format compatible with Chambers' code.
 
 How to add Bibliography ?
-Chambers, John (2009) Software for Data Analysis (Springer) 
+Chambers, John (2009) Software for Data Analysis (Springer)
 
-Some users might try the following:  
+One might first try the {\tt help.search} function, which 
+in this case unfortunately yields nothing:  
 \begin{verbatim}
 > help.search('Petal.Length')
 No help files found ...
 \end{verbatim}
-When this failed, many users might then try 
-{\tt RSiteSearch('Petal.Length')}.  This produced 80 hits.  
-{\tt RSiteSearch('Petal.Length', 'function')} will identify 
-only the help pages on this list, but we can get something 
+When this failed, many users might then try
+{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches when 
+it was tried on one day and 62 matched a few months later.
+{\tt RSiteSearch('Petal.Length', 'function')} will identify
+only the help pages on this list, but we can get something
 similar and more useful as follows:
 \begin{verbatim}
-> library(sos) 
+> library(sos)
 > PL <- findFn('Petal.Length')
 \end{verbatim}
-{\tt PL} is a {\tt data.frame} of class {\tt findFn} identifying 
-all the help pages in Jonathan Baron's data base matching the 
-search term.  
+{\tt PL} is a {\tt data.frame} of class {\tt findFn} identifying
+all the help pages in Jonathan Baron's data base matching the
+search term.
 
-The {\tt summary} method for such an object returns 
-the number of matches with a table giving for each {\tt Package} 
-the {\tt Count} (number of matches), {\tt MaxScore} (max of the 
-{\tt Score}), {\tt TotalScore} (sum of {\tt Score}), and {\tt Date}, 
-sorted like a Pareto chart to place the {\tt Package} with the most 
-help pages first:  
+The {\tt summary} method for such an object returns
+the number of matches with a table giving for each {\tt Package}
+the {\tt Count} (number of matches), {\tt MaxScore} (max of the
+{\tt Score}), {\tt TotalScore} (sum of {\tt Score}), and {\tt Date},
+sorted like a Pareto chart to place the {\tt Package} with the most
+help pages first:
 \begin{verbatim}
 > summary(PL)
 
-Total number of hits: 23
-Number of links downloaded: 23
-
-Packages with at least 1 hit
-using search pattern 'Petal.Length':
-          Count MaxScore TotalScore
-yaImpute      8        1          8
+Total number of matches: 27
+Downloaded 27 links in 14 packages.
+Packages with at least 1 match using search pattern 'Petal.Length':
+         Package Count MaxScore TotalScore                Date
+1       yaImpute     8        1          8 2009-08-16 05:53:10
 <...>
-datasets      1        2          2
+8       datasets     1        2          2 2009-07-09 18:11:06
 <...>
 \end{verbatim}
-
-REDO to add the Date  
-
-One of the listed packages is {\tt datasets}.  Since it's part of the
+One of the listed packages is {\tt datasets}.  Since it is part of the
 default \R{} distribution, we decide to look there first.  We can
 select that row of PL just like we would select a row from any other
 data.frame:
@@ -91,59 +90,58 @@ data.frame:
 > PL[PL$Package=='datasets', 'Function']
 [1] iris
 \end{verbatim}
-The {\tt print} method for an object of class {\tt findFn} 
-opens the result in a browser with the last column being linked 
-to the associated help page.  
-
-Problem solved in less than a minute!  Any other method known 
-to the present authors would have taken substantially more time.  
+Problem solved in less than a minute!  Any other method known
+to the present authors would have taken substantially more time.
 
 \section*{spline}
 
-Three years ago, I decided I wanted to learn more about
-splines.  I started my literature search as follows:
+Three years ago, the lead author of this article decided he 
+needed to learn 
+more about splines.  The literature search began as follows:  
 \begin{verbatim}
 RSiteSearch('spline')
 \end{verbatim}
 While preparing this manuscript, this command identified 1526
-documents.  That is too much, so I restricted it to functions:
+documents.  That is too many.  It can be restricted to 
+functions as follows:  
 \begin{verbatim}
 RSiteSearch('spline', 'fun')
 \end{verbatim}
-This identified only 631.  That's an improvement over 1526 but is 
-still too much.  To get a quick overview of these 631, we can 
+This identified only 631 on one day;  739 a few months later.  
+That's an improvement over 1526 but is
+still too many.  To get a quick overview of these 739, we can
 proceed as follows:
 \begin{verbatim}
 splinePacs <- findFn('spline')
 \end{verbatim}
 This downloaded a summary of the 400 highest-scoring help pages in
 the 'RSiteSearch' data base in roughly 5-15 seconds, depending on the
-speed of the Internet connection.  To get all 631 hits, increase
-{\tt maxPages}:
+speed of the Internet connection.  To get all 739 matches, increase 
+the {\tt maxPages} from its default 20:  
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages=999)
 \end{verbatim}
-As noted above, the {\tt print} method will open the result in 
-a web browser.  
+The {\tt print} method for a {\tt findFn} object 
+will open the result in a web browser.
 
-However, a table with 631 rows is rather large to digest easily.  
-We could try the {\\ summary} method, but that produces a table 
-with 
+However, a table with 739 rows is rather large to digest easily.
+We could try the {\tt summary} method, but that produces a table
+with
 
-HOW MANY?  
+HOW MANY?
 
-rows.  The simplest thing to do from here is to create an Excel 
-file as follows:  
-\begin{verbatim} 
-writeFindFn2xls(splineAll) 
-\end{verbatim} 
-This produces an Excel file (which can be opened with Open Office 
-Calc 
+rows.  The simplest thing to do from here is to create an Excel
+file as follows:
+\begin{verbatim}
+writeFindFn2xls(splineAll)
+\end{verbatim}
+This produces an Excel file (which can be opened with Open Office
+Calc
 
 citation for Open Office Calc?
 
-asdf, which can be useful for people who do not have Excel) with 
-three sheets:  
+asdf, which can be useful for people who do not have Excel) with
+three sheets:
 
 To find a function named {\tt spline} from this, we can proceed as
 follows:
@@ -156,23 +154,23 @@ This has 0 rows, because there is no help page named {\tt spline}.
 We can expand this to include any help page containing {\tt spline} in
 the name using {\tt grepFn}:
 \begin{verbatim}
-> grepFn('spline', splineAll, ignore.case=TRUE) 
+> grepFn('spline', splineAll, ignore.case=TRUE)
 \end{verbatim}
-This returned a {\tt findFn} object identifying 66 help pages.  
-The {\tt print} method for an object of class {\tt findFn} 
-presents the result in a web browser, 
+This returned a {\tt findFn} object identifying 66 help pages.
+The {\tt print} method for an object of class {\tt findFn}
+presents the result in a web browser,
 
-asdf, 
+asdf,
 the first of which is 'lspline' in the
 'assist' package.  The {\tt RSiteSearch} engine assigned it a {\tt
 Score} of 1.  Evidently, that search engine found only minimal
 evidence of its relevance to the requested search {\tt string}.  It
 appeared at the top of this list, because the {\tt assist} package had
 34 help pages identifed as potentially relevant to that search {\tt
-string}, none of which had a {\tt Score} exceeding 1.  
+string}, none of which had a {\tt Score} exceeding 1.
 
 To establish priorities among different packages for further study, it
-might be nice to have a Pareto chart showing the 10 packages with the 
+might be nice to have a Pareto chart showing the 10 packages with the
 most help pages relevant to our search {\tt string}.  We can get this as
 follows:
 \begin{verbatim}
@@ -231,7 +229,8 @@ Without Prof. Baron's support, it would not have been feasible
 to develop the features described here.
 \newline \newline
 \emph{Spencer Graves \newline
-Productive Systems Engineering \newline
+President and Chief Operating Officer \newline
+Structure Inspection and Monitoring \newline
 San Jose, CA \newline
 email:  {\tt spencer.graves@prodsyse.com} }
 \newline \newline
