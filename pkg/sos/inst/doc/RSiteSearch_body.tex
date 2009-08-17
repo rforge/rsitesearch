@@ -125,13 +125,13 @@ The {\tt print} method for a {\tt findFn} object
 will open the result in a web browser.
 
 However, a table with 739 rows is rather large to digest easily.
-We could try the {\tt summary} method, but that produces a table
-with
+The 739 help pages came from 191 different packages.  The 
+{\tt summary} method by default will display the first 
+minPackages = 12 (plus others with the same number of matches as 
+the that one).  
 
-HOW MANY?
-
-rows.  The simplest thing to do from here is to create an Excel
-file as follows:
+A more complete view can be obtained in MS Excel format 
+using the {\tt writeFindFn2xls} function:  
 \begin{verbatim}
 writeFindFn2xls(splineAll)
 \end{verbatim}
@@ -143,6 +143,17 @@ citation for Open Office Calc?
 asdf, which can be useful for people who do not have Excel) with
 three sheets:
 
+The {\tt PackageSum2} sheet contains information on locally installed 
+packages not available {\tt summary}.  
+
+...
+
+{\tt installPackages} ... 
+
+
+
+
+
 To find a function named {\tt spline} from this, we can proceed as
 follows:
 \begin{verbatim}
@@ -150,6 +161,9 @@ selSpl <- (splineAll[,'Function']=='spline')
 splineAll[selSpl, ]
 \end{verbatim}
 This has 0 rows, because there is no help page named {\tt spline}.
+
+
+
 
 We can expand this to include any help page containing {\tt spline} in
 the name using {\tt grepFn}:
