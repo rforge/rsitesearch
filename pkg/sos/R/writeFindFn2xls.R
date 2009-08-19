@@ -23,15 +23,27 @@ writeFindFn2xls <- function(x,
     return(invisible(file.))
   }
 ##
-## 2.  open connection
+## 2.  Will WriteXLS work?
+##
+  x2 <- lapply(x, function(x)
+               if(is.numeric(x)) x else as.character(x))
+  if(require(WriteXLS) && testPerl()) {
+    WriteXLS(c('sum2', 'x2', 'cl'), ExcelFileName=file.,
+             SheetNames=c('PackageSum2', 'findFn', 'call') )
+    return(invisible(file.))
+  }
+##
+## 3.  How about RODBC?
 ##
   if(!require(RODBC)){
-    warning('RODBC not available;  writing csv files')
+    warning('RODBC not available and WriteXS will not work;  ',
+            'writing csv files')
     writeFindFn2csv(x, file., ...)
     return(invisible(file.))
   }
   if(!(.Platform$OS.type=="windows")){
-    warning('Does not work on non-Windows platform;  writing csv files')
+    warning('Does not work on non-Windows platform without WriteXLS;',
+            '  writing csv files')
     writeFindFn2csv(x, file., ...)
     return(invisible(file.))
   }
@@ -40,9 +52,6 @@ writeFindFn2xls <- function(x,
 ## 3.  Create the sheets
 ##
   sum2. <- sqlSave(xlsFile, sum2, tablename='PackageSum2')
-#
-  x2 <- lapply(x, function(x)
-               if(is.numeric(x)) x else as.character(x))
   x. <- sqlSave(xlsFile, as.data.frame(x2), tablename='findFn')
 #
   cl. <- sqlSave(xlsFile, cl, tablename='call')
@@ -51,6 +60,6 @@ writeFindFn2xls <- function(x,
 ##
   fileClose <- odbcClose(xlsFile)
 #
-  file.
+  return(invisible(file.))
 }
 

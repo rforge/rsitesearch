@@ -3,32 +3,33 @@
 
 \maketitle
 
-The {\tt sos} package provides a means to quickly and
-flexibly search the help pages of contributed packages, finding
+The {\tt sos} package provides a means to quickly and flexibly 
+search the help pages of contributed packages, finding 
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
 The main capability of this package is the {\tt findFn} function,
-which queries only the "function" help pages in Jonathan Baron's
-RSiteSearch data base and returns the results in a {\tt data.frame}
-of class {\tt findFn}.  The corresponding {\tt print} method
-displays the results as a table in a web browser with links to the
-individual help pages, sorted by package displaying the one with the
-most matches first.  Other {\tt sos} functions provide a summary
-with one line for each package, support the union and intersection
-of {\tt findFn} objects, and write the results to an Excel file
-with three sheets:  (1) {\tt PackageSum2}, which
-provides an enhanced summary of the packages with matches, (2) the
-{\tt findFn} table itself, and (3) the {\tt call} used to produce it.
+which scans the "function" entries in Jonathan 
+Baron's RSiteSearch data base and returns the matches in a 
+{\tt data.frame} of class {\tt findFn}.  The corresponding 
+{\tt print} method displays the results as a table in a web 
+browser with links to the individual help pages, sorted by package 
+displaying the one with the most matches first.  Other {\tt sos} 
+functions provide summaries with one line for each package, support 
+the union and intersection of {\tt findFn} objects, and write the 
+results to an Excel file with three sheets:  (1) {\tt PackageSum2}, 
+which provides an enhanced summary of the packages with matches, 
+(2) the {\tt findFn} table itself, and (3) the {\tt call} used to 
+produce it.
 
 Other \R{} functions can then be used to quickly find what you want
 among possibly hundreds of matches.
 
-Two examples are considered below:  First we find a dataset containing
-a variable {\tt Petal.Length}, used without indicating the source
-by 
+Two examples are considered below:  First we find a dataset 
+containing a variable {\tt Petal.Length}, used without indicating 
+the source by
 %\citeauthoryear{JC09}.
-w/o page numbers 
+w/o page numbers
 cite \cite{JC09}.
 citet \citet{JC09}.
 
@@ -45,6 +46,7 @@ for splines, including looking for a function named {\tt spline}.
 
 \section*{Petal.Length}
 
+\citep[pp. 282-283]{JC09} 
 Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a
 famous Fisher data set but without naming the dataset nor indicating
 where it can be found nor even if it exists in \R{}.  The sample
@@ -55,17 +57,18 @@ in a format compatible with Chambers' code.
 How to add Bibliography ?
 Chambers, John (2009) Software for Data Analysis (Springer)
 
-One might first try the {\tt help.search} function, which 
-in this case unfortunately yields nothing:  
+To look for this data set, one might first try 
+the {\tt help.search} function.  Unfortunately, this function 
+returns nothing in this case:  
 \begin{verbatim}
 > help.search('Petal.Length')
 No help files found ...
 \end{verbatim}
 When this failed, many users might then try
-{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches when 
-it was tried on one day and 62 matches a few months later.
+{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches when
+it was tried on one day (and 62 matches a few months later).
 {\tt RSiteSearch('Petal.Length', 'function')} will identify
-only the help pages.  We can get something similar and more 
+only the help pages.  We can get something similar and more
 useful as follows:
 \begin{verbatim}
 > library(sos)
@@ -86,7 +89,7 @@ help pages first:
 
 Total number of matches: 27
 Downloaded 27 links in 14 packages.
-Packages with at least 1 match using search 
+Packages with at least 1 match using search
                       pattern 'Petal.Length':
 Package Count MaxScore TotalScore       Date
 yaImpute    8        1          8 2009-08-16
@@ -107,55 +110,55 @@ to the present authors would have taken substantially more time.
 
 \section*{spline}
 
-Three years ago, the lead author of this article decided he 
-needed to learn more about splines.  The literature search 
-began as follows:  
+Three years ago, the lead author of this article decided he
+needed to learn more about splines.  The literature search
+began as follows:
 \begin{verbatim}
 RSiteSearch('spline')
 \end{verbatim}
-While preparing this manuscript, this command identified 
-1526 documents one day.  That is too many.  It can be 
-restricted to functions as follows:  
+While preparing this manuscript, this command identified
+1526 documents one day.  That is too many.  It can be
+restricted to functions as follows:
 \begin{verbatim}
 RSiteSearch('spline', 'fun')
 \end{verbatim}
-This identified only 631 on one day (739 a few months later).  
-That's an improvement over 1526 but is still too many.  
-To get a quick overview of these 631 (or 739), we can proceed 
+This identified only 631 on one day (739 a few months later).
+That's an improvement over 1526 but is still too many.
+To get a quick overview of these 631 (or 739), we can proceed
 as follows:
 \begin{verbatim}
 splinePacs <- findFn('spline')
 \end{verbatim}
-This downloaded a summary of the 400 highest-scoring help pages 
-in the 'RSiteSearch' data base in roughly 5-15 seconds, depending 
-on the speed of the Internet connection.  To get all 739 matches, 
-increase the {\tt maxPages} argument from its default 20:  
+This downloaded a summary of the 400 highest-scoring help pages
+in the 'RSiteSearch' data base in roughly 5-15 seconds, depending
+on the speed of the Internet connection.  To get all 739 matches,
+increase the {\tt maxPages} argument from its default 20:
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages=999)
 \end{verbatim}
-The {\tt print} method for a {\tt findFn} object 
+The {\tt print} method for a {\tt findFn} object
 will open the result in a web browser.
 
 However, a table with 739 rows is rather large to digest easily.
-The 739 help pages came from 191 different packages.  The 
-{\tt summary} method by default will display the first 
-minPackages = 12 plus others with the same number of matches as 
-package number minPackages.  
+The 739 help pages came from 191 different packages.  The
+{\tt summary} method by default will display the first
+minPackages = 12 plus others with the same number of matches as
+package number minPackages.
 
-A more complete view can be obtained in MS Excel format 
-using the {\tt writeFindFn2xls} function:  
+A more complete view can be obtained in MS Excel format
+using the {\tt writeFindFn2xls} function:
 \begin{verbatim}
 writeFindFn2xls(splineAll)
 \end{verbatim}
-This produces an Excel file with three sheets:  
+This produces an Excel file with three sheets:
 
-The {\tt PackageSum2} sheet contains information on locally 
-installed packages not available {\tt summary}.  
+The {\tt PackageSum2} sheet contains information on locally
+installed packages not available {\tt summary}.
 
-The {\tt findFn} sheet contains the search results.  
+The {\tt findFn} sheet contains the search results.
 
-The {\tt call} sheet gives the call to {\tt findFn} 
-that generated these search results.  
+The {\tt call} sheet gives the call to {\tt findFn}
+that generated these search results.
 
 (An Excel file can be opened and edited with Open Office
 Calc
@@ -164,39 +167,39 @@ Calc
 citation for Open Office Calc?
 )
 
-The {\tt PackageSum2} sheet is created by the 
-{\tt PackagesSum2} function, which adds information from 
-installed packages not obtained on all functions by 
-{\tt findFn}.  This includes names of author and maintainer, 
-the date packaged, the number of help pages in the package, 
-and the name(s) of any vignettes.  This can be quite 
-valuable in prioritizing packages for further study.  
+The {\tt PackageSum2} sheet is created by the
+{\tt PackagesSum2} function, which adds information from
+installed packages not obtained on all functions by
+{\tt findFn}.  This includes names of author and maintainer,
+the date packaged, the number of help pages in the package,
+and the name(s) of any vignettes.  This can be quite
+valuable in prioritizing packages for further study.
 
-To install packages not already available locally, 
-the names of the desired packages can be passed to 
-{\tt install.packages} or the {\tt findFn} object can be 
+To install packages not already available locally,
+the names of the desired packages can be passed to
+{\tt install.packages} or the {\tt findFn} object can be
 passed to the {\tt installPackages} object, which includes
-a second argument {\tt minCount} so any any package with 
-at least {\tt minCount} matches not already installed 
-locally will be installed;  the default {\tt minCount} 
-is the square root of the largest {\tt Count}.  The 
-{\tt PackageSum2} results and the {\tt PackageSum2} 
-sheet of {\tt writeFindFn2xls} will typically contain 
-more information after running {\tt installPackages} 
-than before.  
+a second argument {\tt minCount} so any any package with
+at least {\tt minCount} matches not already installed
+locally will be installed;  the default {\tt minCount}
+is the square root of the largest {\tt Count}.  The
+{\tt PackageSum2} results and the {\tt PackageSum2}
+sheet of {\tt writeFindFn2xls} will typically contain
+more information after running {\tt installPackages}
+than before.
 
-Returning to the {\tt findFn} object, suppose we want 
-to find a function named {\tt spline}.  For this, we can 
+Returning to the {\tt findFn} object, suppose we want
+to find a function named {\tt spline}.  For this, we can
 proceed as follows:
 \begin{verbatim}
 selSpl <- (splineAll[,'Function']=='spline')
 splineAll[selSpl, ]
 \end{verbatim}
-This has 0 rows, because there is no help page named 
-{\tt spline}.  This does not mean that no function 
-with that exact name exists, only that no help page 
+This has 0 rows, because there is no help page named
+{\tt spline}.  This does not mean that no function
+with that exact name exists, only that no help page
 has that name.  To find a function with that exact
-name, try {findFn('spline(')}.  
+name, try {findFn('spline(')}.
 
 This search can be generalized using {\tt grepFn}:
 \begin{verbatim}
@@ -204,14 +207,14 @@ This search can be generalized using {\tt grepFn}:
 \end{verbatim}
 This returned a {\tt findFn} object identifying 60 help pages.
 The {\tt print} method for an object of class {\tt findFn}
-presents the result in a web browser.  In this case, 
-the fifth row is 'lspline' in the 
-'assist' package, which has a {\tt Score} of 1.  It 
-is the fifth row in this table, because it is in the 
-{\tt assist} package, which had a total of 34 help 
-pages matching the search term, and this was the only 
-one whose name (as opposed to contents) matched the 
-{\tt grep} {\tt pattern}.  
+presents the result in a web browser.  In this case,
+the fifth row is 'lspline' in the
+'assist' package, which has a {\tt Score} of 1.  It
+is the fifth row in this table, because it is in the
+{\tt assist} package, which had a total of 34 help
+pages matching the search term, and this was the only
+one whose name (as opposed to contents) matched the
+{\tt grep} {\tt pattern}.
 
 
 

@@ -47,7 +47,8 @@ writeFindFn2xls(x,
   The name of the file created is returned invisibly.
 }
 \author{
-  Spencer Graves
+  Spencer Graves with help from Dirk Eddedbuettel,
+  Gabor Grothendiek, and Marc Schwartz.
 }
 \seealso{
   \code{\link{findFn}},
