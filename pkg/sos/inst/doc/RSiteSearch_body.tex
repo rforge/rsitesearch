@@ -65,11 +65,11 @@ returns nothing in this case:
 No help files found ...
 \end{verbatim}
 When this failed, many users might then try
-{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches when
-it was tried on one day (and 62 matches a few months later).
+{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches 
+when it was tried one day (and 62 matches a few months later).
 {\tt RSiteSearch('Petal.Length', 'function')} will identify
-only the help pages.  We can get something similar and more
-useful as follows:
+only the help pages.  We can get something similar and for 
+many purpose more useful as follows:
 \begin{verbatim}
 > library(sos)
 > PL <- findFn('Petal.Length')
@@ -78,12 +78,11 @@ useful as follows:
 all the help pages in Jonathan Baron's data base matching the
 search term.
 
-The {\tt summary} method for such an object returns
-the number of matches with a table giving for each {\tt Package}
-the {\tt Count} (number of matches), {\tt MaxScore} (max of the
-{\tt Score}), {\tt TotalScore} (sum of {\tt Score}), and {\tt Date},
-sorted like a Pareto chart to place the {\tt Package} with the most
-help pages first:
+The {\tt summary} method for such an object prints a table giving 
+for each {\tt Package} the {\tt Count} (number of matches), 
+{\tt MaxScore} (max of {\tt Score}), {\tt TotalScore} (sum of 
+{\tt Score}), and {\tt Date}, sorted like a Pareto chart to place 
+the {\tt Package} with the most help pages first:
 \begin{verbatim}
 > summary(PL)
 
@@ -122,9 +121,9 @@ restricted to functions as follows:
 \begin{verbatim}
 RSiteSearch('spline', 'fun')
 \end{verbatim}
-This identified only 631 on one day (739 a few months later).
+This identified only 739 one day (631 a few months earlier).  
 That's an improvement over 1526 but is still too many.
-To get a quick overview of these 631 (or 739), we can proceed
+To get a quick overview of these 739, we can proceed
 as follows:
 \begin{verbatim}
 splinePacs <- findFn('spline')
@@ -136,21 +135,23 @@ increase the {\tt maxPages} argument from its default 20:
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages=999)
 \end{verbatim}
-The {\tt print} method for a {\tt findFn} object
-will open the result in a web browser.
+The {\tt print} method for a {\tt findFn} object displays the 
+result as a table in a web browser.
 
 However, a table with 739 rows is rather large to digest easily.
-The 739 help pages came from 191 different packages.  The
-{\tt summary} method by default will display the first
-minPackages = 12 plus others with the same number of matches as
-package number minPackages.
+{\tt summary(splineAll)} would tell us that the 739 help pages 
+came from 191 different packages and display the first
+minPackages = 12 plus others with that number of matches.
 
 A more complete view can be obtained in MS Excel format
 using the {\tt writeFindFn2xls} function:
 \begin{verbatim}
 writeFindFn2xls(splineAll)
 \end{verbatim}
-This produces an Excel file with three sheets:
+If either the {\tt WriteXLS} package and compatible Perl code 
+are properly installed or if you are running Windows with 
+the {\tt RODBC} package, this produces an Excel file with 
+three sheets:
 
 The {\tt PackageSum2} sheet contains information on locally
 installed packages not available {\tt summary}.
@@ -160,14 +161,16 @@ The {\tt findFn} sheet contains the search results.
 The {\tt call} sheet gives the call to {\tt findFn}
 that generated these search results.
 
-(An Excel file can be opened and edited with Open Office
+If {\tt WriteXLS} cannot produce an Excel file with your 
+installation, it will write three *.csv files.  (NOTE:  
+An Excel file can be opened and edited with Open Office
 Calc
 
 
 citation for Open Office Calc?
 )
 
-The {\tt PackageSum2} sheet is created by the
+The {\tt PackageSum2} sheet (or file) is created by the
 {\tt PackagesSum2} function, which adds information from
 installed packages not obtained on all functions by
 {\tt findFn}.  This includes names of author and maintainer,
@@ -177,16 +180,20 @@ valuable in prioritizing packages for further study.
 
 To install packages not already available locally,
 the names of the desired packages can be passed to
-{\tt install.packages} or the {\tt findFn} object can be
-passed to the {\tt installPackages} object, which includes
-a second argument {\tt minCount} so any any package with
-at least {\tt minCount} matches not already installed
-locally will be installed;  the default {\tt minCount}
-is the square root of the largest {\tt Count}.  The
-{\tt PackageSum2} results and the {\tt PackageSum2}
+{\tt install.packages}.  To simplify this task, the 
+{\tt findFn} object can be passed to the {\tt installPackages} 
+function to check all packages for which the number of 
+matches exceeds a second argument {\tt minCount} and 
+install any that are not already installed;  the default 
+{\tt minCount} is the square root of the largest {\tt Count}.  
+The results from {\tt PackageSum2} and the {\tt PackageSum2}
 sheet of {\tt writeFindFn2xls} will typically contain
 more information after running {\tt installPackages}
 than before.
+
+
+
+
 
 Returning to the {\tt findFn} object, suppose we want
 to find a function named {\tt spline}.  For this, we can
@@ -280,7 +287,10 @@ finding things in contributed packages.
 The {\tt RSiteSearch} capabilities here extend the power of the
 {\tt RSiteSearch} search engine maintained by Jonathan Baron.
 Without Prof. Baron's support, it would not have been feasible
-to develop the features described here.
+to develop the features described here.  Duncan Murdoch, Marc Schwarz, 
+Dirk Eddelbuettel and Gabor Grothendiek and anonymous 
+referees contributed suggestions for improving, but of course
+can not be blamed for any of its deficiencies.  
 \newline \newline
 \emph{Spencer Graves \newline
 President and Chief Operating Officer \newline
