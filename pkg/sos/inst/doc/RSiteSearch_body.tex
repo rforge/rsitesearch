@@ -3,31 +3,33 @@
 
 \maketitle
 
-The {\tt sos} package provides a means to quickly and flexibly 
-search the help pages of contributed packages, finding 
+The {\tt sos} package provides a means to quickly and flexibly
+search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
 The main capability of this package is the {\tt findFn} function,
-which scans the "function" entries in Jonathan 
-Baron's RSiteSearch data base and returns the matches in a 
-{\tt data.frame} of class {\tt findFn}.  The corresponding 
-{\tt print} method displays the results as a table in a web 
-browser with links to the individual help pages, sorted by package 
-displaying the one with the most matches first.  Other {\tt sos} 
-functions provide summaries with one line for each package, support 
-the union and intersection of {\tt findFn} objects, and write the 
-results to an Excel file with three sheets:  (1) {\tt PackageSum2}, 
-which provides an enhanced summary of the packages with matches, 
-(2) the {\tt findFn} table itself, and (3) the {\tt call} used to 
+which scans the "function" entries in Jonathan
+Baron's RSiteSearch data base and returns the matches in a
+{\tt data.frame} of class {\tt findFn}.  The corresponding
+{\tt print} method displays the results as a table in a web
+browser with links to the individual help pages, sorted by package
+displaying the one with the most matches first.  Other {\tt sos}
+functions provide summaries with one line for each package, support
+the union and intersection of {\tt findFn} objects, and write the
+results to an Excel file with three sheets:  (1) {\tt PackageSum2},
+which provides an enhanced summary of the packages with matches,
+(2) the {\tt findFn} table itself, and (3) the {\tt call} used to
 produce it.
 
 Other \R{} functions can then be used to quickly find what you want
 among possibly hundreds of matches.
 
-Two examples are considered below:  First we find a dataset 
-containing a variable {\tt Petal.Length}, used without indicating 
-the source by
+Two examples are considered below:  First we find a dataset
+containing a variable {\tt Petal.Length}, used without indicating
+the source by Chambers 
+
+... how to cite?  
 %\citeauthoryear{JC09}.
 w/o page numbers
 cite \cite{JC09}.
@@ -46,7 +48,7 @@ for splines, including looking for a function named {\tt spline}.
 
 \section*{Petal.Length}
 
-\citep[pp. 282-283]{JC09} 
+\citep[pp. 282-283]{JC09}
 Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a
 famous Fisher data set but without naming the dataset nor indicating
 where it can be found nor even if it exists in \R{}.  The sample
@@ -57,18 +59,18 @@ in a format compatible with Chambers' code.
 How to add Bibliography ?
 Chambers, John (2009) Software for Data Analysis (Springer)
 
-To look for this data set, one might first try 
-the {\tt help.search} function.  Unfortunately, this function 
-returns nothing in this case:  
+To look for this data set, one might first try
+the {\tt help.search} function.  Unfortunately, this function
+returns nothing in this case:
 \begin{verbatim}
 > help.search('Petal.Length')
 No help files found ...
 \end{verbatim}
 When this failed, many users might then try
-{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches 
+{\tt RSiteSearch('Petal.Length')}.  This produced 80 matches
 when it was tried one day (and 62 matches a few months later).
 {\tt RSiteSearch('Petal.Length', 'function')} will identify
-only the help pages.  We can get something similar and for 
+only the help pages.  We can get something similar and for
 many purpose more useful as follows:
 \begin{verbatim}
 > library(sos)
@@ -78,10 +80,10 @@ many purpose more useful as follows:
 all the help pages in Jonathan Baron's data base matching the
 search term.
 
-The {\tt summary} method for such an object prints a table giving 
-for each {\tt Package} the {\tt Count} (number of matches), 
-{\tt MaxScore} (max of {\tt Score}), {\tt TotalScore} (sum of 
-{\tt Score}), and {\tt Date}, sorted like a Pareto chart to place 
+The {\tt summary} method for such an object prints a table giving
+for each {\tt Package} the {\tt Count} (number of matches),
+{\tt MaxScore} (max of {\tt Score}), {\tt TotalScore} (sum of
+{\tt Score}), and {\tt Date}, sorted like a Pareto chart to place
 the {\tt Package} with the most help pages first:
 \begin{verbatim}
 > summary(PL)
@@ -110,7 +112,7 @@ to the present authors would have taken substantially more time.
 \section*{spline}
 
 Three years ago, the lead author of this article decided he
-needed to learn more about splines.  The literature search
+needed to learn more about splines.  A literature search
 began as follows:
 \begin{verbatim}
 RSiteSearch('spline')
@@ -121,7 +123,7 @@ restricted to functions as follows:
 \begin{verbatim}
 RSiteSearch('spline', 'fun')
 \end{verbatim}
-This identified only 739 one day (631 a few months earlier).  
+This identified only 739 one day (631 a few months earlier).
 That's an improvement over 1526 but is still too many.
 To get a quick overview of these 739, we can proceed
 as follows:
@@ -135,22 +137,30 @@ increase the {\tt maxPages} argument from its default 20:
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages=999)
 \end{verbatim}
-The {\tt print} method for a {\tt findFn} object displays the 
+The {\tt print} method for a {\tt findFn} object displays the
 result as a table in a web browser.
 
 However, a table with 739 rows is rather large to digest easily.
-{\tt summary(splineAll)} would tell us that the 739 help pages 
+{\tt summary(splineAll)} would tell us that the 739 help pages
 came from 191 different packages and display the first
 minPackages = 12 plus others with that number of matches.
+
+
+
+
+
+
+
+
 
 A more complete view can be obtained in MS Excel format
 using the {\tt writeFindFn2xls} function:
 \begin{verbatim}
 writeFindFn2xls(splineAll)
 \end{verbatim}
-If either the {\tt WriteXLS} package and compatible Perl code 
-are properly installed or if you are running Windows with 
-the {\tt RODBC} package, this produces an Excel file with 
+If either the {\tt WriteXLS} package and compatible Perl code
+are properly installed or if you are running Windows with
+the {\tt RODBC} package, this produces an Excel file with
 three sheets:
 
 The {\tt PackageSum2} sheet contains information on locally
@@ -161,8 +171,8 @@ The {\tt findFn} sheet contains the search results.
 The {\tt call} sheet gives the call to {\tt findFn}
 that generated these search results.
 
-If {\tt WriteXLS} cannot produce an Excel file with your 
-installation, it will write three *.csv files.  (NOTE:  
+If {\tt WriteXLS} cannot produce an Excel file with your
+installation, it will write three *.csv files.  (NOTE:
 An Excel file can be opened and edited with Open Office
 Calc
 
@@ -180,12 +190,12 @@ valuable in prioritizing packages for further study.
 
 To install packages not already available locally,
 the names of the desired packages can be passed to
-{\tt install.packages}.  To simplify this task, the 
-{\tt findFn} object can be passed to the {\tt installPackages} 
-function to check all packages for which the number of 
-matches exceeds a second argument {\tt minCount} and 
-install any that are not already installed;  the default 
-{\tt minCount} is the square root of the largest {\tt Count}.  
+{\tt install.packages}.  To simplify this task, the
+{\tt findFn} object can be passed to the {\tt installPackages}
+function to check all packages for which the number of
+matches exceeds a second argument {\tt minCount} and
+install any that are not already installed;  the default
+{\tt minCount} is the square root of the largest {\tt Count}.
 The results from {\tt PackageSum2} and the {\tt PackageSum2}
 sheet of {\tt writeFindFn2xls} will typically contain
 more information after running {\tt installPackages}
@@ -287,10 +297,10 @@ finding things in contributed packages.
 The {\tt RSiteSearch} capabilities here extend the power of the
 {\tt RSiteSearch} search engine maintained by Jonathan Baron.
 Without Prof. Baron's support, it would not have been feasible
-to develop the features described here.  Duncan Murdoch, Marc Schwarz, 
-Dirk Eddelbuettel and Gabor Grothendiek and anonymous 
+to develop the features described here.  Duncan Murdoch, Marc Schwarz,
+Dirk Eddelbuettel and Gabor Grothendiek and anonymous
 referees contributed suggestions for improving, but of course
-can not be blamed for any of its deficiencies.  
+can not be blamed for any of its deficiencies.
 \newline \newline
 \emph{Spencer Graves \newline
 President and Chief Operating Officer \newline
