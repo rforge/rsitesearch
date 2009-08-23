@@ -10,22 +10,36 @@ found in hours or days by any other means we know.
 
 The main capability of this package is the {\tt findFn} function,
 which scans the "function" entries in Jonathan
-Baron's RSiteSearch data base and returns the matches in a
-{\tt data.frame} of class {\tt findFn}.  The corresponding
-{\tt print} method displays the results as a table in a web
+
+Baron's "R site search"
+
+need a bibliography entry for Baron's "R site search"
+
+data base and returns the matches in a
+{\tt data.frame} of class {\tt findFn}.  Baron's is one of five
+search capabilities currently identified under "search" from the
+main "www.r-project.org" web site.  It includes options to
+search both R mailing list archives plus the help pages of
+R packages contributed to CRAN (the Comprehensive R Archive
+Network) plus a few others.
+
+The {\tt print} method for objects of class {\tt findFn}
+displays the results as a table in a web
 browser with links to the individual help pages, sorted by package
-displaying the one with the most matches first.  Other {\tt sos}
-functions provide summaries with one line for each package, support
-the union and intersection of {\tt findFn} objects, and write the
-results to an Excel file with three sheets:  (1) {\tt PackageSum2},
-which provides an enhanced summary of the packages with matches,
-(2) the {\tt findFn} table itself, and (3) the {\tt call} used to
-produce it.
+displaying the one with the most matches first.  This is different
+from the {\tt RSiteSearch} function, as {\tt findFn} returns
+the results in \R{} as a {\tt data.frame}, which can be further
+manipulated, and the ultimate display in a web browser is a
+table, unlike the list produced by {\tt RSiteSearch}.
 
-Other \R{} functions can then be used to quickly find what you want
-among possibly hundreds of matches.
+Other {\tt sos} functions provide summaries with one line for each
+package, support the union and intersection of {\tt findFn} objects,
+and write the results to an Excel file with three sheets:  (1)
+{\tt PackageSum2}, which provides an enhanced summary of the packages
+with matches, (2) the {\tt findFn} table itself, and (3) the {\tt call}
+used to produce it.
 
-Two examples are considered below:  First we find a dataset
+Three examples are considered below:  First we find a dataset
 containing a variable {\tt Petal.Length}, used without indicating
 the source by Chambers
 
@@ -44,17 +58,19 @@ citet \citet[pp. 282-283]{JC09}.
 citep \citep[pp. 282-283]{JC09}.
 
 Second, we study \R{} capabilities
-for splines, including looking for a function named {\tt spline}.
+for splines, including looking for a function named {\tt spline}.  Third,
+we search for contributed \R{} packages with capabilities for solving
+differential equations.
 
-\section*{Petal.Length}
+\section*{Finding a Variable in a Data Set:  Petal.Length}
 
 \citep[pp. 282-283]{JC09}
 Chambers (2009, p. 282-283) uses a variable {\tt Petal.Length} from a
 famous Fisher data set but without naming the dataset nor indicating
-where it can be found nor even if it exists in \R{}.  The sample
-code he provides does not work by itself.  To reproduce his
-Figure 7.2, we must first obtain a copy of this famous data set
-in a format compatible with Chambers' code.
+where it can be found nor even if it exists in any contributed \R{}
+package.  The sample code he provides does not work by itself.  To get
+his code to  work to produce his Figure 7.2, we must first obtain a
+copy of this famous data set in a format compatible with his code.
 
 How to add Bibliography ?
 Chambers, John (2009) Software for Data Analysis (Springer)
@@ -63,6 +79,7 @@ To look for this data set, one might first try
 the {\tt help.search} function.  Unfortunately, this function
 returns nothing in this case:
 \begin{verbatim}
+> library(sos)
 > help.search('Petal.Length')
 No help files found ...
 \end{verbatim}
@@ -78,7 +95,22 @@ many purpose more useful as follows:
 \end{verbatim}
 {\tt PL} is a {\tt data.frame} of class {\tt findFn} identifying
 all the help pages in Jonathan Baron's data base matching the
-search term.
+search term.  This {\tt data.frame} has columns {\tt Count},
+{\tt MaxScore}, {\tt TotalScore}, {\tt Package}, {\tt Function},
+{\tt Date}, {\tt Score}, {\tt Description}, and {\tt Link}.
+{\tt Function} is the name of the help page, not the name of the
+function, as multiple functions may be documented on a single
+help page, and some help pages document other things such as data
+sets.  {\tt Score} is the index of the strength of the match used
+by Baron's search engine to decide which items to display first.
+{\tt Package} is the name of the package containing {\tt Function}.
+{\tt Count} gives the total number of matches found in this
+{\tt findFn} call.  By default, the {\tt findFn} object is sorted
+to present first the most important {\tt Package} first (sorting first
+by {\tt Count}, {\tt MaxScore},  {\tt TotalScore}, and {\tt Package}
+in case multiple packages have the same number of matches to the
+search string), then placing the {\tt Function} with the highest
+{\tt Score} first within each {\tt Package}.
 
 The {\tt summary} method for such an object prints a table giving
 for each {\tt Package} the {\tt Count} (number of matches),
@@ -109,7 +141,7 @@ data.frame:
 Problem solved in less than a minute!  Any other method known
 to the present authors would have taken substantially more time.
 
-\section*{spline}
+\section*{Finding Packages with Spline Capabilities}
 
 Three years ago, the lead author of this article decided he
 needed to learn more about splines.  A literature search
@@ -117,6 +149,7 @@ began as follows:
 \begin{verbatim}
 RSiteSearch('spline')
 \end{verbatim}
+(using the {\tt RSiteSearch} function in the {\tt utils} package).
 While preparing this manuscript, this command identified
 1526 documents one day.  That is too many.  It can be
 restricted to functions as follows:
@@ -150,10 +183,10 @@ This has 0 rows, because there is no help page named
 {\tt spline}.  This does not mean that no function
 with that exact name exists, only that no help page
 has that name.  To find a function with that exact
-name, try {findFn('spline(')}.  This produced one match 
-for a function named 'regspline'.  
+name, try {findFn('spline(')}.  This produced one match
+for a function named 'regspline'.
 
-To look for functions whose name includes the characters 'spline', 
+To look for functions whose name includes the characters 'spline',
 we can use {\tt grepFn}:
 \begin{verbatim}
 grepFn('spline', splineAll, ignore.case=TRUE)
@@ -168,15 +201,15 @@ is the fifth row in this table, because it is in the
 pages matching the search term, and this was the only
 one whose name matched the {\tt grepFn} {\tt pattern}.
 
-To try to evaluate further the {\tt splineAll} {\tt findFn} 
-object, we must first acknowledge that a table with 739 rows 
-is too large to digest easily.  
+To try to evaluate further the {\tt splineAll} {\tt findFn}
+object, we must first acknowledge that a table with 739 rows
+is too large to digest easily.
 
 {\tt summary(splineAll)} would tell us that the 739 help pages
 came from 191 different packages and display the first
-minPackages = 12.  (If other packages had the same number of 
-matches as the twelfth package, they would also appear in the 
-summary.)  
+minPackages = 12.  (If other packages had the same number of
+matches as the twelfth package, they would also appear in the
+summary.)
 
 A more complete view can be obtained in MS Excel format
 using the {\tt writeFindFn2xls} function:
@@ -185,7 +218,7 @@ writeFindFn2xls(splineAll)
 \end{verbatim}
 If either the {\tt WriteXLS} package and compatible Perl code
 are properly installed or if you are running Windows with
-the {\tt RODBC} package, this produces a '*.xls' Excel file 
+the {\tt RODBC} package, this produces a '*.xls' Excel file
 with three sheets:
 
 The {\tt PackageSum2} sheet contains information on locally
@@ -197,9 +230,9 @@ The {\tt call} sheet gives the call to {\tt findFn}
 that generated these search results.
 
 If {\tt WriteXLS} cannot produce an Excel file with your
-installation, it will write three *.csv files.  (NOTE:  
-Users who do not have MS Excel may like to know that 
-Open Office Calc can open a standard '*.xls' file and 
+installation, it will write three *.csv files.  (NOTE:
+Users who do not have MS Excel may like to know that
+Open Office Calc can open a standard '*.xls' file and
 can similarly create such files.
 
 
@@ -214,26 +247,34 @@ the date packaged, the number of help pages in the package,
 and the name(s) of any vignettes.  This can be quite
 valuable in prioritizing packages for further study.
 
-For packages not already installed, the standard 
-{\tt install.packages} function can be used.  To simplify this 
-task, the {\tt findFn} object can be passed to the 
-{\tt installPackages} function to check all packages for which 
-the number of matches exceeds a second argument {\tt minCount} 
-and install any of those that are not already installed;  the 
-default {\tt minCount} is the square root of the largest 
-{\tt Count}.  The results from {\tt PackageSum2} and the 
-{\tt PackageSum2} sheet of {\tt writeFindFn2xls} will typically 
+For packages not already installed, the standard
+{\tt install.packages} function can be used.  To simplify this
+task, the {\tt findFn} object can be passed to the
+{\tt installPackages} function to check all packages for which
+the number of matches exceeds a second argument {\tt minCount}
+and install any of those that are not already installed;  the
+default {\tt minCount} is the square root of the largest
+{\tt Count}.  The results from {\tt PackageSum2} and the
+{\tt PackageSum2} sheet of {\tt writeFindFn2xls} will typically
 contain more information after running {\tt installPackages}
 than before.
 
-This analysis quickly gave us a very informative overview of 
-{\tt spline} capabilities in contributed \R{} packages in a way 
-that can help establish priorities for further study of the 
+This analysis quickly gave us a very informative overview of
+{\tt spline} capabilities in contributed \R{} packages in a way
+that can help establish priorities for further study of the
 different packages and functions.
 
+\section*{Combining Search Results to Find Functions to Solve Differential Equations}
+
+
+importance of sorting by Count plus the other items
+in PackageSum2  ?
+
+
+
 \section*{Summary}
-In sum, we have found {\tt findFn} in the {\tt sos} package to 
-be a very quick and efficient method for finding things in 
+In sum, we have found {\tt findFn} in the {\tt sos} package to
+be a very quick and efficient method for finding things in
 contributed packages.
 
 \section*{Acknowledgments}
@@ -243,7 +284,17 @@ Without Prof. Baron's support, it would not have been feasible
 to develop the features described here.  Duncan Murdoch, Marc Schwarz,
 Dirk Eddelbuettel and Gabor Grothendiek and anonymous
 referees contributed suggestions for improving, but of course
-can not be blamed for any of its deficiencies.
+can not be blamed for any of its deficiencies.  The collaboration
+required to produce the current {\tt sos} package was greatly
+facilitated by R-Forge
+
+cite ... ???
+
+
+The {\tt sos} package is part of the {\tt RSiteSearch} project
+hosted there.  This project also includes code for a Firefox
+extension to simplify the process of finding information about
+\R{}.
 \newline \newline
 \emph{Spencer Graves \newline
 President and Chief Operating Officer \newline
