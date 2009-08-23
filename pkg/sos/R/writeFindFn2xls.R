@@ -48,8 +48,9 @@ writeFindFn2xls <- function(x,
     return(invisible(file.))
   }
   xlsFile <- odbcConnectExcel(file., readOnly=FALSE)
+  on.exit( odbcClose(xlsFile) )
 ##
-## 3.  Create the sheets
+## 4.  Create the sheets
 ##
   sum2. <- sqlSave(xlsFile, sum2, tablename='PackageSum2')
   x. <- sqlSave(xlsFile, as.data.frame(x2), tablename='findFn')
@@ -58,8 +59,6 @@ writeFindFn2xls <- function(x,
 ##
 ## 4.  Done
 ##
-  fileClose <- odbcClose(xlsFile)
-#
   return(invisible(file.))
 }
 

@@ -95,7 +95,12 @@ many purpose more useful as follows:
 \end{verbatim}
 {\tt PL} is a {\tt data.frame} of class {\tt findFn} identifying
 all the help pages in Jonathan Baron's data base matching the
-search term.  This {\tt data.frame} has columns {\tt Count},
+search term.  An alias for "findFn" is "???", and this same 
+search can be performed as follows:  
+\begin{verbatim}
+> PL <- ???Petal.Length
+\end{verbatim}
+This {\tt data.frame} has columns {\tt Count},
 {\tt MaxScore}, {\tt TotalScore}, {\tt Package}, {\tt Function},
 {\tt Date}, {\tt Score}, {\tt Description}, and {\tt Link}.
 {\tt Function} is the name of the help page, not the name of the
@@ -262,20 +267,100 @@ than before.
 This analysis quickly gave us a very informative overview of
 {\tt spline} capabilities in contributed \R{} packages in a way
 that can help establish priorities for further study of the
-different packages and functions.
+different packages and functions.  An analysis of this nature 
+almost four years ago led the lead author to the {\tt fda} 
+package and its companion books, which further led to a 
+collaboration that has joint presentations at three different
+conferences and a joint book 
+
+\citep{RHG09}
+
+.  
+
 
 \section*{Combining Search Results to Find Functions to Solve Differential Equations}
 
+The lead author of this article recently gave an invited 
+presentation on "Fitting Nonlinear Differential Equations to 
+Data in R" 
 
-importance of sorting by Count plus the other items
-in PackageSum2  ?
+\cite{GHR09} 
+
+.  A key part of preparing for that presentation was a search 
+of contributed R code, which proceeded roughly as follows:  
+
+\begin{verbatim}
+de <- findFn('differential equation') 
+des <- findFn('differential equations')
+de. <- de | des 
+\end{verbatim}
+
+The object {\tt de} has 53 rows, while {\tt des} has 105.  
+If this search engine were simply searching for character 
+strings, the first would be larger than the second rather than 
+the other way around.  The last object {\tt de.} is the union
+of the other two;  "|" is an alias for {\tt unionFindFn}.  
+The {\tt de.} object has 124 rows, which suggests that 
+the corresponding intersection must have (53+105-124) = 34, which 
+is confirmed, e.g., via {\tt nrow(de \& des)}.  
+
+To make everthing in {\tt de.} locally available, we can use 
+{\tt installPackages(de., minCount=1)}.  This installed all 
+referenced packages except 'rmutil' and a dependency 'Biobase', 
+which were not available on CRAN but are included in Jonathan 
+Baron's "R site search" data base.  
+
+Next, {\tt writeFindFn2xls(de.)} produced a file {\tt de..xls} 
+in the working directory (identifiable via {\tt getwd()}).  
+
+The {\tt PackageSum2} page of that Excel file provided a quick 
+summary of packages with matches, sorted to put the package 
+with the most matches first.  In this case, this first package 
+was {\tt deSolve}, which provides, "General solvers for initial 
+value problems of ordinary differential equations (ODE), 
+partial differential equations (PDE) and differential 
+algebraic equations (DAE)".  This is clearly quite relevant 
+to the subject.  The second package was {\tt PKfit}, which 
+is "A Data Analysis Tool for Pharmacokinetics".  This may 
+be too specialized for general use.  I therefore would not 
+want to study this first unless my primary interest here was in 
+pharmacokinetic models.  
+
+By studying this summary page in this way, I was able to decide 
+relatively quickly which packages I should consider first.  In 
+making this decision, I gave more weight to packages with 
+one or more vignettes and less weight on those where the 
+'Packaged' date was old, indicating that the code was not being 
+actively maintained and updated.  I also checked the conference 
+information to make sure I didn't embarrass myself by overlooking 
+a package authored or maintained by another invited speaker.  
 
 
-
-\section*{Summary}
+\section*{Discussion}
 In sum, we have found {\tt findFn} in the {\tt sos} package to
 be a very quick and efficient method for finding things in
-contributed packages.
+contributed packages.  The {\tt grepFn} function helps quickly 
+look for functions (or help pages) with particular names.  
+The {\tt unionFindFn} and {\tt intersectFindFn} (especially via 
+their "|" and "\&" aliases) can be quite useful where a single 
+search term seems inadequate and multiple searches can be 
+combined to produce something closer to what is desired.  
+An example of this was provided with searching for both
+"differential equation" and "differential equations".  
+
+Finally, the "PackageSum2" sheet of an excel file produced by 
+{\tt writeFindFn2xls} is quite valuable for understanding the 
+general capabilities available for a particular topic.  
+This could be of great value for authors to find what is already 
+available so they don't duplicate something that already exists 
+and so their new contributions are compatible to the maximum extent
+feasible with other packages.  
+
+The {\tt findFn} capability also makes it much easier 
+to avoid "the researcher's nightmare" of being told after 
+substantial work that someone else has already done essentially 
+the same thing.  
+
 
 \section*{Acknowledgments}
 The {\tt RSiteSearch} capabilities here extend the power of the
