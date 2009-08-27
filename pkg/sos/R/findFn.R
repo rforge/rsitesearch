@@ -1,5 +1,4 @@
-findFn <- function(string, maxPages = 20, sortby=NULL,
-                                 verbose = 1, ...) {
+findFn <- function(string, maxPages = 20, sortby = NULL, verbose = 1, ...) {
 ##
 ## RSiteSearch(string, 'fun')
 ##
@@ -73,7 +72,7 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
 ## 1.  Query
 ##
 #  1.1.  Set up
-  if(verbose) cat("retrieving page 1: ")
+  if(verbose) cat("retrieving page 1: ", fill = TRUE)
   ans <- parseHTML(url)
   hits <- attr(ans, 'matches')
 #  hits <- max(0, attr(ans, 'hits'))
@@ -87,12 +86,12 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     class(ans) <- c("findFn", "data.frame")
     return(ans)
   }
-  if(verbose)cat(' found ', hits, ' match', c('', 'es')[1+(hits>1)],
-                 sep='')
+  if(verbose) cat(' found ', hits, ' match', c('', 'es')[1+(hits>1)],
+                  sep='')
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {
-    if(verbose)cat('; retrieving', n, c('page', 'pages')[1+(n>1)])
+    if(verbose) cat('; retrieving', n, c('page', 'pages')[1+(n>1)], fill = TRUE)
     {
       if(verbose){
         if((20*n)<hits) cat(',', 20*n, 'matches.\n')
@@ -102,7 +101,7 @@ findFn <- function(string, maxPages = 20, sortby=NULL,
     for(i in seq(2, length=n-1)) {
       {
         if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
-        else if(verbose>0) cat(i, '')
+        else if(verbose>0) cat(i, '', fill = TRUE)
       }
       url.i <- sprintf("%s&whence=%d", url, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(url.i))

@@ -1,6 +1,6 @@
 \name{findFn}
 \alias{findFn}
-\alias{?}
+\alias{???}
 \title{
   Search Help Pages
 }
