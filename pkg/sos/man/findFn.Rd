@@ -1,5 +1,6 @@
 \name{findFn}
 \alias{findFn}
+\alias{?}
 \alias{???}
 \title{
   Search Help Pages
@@ -11,8 +12,8 @@
   table.
 }
 \usage{
-findFn(string, maxPages = 20, sortby=NULL, verbose = 1, ...)
-???e1(e2)
+findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
+##???string(maxPages)
 }
 \arguments{
   \item{string}{
@@ -40,8 +41,8 @@ findFn(string, maxPages = 20, sortby=NULL, verbose = 1, ...)
     If greater than 1, additional information is provided on the
     download process.
   }
-  \item{e1}{ \code{string} }
-  \item{e2}{ \code{maxPages} }
+%   \item{e1}{ \code{string} }
+%   \item{e2}{ \code{maxPages} }
   \item{\dots}{ignored}
 }
 \details{
