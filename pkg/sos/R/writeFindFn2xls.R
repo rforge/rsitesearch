@@ -27,8 +27,9 @@ writeFindFn2xls <- function(x,
 ##
   x2 <- lapply(x, function(x)
                if(is.numeric(x)) x else as.character(x))
+  x2. <- as.data.frame(x2)
   if(require(WriteXLS) && testPerl()) {
-    WriteXLS(c('sum2', 'x2', 'cl'), ExcelFileName=file.,
+    WriteXLS(c('sum2', 'x2.', 'cl'), ExcelFileName=file.,
              SheetNames=c('PackageSum2', 'findFn', 'call') )
     return(invisible(file.))
   }

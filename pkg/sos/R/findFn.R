@@ -91,7 +91,8 @@ findFn <- function(string, maxPages = 20, sortby = NULL, verbose = 1, ...) {
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {
-    if(verbose) cat('; retrieving', n, c('page', 'pages')[1+(n>1)], fill = TRUE)
+    if(verbose) cat('; retrieving', n, c('page', 'pages')[1+(n>1)])
+#                    fill = TRUE)
     {
       if(verbose){
         if((20*n)<hits) cat(',', 20*n, 'matches.\n')
