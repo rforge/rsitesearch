@@ -1,9 +1,16 @@
 \documentclass[a4paper]{report}
+
+%% need no \usepackage{Sweave}
+  
 \usepackage{RJournal}
 \usepackage[round]{natbib}
 %\bibliographystyle{abbrvnat}
 
 \begin{document}
+%\VignetteIndexEntry{sos R Journal article}
+%\VignetteDepends{sos}
+%\VignetteKeywords{help, search}
+%\VignettePackage{sos}
 
 \begin{article}
   \input{RSiteSearch_body}
