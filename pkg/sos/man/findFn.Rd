@@ -139,7 +139,7 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   function in the \code{utils} package.
 }
 \seealso{
-  \code{\link[base]{help.search}} to search only installed packages.
+  \code{\link{help.search}} to search only installed packages.
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{download.file}}
   \url{http://finzi.psych.upenn.edu/search.html} for a web interface to
@@ -151,7 +151,7 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   search capabilities, each of which may be best for different types of
   inquiries.
 
-  \code{\link[methods]{findFunction}} for a completely different
+  \code{\link{findFunction}} for a completely different
   function with a similar name.
 }
 \references{

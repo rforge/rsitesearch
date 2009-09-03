@@ -33,7 +33,7 @@ installPackages(x, minCount=sqrt(x[['Count']][1]), ...)
   Spencer Graves
 }
 \seealso{
-  \code{\link[utils]{install.packages}}
+  \code{\link{install.packages}}
   \code{\link{PackageSum2}}
 }
 %\references{

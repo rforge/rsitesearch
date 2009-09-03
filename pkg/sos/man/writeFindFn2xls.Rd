@@ -52,7 +52,7 @@ writeFindFn2xls(x,
 }
 \seealso{
   \code{\link{findFn}},
-  \code{\link[RODBC]{odbcConnectExcel}},
+  \code{\link[RODBC]{odbcConnect}},
   \code{\link[RODBC]{sqlSave}},
   \code{\link[RODBC]{odbcClose}}
 }
