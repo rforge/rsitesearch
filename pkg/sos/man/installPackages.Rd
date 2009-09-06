@@ -13,14 +13,14 @@ installPackages(x, minCount=sqrt(x[['Count']][1]), ...)
 \arguments{
   \item{x}{
     either a character vector to be passed to
-    \code{\link[utils]{install.package}} or a \code{findFn} object
+    \code{\link{install.packages}} or a \code{findFn} object
   }
   \item{minCount}{
     Install all packages identified in \code{x[['Packages']]} with
     \code{x[['Count']]} exceeding \code{minCount}.
   }
   \item{\dots}{
-    optional arguments passed to \code{\link[utils]{install.packages}}
+    optional arguments passed to \code{\link{install.packages}}
   }
 }
 \details{
