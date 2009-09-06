@@ -1,4 +1,5 @@
-findFn <- function(string, maxPages = 20, sortby = NULL, verbose = 1, ...) {
+findFn <- function(string, maxPages = 20, sortby = NULL,
+                   verbose = 1, ...) {
 ##
 ## RSiteSearch(string, 'fun')
 ##
@@ -102,11 +103,12 @@ findFn <- function(string, maxPages = 20, sortby = NULL, verbose = 1, ...) {
     for(i in seq(2, length=n-1)) {
       {
         if(!quiet) cat("retrieving page ", i, " of ", n, "\n", sep = "")
-        else if(verbose>0) cat(i, '', fill = TRUE)
+        else if(verbose>0) cat(i, '')
       }
       url.i <- sprintf("%s&whence=%d", url, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(url.i))
     }
+    if(verbose>0) cat('\n')
   }
 ##
 ## 2.  Compute Summary
