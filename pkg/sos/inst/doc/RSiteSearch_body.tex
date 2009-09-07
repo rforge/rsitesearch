@@ -8,7 +8,8 @@ search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
-The main capability of this package is the {\tt findFn} function, which scans the "function" entries in Jonathan Baron's "R site search"
+The main capability of this package is the {\tt findFn} function, 
+which scans the "function" entries in Jonathan Baron's "R site search"
 database and returns the matches in a {\tt data.frame} of class
 {\tt findFn} \citep{JB09URL}.  Baron's is one of five
 search capabilities currently identified under "search" from the main
@@ -22,10 +23,11 @@ on the help pages in this database.
 The {\tt print} method for objects of class {\tt findFn}
 displays the results as a table in a web
 browser with links to the individual help pages, sorted by package
-displaying the one with the most matches first.  This is different
-from the {\tt RSiteSearch} function, as {\tt findFn} returns
+displaying the one with the most matches first.  The {\tt findFn} 
+and {\tt RSiteSearch} functions in more ways that the sort order.  
+First, {\tt findFn} returns
 the results in \R{} as a {\tt data.frame}, which can be further
-manipulated, and the ultimate display in a web browser is a
+manipulated.  Second, the ultimate display in a web browser is a
 table, unlike the list produced by {\tt RSiteSearch}.
 
 Other {\tt sos} functions provide summaries with one line for each
@@ -160,13 +162,10 @@ splineAll[selSpl, ]
 This has 0 rows, because there is no help page named
 {\tt spline}.  This does not mean that no function
 with that exact name exists, only that no help page
-has that name.  To find a function with that exact
-name, try {\tt findFn(`spline(')}.  This produced one match
-for a function named {\tt regspline}.
+has that name.  
 
-To look for functions whose name includes the characters
-{\tt `spline'},
-we can use {\tt grepFn}:
+To look for help pages whose name includes the characters
+{\tt `spline'}, we can use {\tt grepFn}:
 \begin{verbatim}
 grepFn('spline', splineAll, ignore.case = TRUE)
 \end{verbatim}
@@ -180,9 +179,9 @@ is the fifth row in this table, because it is in the
 pages matching the search term, and this was the only
 one whose name matched the {\tt grepFn} {\tt pattern}.
 
-To try to evaluate further the {\tt splineAll} {\tt findFn}
-object, we must first acknowledge that a table with 739 rows
-is too large to digest easily.
+We could next {\tt print} the {\tt splineAll} {\tt findFn}
+object.  However, it may not be easy to digest a table 
+with 739 rows.
 
 {\tt summary(splineAll)} would tell us that the 739 help pages
 came from 191 different packages and display the first
@@ -198,24 +197,24 @@ writeFindFn2xls(splineAll)
 \end{verbatim}
 If either the {\tt WriteXLS} package and compatible Perl code
 are properly installed or if you are running Windows with
-the {\tt RODBC} package, this produces an Excel file in the 
+the {\tt RODBC} package, this produces an Excel file in the
 working directory named {\tt splineAll.xls}, containing the
 following three worksheets:
 
 \begin{itemize}
-\item{The {\tt `PackageSum2'} sheet includes one line for each 
-package with a matching help page, enhanced for locally 
-installed packages with other 
-information not available in the {\tt findFn} object.}
+\item{The {\tt `PackageSum2'} sheet includes one line for each
+package with a matching help page, enhanced by providing 
+information not available in the {\tt findFn} object 
+for locally installed packages.}
 \item{The {\tt `findFn'} sheet contains the search results.}
 \item{The {\tt `call'} sheet gives the call to {\tt findFn}
 that generated these search results.}
 \end{itemize}
 
-If {\tt writeFindFn2xls} cannot produce an Excel file with 
+If {\tt writeFindFn2xls} cannot produce an Excel file with
 your installation, it will write three {\tt csv} files with
 names {\tt splineAll-sum.csv}, {\tt splineAll.csv}, and
-{\tt splineAll-call.csv}.  Each file corresponds to the three
+{\tt splineAll-call.csv}, corresponding to the three
 worksheets described above. (Users who do not have MS Excel
 may like to know that Open Office Calc can open a standard
 {\tt xls} file and can similarly create such files
@@ -228,8 +227,8 @@ installed packages not obtained by
 the names of author and maintainer,
 the date packaged, the number of help pages in the package,
 and the name(s) of any vignettes.  This can be quite
-valuable in prioritizing packages for further study.  
-Other things being equal, we think most people would 
+valuable in prioritizing packages for further study.
+Other things being equal, we think most people would
 rather learn how to use a package being actively maintained
 than one that has not changed in five years.  Similarly,
 we might prefer to study a capability in a larger package
@@ -237,15 +236,15 @@ than a smaller one, because the rest of the package might
 provide other useful tools or a broader context for
 understanding the capability of interest.
 
-These extra fields, package title, etc., are blank for 
-packages in the {\tt findFn} object not installed locally.  
-Clearly, therefore, the value of {\tt PackageSum2} can be 
-increased by running {\tt install.packages} (from the 
-{\tt utils} package) to install packages not currently 
+These extra fields, package title, etc., are blank for
+packages in the {\tt findFn} object not installed locally.
+Clearly, therefore, the value of {\tt PackageSum2} can be
+increased by running {\tt install.packages} (from the
+{\tt utils} package) to install packages not currently
 available locally.
 
-To make it easier to do this,the {\tt sos} package includes 
-an {\tt installPackage} function, which checks all the 
+To make it easier to do this, the {\tt sos} package includes
+an {\tt installPackage} function, which checks all the
 packages in a {\tt findFn} for which
 the number of matches exceeds a second argument {\tt minCount}
 and installs any of those not already available locally;  the
@@ -261,15 +260,15 @@ packages:
 
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages = 999);
-installPackages(splineAll) 
+installPackages(splineAll)
 writeFindFn2xls(splineAll)
 \end{verbatim}
 
-The resulting {\tt splineAll.xls} file can help establish priorities 
-for further study of the different packages and functions.  An 
-analysis of this nature almost four years ago led the lead author 
-to the {\tt fda} package and its companion books, which further 
-led to a collaboration that has produced joint presentations at 
+The resulting {\tt splineAll.xls} file can help establish priorities
+for further study of the different packages and functions.  An
+analysis of this nature almost four years ago led the lead author
+to the {\tt fda} package and its companion books, which further
+led to a collaboration that has produced joint presentations at
 three different conferences and a joint book \citep{RHG09}.
 
 
@@ -277,7 +276,7 @@ three different conferences and a joint book \citep{RHG09}.
 
 The lead author of this article recently gave an invited presentation
 on ``Fitting Nonlinear Differential Equations to Data in R'' \citep{GHR09}.
-A key part of preparing for that presentation was a search of 
+A key part of preparing for that presentation was a search of
 contributed R code, which proceeded roughly as follows:
 
 \begin{verbatim}
@@ -302,7 +301,7 @@ which were not available on CRAN but are included in Jonathan
 Baron's ``R site search'' data base.
 
 Next, {\tt writeFindFn2xls(de.)} produced a file {\tt de..xls}
-in the working directory.  (The working directory can be 
+in the working directory.  (The working directory can be
 identified via {\tt getwd()}.)
 
 The {\tt `PackageSum2'} sheet of that Excel file provided a quick
@@ -332,15 +331,15 @@ In sum, we have found {\tt findFn} in the {\tt sos} package to
 be very quick, efficient, and effective for finding things in
 contributed packages.  The {\tt grepFn} function helps quickly
 look for functions (or help pages) with particular names.
-The capabilities in {\tt unionFindFn} and {\tt intersectFindFn} 
-(especially via their ``|'' and ``\&'' aliases) can be quite useful 
-where a single search term seems inadequate;  they make it easy 
-to combine multiple searches to produce something closer to what 
-is desired.  An example of this was provided with searching for 
+The capabilities in {\tt unionFindFn} and {\tt intersectFindFn}
+(especially via their ``|'' and ``\&'' aliases) can be quite useful
+where a single search term seems inadequate;  they make it easy
+to combine multiple searches to produce something closer to what
+is desired.  An example of this was provided with searching for
 both ``differential equation'' and ``differential equations''.
 
 Finally, the {\tt `PackageSum2'} sheet of an Excel file produced by
-{\tt writeFindFn2xls} (after also running the {\tt installPackages} 
+{\tt writeFindFn2xls} (after also running the {\tt installPackages}
 function) is quite valuable for understanding the
 general capabilities available for a particular topic.
 This could be of great value for authors to find what is already
@@ -363,8 +362,6 @@ can not be blamed for any deficiencies.  The collaboration
 required to produce the current {\tt sos} package was greatly
 facilitated by R-Forge \citep{RFORGE09URL}. The {\tt sos} package
 is part of the {\tt RSiteSearch} project hosted there.  This project
-also includes code for a Firefox extension to simplify the process of
-finding information about \R{} from within Firefox.  This project
 also includes code for a Firefox extension to simplify the process of
 finding information about \R{} from within Firefox.  This Firefox
 extension is still being developed with the current version
