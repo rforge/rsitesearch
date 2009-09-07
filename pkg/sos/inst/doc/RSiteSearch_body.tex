@@ -196,17 +196,19 @@ are properly installed or if you are running Windows with
 the {\tt RODBC} package, this produces a '*.xls' Excel file
 with three sheets:
 
-The {\tt PackageSum2} sheet contains information on locally
-installed packages not available from {\tt summary}.
+The {\tt PackageSum2} sheet includes one line for each 
+package with a matching help page, enhanced for locally 
+installed packages with other 
+information not available in the {\tt findFn} object.  
 
 The {\tt findFn} sheet contains the search results.
 
 The {\tt call} sheet gives the call to {\tt findFn}
 that generated these search results.
 
-If {\tt WriteXLS} cannot produce an Excel file with your
-installation, it will write three *.csv files.  (NOTE:
-Users who do not have MS Excel may like to know that
+If {\tt writeFindFn2xls} cannot produce an Excel file with 
+your installation, it will write three *.csv files.  
+(Users who do not have MS Excel may like to know that
 Open Office Calc can open a standard '*.xls' file and
 can similarly create such files \citep{CALC09MAN}.)
 
@@ -217,20 +219,25 @@ installed packages not obtained by
 the names of author and maintainer,
 the date packaged, the number of help pages in the package,
 and the name(s) of any vignettes.  This can be quite
-valuable in prioritizing packages for further study.  I'd
+valuable in prioritizing packages for further study.  
+Other things being equal, we think most people would 
 rather learn how to use a package being actively maintained
 than one that has not changed in five years.  Similarly,
-I might prefer to study a capability in a larger package
+we might prefer to study a capability in a larger package
 than a smaller one, because the rest of the package might
 provide other useful tools or a broader context for
 understanding the capability of interest.
 
-For packages not already installed, the standard
-{\tt install.packages} function in the {\tt utils}
-package can be used.  To make it easier to do this,
-the {\tt sos} package includes a {\tt installPackage}
-function, which checks all the packages in a
-{\tt findFn} for which
+These extra fields, package title, etc., are blank for 
+packages in the {\tt findFn} object not installed locally.  
+Clearly, therefore, the value of {\tt PackageSum2} can be 
+increased by running {\tt install.packages} (from the 
+{\tt utils} package) to install packages not currently 
+available locally.  
+
+To make it easier to do this,the {\tt sos} package includes 
+an {\tt installPackage} function, which checks all the 
+packages in a {\tt findFn} for which
 the number of matches exceeds a second argument {\tt minCount}
 and installs any of those not already available locally;  the
 default {\tt minCount} is the square root of the largest
@@ -239,29 +246,30 @@ default {\tt minCount} is the square root of the largest
 contain more information after running {\tt installPackages}
 than before.
 
-To summarize, two lines of code gave us a very powerful
+To summarize, three lines of code gave us a very powerful
 summary of spline capabilities in contributed \R{}
 packages:
 
 \begin{verbatim}
 splineAll <- findFn('spline', maxPages=999);
+installPackages(splineAll) 
 writeFindFn2xls(splineAll)
 \end{verbatim}
 
-The resulting splineAll.xls file can help establish priorities for further study of the
-different packages and functions.  An analysis of this nature
-almost four years ago led the lead author to the {\tt fda}
-package and its companion books, which further led to a
-collaboration that has produced joint presentations at three different
-conferences and a joint book \citep{RHG09}.
+The resulting splineAll.xls file can help establish priorities 
+for further study of the different packages and functions.  An 
+analysis of this nature almost four years ago led the lead author 
+to the {\tt fda} package and its companion books, which further 
+led to a collaboration that has produced joint presentations at 
+three different conferences and a joint book \citep{RHG09}.
 
 
 \section*{Combining Search Results to Find Functions to Solve Differential Equations}
 
 The lead author of this article recently gave an invited presentation
 on "Fitting Nonlinear Differential Equations to Data in R" \citep{GHR09}.
-A key part of preparing for that presentation was a search
-of contributed R code, which proceeded roughly as follows:
+A key part of preparing for that presentation was a search of 
+contributed R code, which proceeded roughly as follows:
 
 \begin{verbatim}
 de <- findFn('differential equation')
@@ -271,21 +279,22 @@ de. <- de | des
 
 The object {\tt de} has 53 rows, while {\tt des} has 105.
 If this search engine were simply searching for character
-strings, the first would be larger than the second rather than
+strings, {\tt de} would be larger than {\tt des}, rather than
 the other way around.  The last object {\tt de.} is the union
-of the other two;  "|" is an alias for {\tt unionFindFn}.
+of {\tt de} and {\tt des};  "|" is an alias for {\tt unionFindFn}.
 The {\tt de.} object has 124 rows, which suggests that
 the corresponding intersection must have (53+105-124) = 34.
 This can be confirmed via {\tt nrow(de \& des)}.
 
-To make everthing in {\tt de.} locally available, we can use
+To make everthing in {\tt "de."} locally available, we can use
 {\tt installPackages(de., minCount=1)}.  This installed all
 referenced packages except 'rmutil' and a dependency 'Biobase',
 which were not available on CRAN but are included in Jonathan
 Baron's "R site search" data base.
 
 Next, {\tt writeFindFn2xls(de.)} produced a file {\tt de..xls}
-in the working directory (identifiable via {\tt getwd()}).
+in the working directory.  (The working directory can be 
+identified via {\tt getwd()}.)
 
 The {\tt PackageSum2} page of that Excel file provided a quick
 summary of packages with matches, sorted to put the package
@@ -303,7 +312,7 @@ pharmacokinetic models.
 By studying this summary page in this way, I was able to decide
 relatively quickly which packages I should consider first.  In
 making this decision, I gave more weight to packages with
-one or more vignettes and less weight on those where the
+one or more vignettes and less weight to those where the
 'Packaged' date was old, indicating that the code was not being
 actively maintained and updated.  I also checked the conference
 information to make sure I didn't embarrass myself by overlooking
@@ -314,15 +323,16 @@ In sum, we have found {\tt findFn} in the {\tt sos} package to
 be very quick, efficient, and effective for finding things in
 contributed packages.  The {\tt grepFn} function helps quickly
 look for functions (or help pages) with particular names.
-The {\tt unionFindFn} and {\tt intersectFindFn} (especially via
-their "|" and "\&" aliases) can be quite useful where a single
-search term seems inadequate;  they make it easy to combine
-multiple searches to produce something closer to what is desired.
-An example of this was provided with searching for both
-"differential equation" and "differential equations".
+The capabilities in {\tt unionFindFn} and {\tt intersectFindFn} 
+(especially via their "|" and "\&" aliases) can be quite useful 
+where a single search term seems inadequate;  they make it easy 
+to combine multiple searches to produce something closer to what 
+is desired.  An example of this was provided with searching for 
+both "differential equation" and "differential equations".
 
 Finally, the "PackageSum2" sheet of an excel file produced by
-{\tt writeFindFn2xls} is quite valuable for understanding the
+{\tt writeFindFn2xls} (after also running the {\tt installPackages} 
+function) is quite valuable for understanding the
 general capabilities available for a particular topic.
 This could be of great value for authors to find what is already
 available so they don't duplicate something that already exists
