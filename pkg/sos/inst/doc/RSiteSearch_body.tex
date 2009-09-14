@@ -3,15 +3,36 @@
 
 \maketitle
 
+\section*{abstract}
+
+%\abstract{}
+The {\tt sos} package provides a means to quickly and 
+flexibly search the help pages of contributed packages, finding
+functions and datasets in seconds or minutes that could not be
+found in hours or days by any other means we know.  Its 
+{\tt findFn} function accesses Jonathan Baron's "R site search"
+database and returns the matches in a {\tt data.frame} of class
+{\tt findFn}, which can be further manipulated by other 
+{\tt sos} functions to produce, for example, an Excel file 
+that starts with a summary sheet that makes it relatively 
+easy to prioritize alternative packages for further study.  
+As such, it provides a very powerful way to do a literature 
+search for functions and packages relevant to a particular topic
+of interest and could become virtually mandatory for authors
+of new package and of papers for publications like R Journal 
+and the Journal of Statistical Software.  
+
+
+\section*{Introduction}
 The {\tt sos} package provides a means to quickly and flexibly
 search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
 
-The main capability of this package is the {\tt findFn} function, 
+The main capability of this package is the {\tt findFn} function,
 which scans the "function" entries in Jonathan Baron's "R site search"
 database and returns the matches in a {\tt data.frame} of class
-{\tt findFn} \citep{JB09URL}.  Baron's is one of five
+{\tt findFn} \citep{JB09URL}.  Baron's site is one of five
 search capabilities currently identified under "search" from the main
 \url{www.r-project.org} web site. It includes options to
 search the help pages of R packages contributed to CRAN (the
@@ -23,16 +44,17 @@ on the help pages in this database.
 The {\tt print} method for objects of class {\tt findFn}
 displays the results as a table in a web
 browser with links to the individual help pages, sorted by package
-displaying the one with the most matches first.  The {\tt findFn} 
-and {\tt RSiteSearch} functions in more ways that the sort order.  
-First, {\tt findFn} returns
+displaying the one with the most matches first.  This 
+differs from the {\tt RSiteSearch} function in the {\tt utils} 
+package in more ways than the sort 
+order.  First, {\tt findFn} returns
 the results in \R{} as a {\tt data.frame}, which can be further
 manipulated.  Second, the ultimate display in a web browser is a
 table, unlike the list produced by {\tt RSiteSearch}.
 
 Other {\tt sos} functions provide summaries with one line for each
 package, support the union and intersection of {\tt findFn} objects,
-and write the results to an Excel file with three sheets:  (1)
+and translate a findFn object into an Excel file with three sheets:  (1)
 {\tt PackageSum2}, which provides an enhanced summary of the packages
 with matches, (2) the {\tt findFn} table itself, and (3) the {\tt call}
 used to produce it.
@@ -162,7 +184,7 @@ splineAll[selSpl, ]
 This has 0 rows, because there is no help page named
 {\tt spline}.  This does not mean that no function
 with that exact name exists, only that no help page
-has that name.  
+has that name.
 
 To look for help pages whose name includes the characters
 {\tt `spline'}, we can use {\tt grepFn}:
@@ -171,16 +193,19 @@ grepFn('spline', splineAll, ignore.case = TRUE)
 \end{verbatim}
 This returned a {\tt findFn} object identifying 78 help pages.
 The {\tt print} method for an object of class {\tt findFn}
-presents the result in a web browser.  In this case,
-the sixth row is {\tt lspline} in the
-{\tt assist} package, which has a {\tt Score} of 1.  It
-is the fifth row in this table, because it is in the
+presents the result in a web browser.  When this was 
+run while preparing this manuscript, the sixth row was 
+{\tt lspline} in the
+{\tt assist} package, which has a {\tt Score} of 1.  
+(On another day, the results could be different, because 
+CRAN changes over time.)  This was the sixth row in this 
+table, because it is in the
 {\tt assist} package, which had a total of 34 help
-pages matching the search term, and this was the only
+pages matching the search term, but this was the only
 one whose name matched the {\tt grepFn} {\tt pattern}.
 
 We could next {\tt print} the {\tt splineAll} {\tt findFn}
-object.  However, it may not be easy to digest a table 
+object.  However, it may not be easy to digest a table
 with 739 rows.
 
 {\tt summary(splineAll)} would tell us that the 739 help pages
@@ -203,8 +228,8 @@ following three worksheets:
 
 \begin{itemize}
 \item{The {\tt `PackageSum2'} sheet includes one line for each
-package with a matching help page, enhanced by providing 
-information not available in the {\tt findFn} object 
+package with a matching help page, enhanced by providing
+information not available in the {\tt findFn} object
 for locally installed packages.}
 \item{The {\tt `findFn'} sheet contains the search results.}
 \item{The {\tt `call'} sheet gives the call to {\tt findFn}
@@ -221,7 +246,7 @@ may like to know that Open Office Calc can open a standard
 \citep{CALC09MAN}.)
 
 The {\tt `PackageSum2'} sheet is created by the
-{\tt PackagesSum2} function, which adds information from
+{\tt PackageSum2} function, which adds information from
 installed packages not obtained by
 {\tt findFn}.  This includes the package title and date, plus
 the names of author and maintainer,
@@ -244,7 +269,7 @@ increased by running {\tt install.packages} (from the
 available locally.
 
 To make it easier to do this, the {\tt sos} package includes
-an {\tt installPackage} function, which checks all the
+an {\tt installPackages} function, which checks all the
 packages in a {\tt findFn} for which
 the number of matches exceeds a second argument {\tt minCount}
 and installs any of those not already available locally;  the
@@ -259,7 +284,7 @@ summary of spline capabilities in contributed \R{}
 packages:
 
 \begin{verbatim}
-splineAll <- findFn('spline', maxPages = 999);
+splineAll <- findFn('spline', maxPages = 999)
 installPackages(splineAll)
 writeFindFn2xls(splineAll)
 \end{verbatim}
@@ -292,7 +317,8 @@ the other way around.  The last object {\tt de.} is the union
 of {\tt de} and {\tt des};  ``|'' is an alias for {\tt unionFindFn}.
 The {\tt de.} object has 124 rows, which suggests that
 the corresponding intersection must have (53+105-124) = 34.
-This can be confirmed via {\tt nrow(de \& des)}.
+This can be confirmed via {\tt nrow(de \& des)}.  
+(``\&'' is an alias for {\tt intersectFindFn}.)  
 
 To make everthing in {\tt de.} locally available, we can use
 {\tt installPackages(de., minCount = 1)}.  This installed all
