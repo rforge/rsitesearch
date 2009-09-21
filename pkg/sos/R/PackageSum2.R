@@ -79,7 +79,7 @@ PackageSum2.data.frame <- function(x,
     }
   }
 ##
-## 4.  Parse Packaged
+## 4.  Parse Packaged and update Date
 ##
   xnew. <- as.data.frame(xnew, stringsAsFactors=FALSE)
   if(nx>0){
@@ -97,9 +97,11 @@ PackageSum2.data.frame <- function(x,
       dd <- as.Date(mo, '%b %d %H:%M:%S %Y')
       dateC[num.>8] <- as.character(dd)
     }
-    pkgd[nch>0] <- dateC
-    xnew.$Packaged <- pkgd
+#    pkgd[nch>0] <- dateC
+#    xnew.$Packaged <- pkgd
+    x$Date[nch>0] <- dateC
   }
+  xnew.$Packaged <- NULL
 ##
 ## 5.  Done
 ##

@@ -19,7 +19,7 @@ search for functions and packages relevant to a particular topic
 of interest and could become virtually mandatory for authors
 of new package and of papers for publications like R Journal
 and the Journal of Statistical Software.
-} 
+}
 \section{Introduction}
 The \pkg{sos} package provides a means to quickly and flexibly
 search the help pages of contributed packages, finding
@@ -248,8 +248,8 @@ The {\tt `PackageSum2'} sheet is created by the
 {\tt PackageSum2} function, which adds information from
 installed packages not obtained by
 {\tt findFn}.  This includes the package title and date, plus
-the names of author and maintainer,
-the date packaged, the number of help pages in the package,
+the names of author and maintainer, the number of help pages 
+in the package,
 and the name(s) of any vignettes.  This can be quite
 valuable in prioritizing packages for further study.
 Other things being equal, we think most people would
@@ -262,12 +262,19 @@ understanding the capability of interest.
 
 These extra fields, package title, etc., are blank for
 packages in the {\tt findFn} object not installed locally.
-Clearly, therefore, the value of {\tt PackageSum2} can be
+The {\tt Date} is changed for installed packages 
+to the `packaged' date from the date the 
+package was added to Baron's database.  
+
+Therefore, the value of {\tt PackageSum2} can be
 increased by running {\tt install.packages} (from the
 {\tt utils} package) to install packages not currently
-available locally.
+available locally and {\tt update.packages()} to ensure the 
+local availability of the latest versions for all 
+installed packages.  
 
-To make it easier to do this, the \pkg{sos} package includes
+To make it easier to add desired packages, 
+the \pkg{sos} package includes
 an {\tt installPackages} function, which checks all the
 packages in a {\tt findFn} for which
 the number of matches exceeds a second argument {\tt minCount}
@@ -377,8 +384,8 @@ of ``the researcher's nightmare'' of being told after
 substantial work that someone else has already done it.
 
 Users of \pkg{sos} may also wish to consult Crantastic
-(\url{http://www.crantastic.org/}), which allows users to tag, rate, 
-and view packages.  (The coverage of Crantastic includes current and 
+(\url{http://www.crantastic.org/}), which allows users to tag, rate,
+and view packages.  (The coverage of Crantastic includes current and
 orphaned CRAN packages, while \cite{JB09URL}
 also includes 'most of the default packages from Bioconductor and all
 of Jim Lindsey's packages.')
