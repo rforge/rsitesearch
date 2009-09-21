@@ -44,7 +44,7 @@ findFn <- function(string, maxPages = 20, sortby = NULL,
     lnk <- sub("<dt>.*<strong><a href=\\\"(.*)\\\">R:.*$", "\\1", links)
     desc0 <- sub("<dt>.*<strong><a href=\\\".*\\\">R:(.*)</a>.*$", "\\1",
                 links)
-    desc <- gsub("(<strong.*>)|(</strong>)", "", desc0)
+    desc <- gsub("(<strong class=\"keyword\">)|(</strong>)", "", desc0)
     if((length(pac)<1) && (length(Date)>0)){
       tooMany <- (length(grep("Too many documents hit.  Ignored",
                               html))>0)
@@ -87,13 +87,13 @@ findFn <- function(string, maxPages = 20, sortby = NULL,
     class(ans) <- c("findFn", "data.frame")
     return(ans)
   }
-  if(verbose) cat(' found ', hits, ' match', c('', 'es')[1+(hits>1)],
-                  sep='')
+  if(verbose) cat('found ', hits, ' match', c('', 'es')[1+(hits>1)],
+                  sep='', fill = TRUE)
 #  1.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if(nrow(ans) < attr(ans, "matches")) {
-    if(verbose) cat('; retrieving', n, c('page', 'pages')[1+(n>1)])
-#                    fill = TRUE)
+    if(verbose) cat('retrieving', n, c('page', 'pages')[1+(n>1)],
+                    fill = TRUE)
     {
       if(verbose){
         if((20*n)<hits) cat(',', 20*n, 'matches.\n')
