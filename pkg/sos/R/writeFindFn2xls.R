@@ -1,3 +1,9 @@
+findFn2xls <- function(x,
+           file.=paste(deparse(substitute(x)), 'xls', sep='.'),
+           csv, ...) {
+  writeFindFn2xls(x, file.=file., csv=csv, ...)
+}
+
 writeFindFn2xls <- function(x,
            file.=paste(deparse(substitute(x)), 'xls', sep='.'),
            csv, ...) {

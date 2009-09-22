@@ -31,7 +31,7 @@ which scans the "function" entries in Jonathan Baron's "R site search"
 database and returns the matches in a {\tt data.frame} of class
 {\tt findFn} \citep{JB09URL}.  Baron's site is one of five
 search capabilities currently identified under "search" from the main
-\url{http://www.r-project.org/} web site. It includes options to
+\url{http://www.r-project.org/} web site.  It includes options to
 search the help pages of R packages contributed to CRAN (the
 Comprehensive R Archive Network) plus a few other publicly
 available packages as well as selected mailing list archives,
@@ -97,6 +97,9 @@ search can be performed as follows:
 \begin{verbatim}
 > PL <- ???Petal.Length
 \end{verbatim}
+(This {\tt ???} alias only works in an assignment, so to print 
+immediately, you need something like {\tt (PL <- ???Petal.Length)}).  
+
 This {\tt data.frame} has columns {\tt Count},
 {\tt MaxScore}, {\tt TotalScore}, {\tt Package}, {\tt Function},
 {\tt Date}, {\tt Score}, {\tt Description}, and {\tt Link}.
@@ -107,7 +110,8 @@ sets.  {\tt Score} is the index of the strength of the match.  It is used
 by Baron's search engine to decide which items to display first.
 {\tt Package} is the name of the package containing {\tt Function}.
 {\tt Count} gives the total number of matches in {\tt Package} found in this
-{\tt findFn} call.  By default, the {\tt findFn} object is sorted by {\tt Count}, {\tt MaxScore}, {\tt TotalScore},
+{\tt findFn} call.  By default, the {\tt findFn} object is sorted by 
+{\tt Count}, {\tt MaxScore}, {\tt TotalScore},
 and {\tt Package} (to place the most important {\tt Package}
 first), then by {\tt Score} and {\tt Function}.
 
@@ -131,6 +135,9 @@ yaImpute    8        1          8 2009-08-16
 datasets    1        2          2 2009-07-09
 <...>
 \end{verbatim}
+(The {\tt Date} here is the date that this package was added 
+to Baron's database.)  
+
 One of the listed packages is {\tt datasets}.  Since it is part of the
 default \R{} distribution, we decide to look there first.  We can
 select that row of PL just like we would select a row from any other
