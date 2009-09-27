@@ -22,7 +22,8 @@ findFn2xls(x,
     An object of class \code{findFn}
   }
   \item{file.}{
-    Name of Excel file to create.
+    Name of Excel file to create.  If a file of this name already
+    exists, it will be overwritten.
   }
   \item{csv}{
     logical:  if TRUE, write three *.csv files rather than one
