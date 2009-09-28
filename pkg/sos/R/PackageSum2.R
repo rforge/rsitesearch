@@ -105,5 +105,7 @@ PackageSum2.data.frame <- function(x,
 ##
 ## 5.  Done
 ##
-  cbind(x, xnew.)
+  x. <- cbind(x, xnew.)
+  rownames(x.) <- 1:nx
+  x.
 }

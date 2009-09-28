@@ -109,8 +109,6 @@ attr(tst.findFn, 'PackageSummary') <- PackageSummary(tst.findFn)
 class(tst.findFn) <- c('findFn', 'data.frame')
 tst2. <- PackageSum2(tst.findFn)
 
-# row names are different from tst2, so fix ...
-row.names(tst2.) <- row.names(tst2)
 \dontshow{stopifnot(}
 all.equal(tst2[, 1:7], tst2.[names(tst2)][, 1:7])
 \dontshow{)}
