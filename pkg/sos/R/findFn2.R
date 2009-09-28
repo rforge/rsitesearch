@@ -32,12 +32,12 @@
   if (is.call(topicExpr)) {
 # It must not be a call to ?,
 #      that would mean there are 4 or more
-    if (topicExpr[[1]] == "?")
-      return(original())
+    if (topicExpr[[1]] == "?")return(original())
     lastArg <- length(topicExpr)
     topicExpr[[lastArg+1]] <- as.character(topicExpr[[1]])
     names(topicExpr)[[lastArg+1]] <- "string"
-    topicExpr[[1]] <- quote(sos::findFn)
+#    topicExpr[[1]] <- quote(sos::findFn)
+    topicExpr[[1]] <- quote(findFn)
     f. <- eval(topicExpr, parent.frame(1))
   } else {
 #    	RSiteSearch.function(as.character(topicExpr))
