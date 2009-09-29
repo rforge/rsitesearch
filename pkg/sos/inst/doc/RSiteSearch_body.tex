@@ -97,8 +97,8 @@ search can be performed as follows:
 \begin{verbatim}
 > PL <- ???Petal.Length
 \end{verbatim}
-(This {\tt ???} alias only works in an assignment, so to print 
-immediately, you need something like {\tt (PL <- ???Petal.Length)}).  
+(This {\tt ???} alias only works in an assignment, so to print
+immediately, you need something like {\tt (PL <- ???Petal.Length)}).
 
 This {\tt data.frame} has columns {\tt Count},
 {\tt MaxScore}, {\tt TotalScore}, {\tt Package}, {\tt Function},
@@ -110,7 +110,7 @@ sets.  {\tt Score} is the index of the strength of the match.  It is used
 by Baron's search engine to decide which items to display first.
 {\tt Package} is the name of the package containing {\tt Function}.
 {\tt Count} gives the total number of matches in {\tt Package} found in this
-{\tt findFn} call.  By default, the {\tt findFn} object is sorted by 
+{\tt findFn} call.  By default, the {\tt findFn} object is sorted by
 {\tt Count}, {\tt MaxScore}, {\tt TotalScore},
 and {\tt Package} (to place the most important {\tt Package}
 first), then by {\tt Score} and {\tt Function}.
@@ -135,8 +135,8 @@ yaImpute    8        1          8 2009-08-16
 datasets    1        2          2 2009-07-09
 <...>
 \end{verbatim}
-(The {\tt Date} here is the date that this package was added 
-to Baron's database.)  
+(The {\tt Date} here is the date that this package was added
+to Baron's database.)
 
 One of the listed packages is {\tt datasets}.  Since it is part of the
 default \R{} distribution, we decide to look there first.  We can
@@ -226,6 +226,10 @@ using the {\tt writeFindFn2xls} function:
 \begin{verbatim}
 writeFindFn2xls(splineAll)
 \end{verbatim}
+({\tt findFn2xls} is an alias for {\tt writeFindFn2xls}.  
+We use the longer version here, as it may be 
+easier to remember.)  
+
 If either the {\tt WriteXLS} package and compatible Perl code
 are properly installed or if you are running Windows with
 the {\tt RODBC} package, this produces an Excel file in the
@@ -235,7 +239,7 @@ following three worksheets:
 \begin{itemize}
 \item{The {\tt `PackageSum2'} sheet includes one line for each
 package with a matching help page, enhanced by providing
-information for locally installed packages 
+information for locally installed packages
 not available in the {\tt findFn} object.}
 \item{The {\tt `findFn'} sheet contains the search results.}
 \item{The {\tt `call'} sheet gives the call to {\tt findFn}
@@ -255,7 +259,7 @@ The {\tt `PackageSum2'} sheet is created by the
 {\tt PackageSum2} function, which adds information from
 installed packages not obtained by
 {\tt findFn}.  This includes the package title and date, plus
-the names of author and maintainer, the number of help pages 
+the names of author and maintainer, the number of help pages
 in the package,
 and the name(s) of any vignettes.  This can be quite
 valuable in prioritizing packages for further study.
@@ -269,18 +273,18 @@ understanding the capability of interest.
 
 These extra fields, package title, etc., are blank for
 packages in the {\tt findFn} object not installed locally.
-The {\tt Date} is changed for installed packages 
-to the `packaged' date from the date the 
-package was added to Baron's database.  
+The {\tt Date} is changed for installed packages
+to the `packaged' date from the date the
+package was added to Baron's database.
 
 Therefore, the value of {\tt PackageSum2} can be
 increased by running {\tt install.packages} (from the
 {\tt utils} package) to install packages not currently
-available locally and {\tt update.packages()} to ensure the 
-local availability of the latest versions for all 
-installed packages.  
+available locally and {\tt update.packages()} to ensure the
+local availability of the latest versions for all
+installed packages.
 
-To make it easier to add desired packages, 
+To make it easier to add desired packages,
 the \pkg{sos} package includes
 an {\tt installPackages} function, which checks all the
 packages in a {\tt findFn} for which
