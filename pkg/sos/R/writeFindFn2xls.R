@@ -11,6 +11,10 @@ writeFindFn2xls <- function(x,
 ## 1.  exists(file.)?
 ##
   if(file.exists(file.))file.remove(file.)
+  if(nrow(x)<1){
+    cat('No matches;  nothing written.\'n')
+    return(invisible(''))
+  }
 ##
 ## 2.  csv?
 ##
