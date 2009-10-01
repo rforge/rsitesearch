@@ -16,6 +16,10 @@ RSiteSearch.function <- function(string, maxPages = 10, sort.=NULL,
 ##
 ## 0.  Set up
 ##
+  cat('*** NOTE:  The RSiteSearch package has been replaced by sos, ',
+      'and RSiteSearch.function has been replaced by findFn in sos.\n',
+      'You may wish to consult vignette("sos").\n')
+#
   parseHTML <- function(url) {
     code <- download.file(url, tmpfile, quiet = quiet)
     if(code != 0) stop("error downloading file")
