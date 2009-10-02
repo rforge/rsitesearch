@@ -3,7 +3,7 @@ Title: RSiteSearch
 Version: 1.0-5
 Author: Spencer Graves, Sundar Dorai-Raj, and Romain Francois
 Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
-Description:  Alternative interfaces to RSiteSearch;  obsolete:  use 'sos'
+Description:  Alternative interfaces to RSiteSearch;  deprecated:  use 'sos'
 License: GPL
 Depends: brew
 
