@@ -4,14 +4,14 @@
 \maketitle
 
 \abstract{
-The \pkg{sos} package provides a means to quickly and
+The \CRANpkg{sos} package provides a means to quickly and
 flexibly search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.  Its
 {\tt findFn} function accesses Jonathan Baron's \emph{R Site Search}
 database and returns the matches in a data frame of class
 {\tt "findFn"}, which can be further manipulated by other
-\pkg{sos} functions to produce, for example, an Excel file
+\CRANpkg{sos} functions to produce, for example, an Excel file
 that starts with a summary sheet that makes it relatively
 easy to prioritize alternative packages for further study.
 As such, it provides a very powerful way to do a literature
@@ -21,7 +21,7 @@ of new packages or papers in publications such as \emph{The R Journal}
 and the \emph{Journal of Statistical Software}.
 }
 \section{Introduction}
-The \pkg{sos} package provides a means to quickly and flexibly
+The \CRANpkg{sos} package provides a means to quickly and flexibly
 search the help pages of contributed packages, finding
 functions and datasets in seconds or minutes that could not be
 found in hours or days by any other means we know.
@@ -50,7 +50,7 @@ returns the results in R as a data frame, which can be further
 manipulated.  Second, the ultimate display in a web browser is a
 table, unlike the list produced by {\tt RSiteSearch}.
 
-Other \pkg{sos} functions provide summaries with one line for each
+Other \CRANpkg{sos} functions provide summaries with one line for each
 package, support the union and intersection of {\tt "findFn"} objects,
 and translate a \code{"findFn"} object into an Excel file with three sheets:
 (1) \strong{PackageSum2}, which provides an enhanced summary of the packages
@@ -229,9 +229,9 @@ using the {\tt writeFindFn2xls} function:
 We use the longer version here, as it may be
 easier to remember.)
 
-If either the \pkg{WriteXLS} package and compatible Perl code
+If either the \CRANpkg{WriteXLS} package and compatible Perl code
 are properly installed or if you are running Windows with
-the \pkg{RODBC} package, this produces an Excel file in the
+the \CRANpkg{RODBC} package, this produces an Excel file in the
 working directory named \file{splineAll.xls}, containing the
 following three worksheets:
 
@@ -283,9 +283,9 @@ local availability of the latest versions for all
 installed packages.
 
 To make it easier to add desired packages,
-the \pkg{sos} package includes
+the \CRANpkg{sos} package includes
 an {\tt installPackages} function, which checks all the
-packages in a {\tt findFn} object for which
+packages in a {\tt "findFn"} object for which
 the number of matches exceeds a second argument {\tt minCount}
 and installs any of those not already available locally;  the
 default {\tt minCount} is the square root of the largest
@@ -307,7 +307,7 @@ writeFindFn2xls(splineAll)
 The resulting \file{splineAll.xls} file can help establish priorities
 for further study of the different packages and functions.  An
 analysis of this nature almost four years ago led the lead author
-to the \pkg{fda} package and its companion books, which further
+to the \CRANpkg{fda} package and its companion books, which further
 led to a collaboration that has produced joint presentations at
 three different conferences and a joint book \citep{RHG09}.
 
@@ -349,11 +349,11 @@ identified via {\tt getwd()}.)
 The \strong{PackageSum2} sheet of that Excel file provided a quick
 summary of packages with matches, sorted to put the package
 with the most matches first.  In this case, this first package
-was \pkg{deSolve}, which provides, ``General solvers for initial
+was \CRANpkg{deSolve}, which provides, ``General solvers for initial
 value problems of ordinary differential equations (ODE),
 partial differential equations (PDE) and differential
 algebraic equations (DAE)''.  This is clearly quite relevant
-to the subject.  The second package was \pkg{PKfit}, which
+to the subject.  The second package was \CRANpkg{PKfit}, which
 is ``A Data Analysis Tool for Pharmacokinetics''.  This may
 be too specialized for general use.  I therefore would not
 want to study this first unless my primary interest here was in
@@ -369,7 +369,7 @@ information to make sure I did not embarrass myself by overlooking
 a package authored or maintained by another invited speaker.
 
 \section{Discussion}
-We have found {\tt findFn} in the \pkg{sos} package to
+We have found {\tt findFn} in the \CRANpkg{sos} package to
 be very quick, efficient and effective for finding things in
 contributed packages.  The {\tt grepFn} function helps quickly
 look for functions (or help pages) with particular names.
@@ -393,7 +393,7 @@ The {\tt findFn} capability can also reduce the risk
 of ``the researcher's nightmare'' of being told after
 substantial work that someone else has already done it.
 
-Users of \pkg{sos} may also wish to consult Crantastic
+Users of \CRANpkg{sos} may also wish to consult Crantastic
 (\url{http://www.crantastic.org/}), which allows users to tag, rate,
 and view packages.  (The coverage of Crantastic includes current and
 orphaned CRAN packages, while \cite{JB09URL}
@@ -409,8 +409,8 @@ to develop the features described here. Duncan Murdoch, Marc Schwarz,
 Dirk Eddelbuettel, Gabor Grothendiek and anonymous
 referees contributed suggestions for improvement, but of course
 can not be blamed for any deficiencies.  The collaboration
-required to produce the current \pkg{sos} package was greatly
-facilitated by R-Forge \citep{RFORGE09URL}. The \pkg{sos} package
+required to produce the current \CRANpkg{sos} package was greatly
+facilitated by R-Forge \citep{RFORGE09URL}. The \CRANpkg{sos} package
 is part of the R Site Search project hosted there.  This project
 also includes code for a Firefox extension to simplify the process of
 finding information about R from within Firefox.  This Firefox
