@@ -267,11 +267,16 @@ summary.)
 
 A more complete view can be obtained in MS Excel format
 using the {\tt writeFindFn2xls} function:
-\begin{Schunk}
-\begin{Sinput}
-> writeFindFn2xls(splineAll)
-\end{Sinput}
-\end{Schunk}
+
+<<writeFindFn2xls-options,echo=FALSE>>=
+op <- options(width = 80)
+@ 
+<<writeFindFn2xls,results=hide>>=
+writeFindFn2xls(splineAll)
+@
+<<writeFindFn2xls-options,echo=FALSE>>=
+options(op)
+@ 
 ({\tt findFn2xls} is an alias for {\tt writeFindFn2xls}.
 We use the longer version here, as it may be
 easier to remember.)
@@ -345,13 +350,17 @@ To summarize, three lines of code gave us a very powerful
 summary of spline capabilities in contributed R
 packages:
 
-\begin{Schunk}
-\begin{Sinput}
-> splineAll <- findFn('spline', maxPages = 999)
-> installPackages(splineAll)
-> writeFindFn2xls(splineAll)
-\end{Sinput}
-\end{Schunk}
+<<install-and-write-options,echo=FALSE>>=
+op <- options(width=80)
+@ 
+<<install-and-write,results=hide>>=
+splineAll <- findFn('spline', maxPages = 999)
+installPackages(splineAll)
+writeFindFn2xls(splineAll)
+@ 
+<<install-and-write-options-undo,echo=FALSE>>=
+options(op)
+@ 
 
 The resulting \file{splineAll.xls} file can help establish priorities
 for further study of the different packages and functions.  An

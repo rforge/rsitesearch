@@ -130,7 +130,45 @@ gCount6 <- g[6, "Count"]
 
 
 ###################################################
-### chunk number 18: differntial-equations
+### chunk number 18: writeFindFn2xls-options
+###################################################
+op <- options(width = 80)
+
+
+###################################################
+### chunk number 19: writeFindFn2xls
+###################################################
+writeFindFn2xls(splineAll)
+
+
+###################################################
+### chunk number 20: writeFindFn2xls-options
+###################################################
+options(op)
+
+
+###################################################
+### chunk number 21: install-and-write-options
+###################################################
+op <- options(width=80)
+
+
+###################################################
+### chunk number 22: install-and-write
+###################################################
+splineAll <- findFn('spline', maxPages = 999)
+installPackages(splineAll)
+writeFindFn2xls(splineAll)
+
+
+###################################################
+### chunk number 23: install-and-write-options-undo
+###################################################
+options(op)
+
+
+###################################################
+### chunk number 24: differntial-equations
 ###################################################
 de <- findFn('differential equation')
 des <- findFn('differential equations')
