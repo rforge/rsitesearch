@@ -5,10 +5,7 @@
 \usepackage{RJournal}
 \usepackage[round]{natbib}
 %\bibliographystyle{abbrvnat}
-\SweaveOpts{keep.source=TRUE}
-<<echo=FALSE>>=
-options(width = 60, useFancyQuotes = FALSE)
-@ 
+
 \begin{document}
 %\VignetteIndexEntry{sos R Journal article}
 %\VignetteDepends{sos}
@@ -93,26 +90,45 @@ copy of this famous data set in a format compatible with his code.
 To look for this data set, one might first try
 the {\tt help.search} function.  Unfortunately, this function
 returns nothing in this case:
-<<Petal.Length>>=
-help.search('Petal.Length')
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> help.search('Petal.Length')
+\end{Sinput}
+\begin{Soutput}
+No help files found with alias or concept or title
+matching 'Petal.Length' using regular expression
+matching.
+\end{Soutput}
+\end{Schunk}
 When this failed, many users might then try
 {\tt RSiteSearch(`Petal.Length')}.  This produced 80 matches
 when it was tried one day (and 62 matches a few months later).
 {\tt RSiteSearch(`Petal.Length', `function')} will identify
 only the help pages.  We can get something similar and for
 many purposes more useful, as follows:
-<<Petal.Length.sos>>=
-library(sos)
-PL <- findFn('Petal.Length')
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> library(sos)
+> PL <- findFn('Petal.Length')
+\end{Sinput}
+\begin{Soutput}
+found 28 matches;  retrieving 2 pages
+2 
+\end{Soutput}
+\end{Schunk}
 {\tt PL} is a data frame of class {\tt "findFn"} identifying
 all the help pages in Jonathan Baron's data base matching the
 search term.  An alias for {\tt findFn} is {\tt ???}, and this same
 search can be performed as follows:
-<<Petal.Length.sos.2>>=
-PL <- ???Petal.Length
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> PL <- ???Petal.Length
+\end{Sinput}
+\begin{Soutput}
+found 28 matches;  retrieving 2 pages
+2 
+\end{Soutput}
+\end{Schunk}
 (The {\tt ???} alias only works in an assignment, so to print
 immediately, you need something like {\tt (PL <- ???Petal.Length)}.)
 
@@ -136,26 +152,30 @@ for each {\tt Package} the {\tt Count} (number of matches),
 {\tt MaxScore} (max of {\tt Score}), {\tt TotalScore} (sum of
 {\tt Score}), and {\tt Date}, sorted like a Pareto chart to place
 the {\tt Package} with the most help pages first:
-<<summary.PL,results=hide>>=
-# the following table has been
-# manually edited for clarity
-summary(PL)
-@ 
-<<summary.PL-print,echo=FALSE>>=
-s <- summary(PL)
-blank <- data.frame(Package = "<...>",
-                    Count = "", MaxScore = "", 
-                    TotalScore = "",
-                    Date = "")
-s$PackageSummary[] <- lapply(s$PackageSummary[], as.character)
-row.names(s$PackageSummary) <- 
-  as.character(s$PackageSummary$Package)
-s$PackageSummary <- rbind(s$PackageSummary['yaImpute', ],
-                          blank,
-                          s$PackageSummary['datasets', ],
-                          blank)
-print(s, row.names = FALSE)
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> # the following table has been
+> # manually edited for clarity
+> summary(PL)
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Soutput}
+Call:
+findFn(string = "Petal.Length")
+
+Total number of matches: 28
+Downloaded 28 links in 15 packages.
+
+Packages with at least 1 match using pattern
+  'Petal.Length'
+  Package Count MaxScore TotalScore       Date
+ yaImpute     8        1          8 2009-08-16
+    <...>                                     
+ datasets     1        2          2 2009-11-26
+    <...>                                     
+\end{Soutput}
+\end{Schunk}
 (The {\tt Date} here is the date that this package was added
 to Baron's database.)
 
@@ -163,12 +183,16 @@ One of the listed packages is \pkg{datasets}.  Since it is part of the
 default R distribution, we decide to look there first.  We can
 select that row of PL just like we would select a row from any other
 data frame:
-<<Petal.Length.sos.3,results=hide>>=
-PL[PL$Package == 'datasets', 'Function']
-@ 
-<<Petal.Length.sos.3-print,echo=FALSE>>=
-print(PL[PL$Package == 'datasets', 'Function'], max.levels = 0)
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> PL[PL$Package == 'datasets', 'Function']
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Soutput}
+[1] iris
+\end{Soutput}
+\end{Schunk}
 Problem solved in less than a minute!  Any other method known
 to the present authors would have taken substantially more time.
 
@@ -177,52 +201,47 @@ to the present authors would have taken substantially more time.
 Almost four years ago, the lead author of this article decided he
 needed to learn more about splines.  A literature search
 began as follows:
-<<RSiteSearch-spline,results=hide>>=
-RSiteSearch('spline')
-@ 
-<<RSiteSearch-spline-numpages,results=hide,echo=FALSE>>=
-getRSiteSearchHits <- function(description) {
-  con <- url(description)
-  on.exit(close(con))
-  lines <- readLines(con)
-  pattern <- "^.*<!-- HIT -->([0-9]+)<!-- HIT -->.*$"
-  hits <- sub(pattern, "\\1", lines[grep(pattern, lines)])
-  today <- format(Sys.time(), "%Y-%m-%d")
-  list(hits = hits, date = today)
-}
-splineHits <- getRSiteSearchHits("http://search.r-project.org/cgi-bin/namazu.cgi?query=spline&max=20&result=normal&sort=score&idxname=Rhelp08&idxname=functions&idxname=views")
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> RSiteSearch('spline')
+\end{Sinput}
+\end{Schunk}
 (using the {\tt RSiteSearch} function in the \pkg{utils} package).
 While preparing this manuscript, this command identified
-\Sexpr{splineHits$hits} documents as of \Sexpr{splineHits$date}.  That is too many.  It can be
+1000 documents as of 2009-12-06.  That is too many.  It can be
 restricted to functions as follows:
-<<RSiteSearch-spline-fun,results=hide>>=
-RSiteSearch('spline', 'fun')
-@ 
-<<RSiteSearch-spline-fun-numpages,results=hide,echo=FALSE>>=
-splineFunHits <- getRSiteSearchHits("http://search.r-project.org/cgi-bin/namazu.cgi?query=spline&max=20&result=normal&sort=score&idxname=functions")
-@ 
-This identified only \Sexpr{splineFunHits$hits} one day (631 a few months earlier).
-That's an improvement over \Sexpr{splineHits$hits} but is still too many.
-To get a quick overview of these \Sexpr{splineFunHits$hits}, we can proceed
+\begin{Schunk}
+\begin{Sinput}
+> RSiteSearch('spline', 'fun')
+\end{Sinput}
+\end{Schunk}
+This identified only 803 one day (631 a few months earlier).
+That's an improvement over 1000 but is still too many.
+To get a quick overview of these 803, we can proceed
 as follows:
-<<sos-spline,results=hide>>=
-splinePacs <- findFn('spline')
-@ 
-This downloaded a summary of the \Sexpr{nlevels(splinePacs$Link)} highest-scoring help pages
+\begin{Schunk}
+\begin{Sinput}
+> splinePacs <- findFn('spline')
+\end{Sinput}
+\end{Schunk}
+This downloaded a summary of the 400 highest-scoring help pages
 in the 'RSiteSearch' data base in roughly 5-15 seconds, depending
-on the speed of the Internet connection.  To get all  \Sexpr{splineFunHits$hits}  matches,
+on the speed of the Internet connection.  To get all  803  matches,
 increase the {\tt maxPages} argument from its default 20:
-<<sos-spline-maxPages-999,results=hide>>=
-splineAll <- findFn('spline', maxPages = 999)
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> splineAll <- findFn('spline', maxPages = 999)
+\end{Sinput}
+\end{Schunk}
 
 If we want to find a function named {\tt spline}, we can
 proceed as follows:
-<<sos-spline-subset,results=hide>>=
-selSpl <- splineAll[, 'Function'] == 'spline'
-splineAll[selSpl, ]
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> selSpl <- splineAll[, 'Function'] == 'spline'
+> splineAll[selSpl, ]
+\end{Sinput}
+\end{Schunk}
 
 This has 0 rows, because there is no help page named
 {\tt spline}.  This does not mean that no function
@@ -231,35 +250,30 @@ has that name.
 
 To look for help pages whose name includes the characters
 \samp{spline}, we can use {\tt grepFn}:
-<<sos-spline-grep,results=hide>>=
-grepFn('spline', splineAll, ignore.case = TRUE)
-@ 
-<<sos-spline-grep,results=hide,echo=FALSE>>=
-g <- grepFn('spline', splineAll, ignore.case = TRUE)
-gFunc6 <- as.character(g[6, "Function"])
-gPac6 <- as.character(g[6, "Package"])
-gScore6 <- g[6, "Score"]
-gCount6 <- g[6, "Count"]
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> grepFn('spline', splineAll, ignore.case = TRUE)
+\end{Sinput}
+\end{Schunk}
 
-This returned a {\tt "findFn"} object identifying \Sexpr{nrow(g)} help pages.
+This returned a {\tt "findFn"} object identifying 84 help pages.
 When this was
 run while preparing this manuscript, the sixth row was
-{\tt \Sexpr{gFunc6}} in the
-\pkg{\Sexpr{gPac6}} package, which has a {\tt Score} of \Sexpr{gScore6}.
+{\tt lspline} in the
+\pkg{assist} package, which has a {\tt Score} of 1.
 (On another day, the results could be different, because
 CRAN changes over time.)  This was the sixth row in this
 table, because it is in the
-\pkg{\Sexpr{gPac6}} package, which had a total of \Sexpr{gCount6} help
+\pkg{assist} package, which had a total of 34 help
 pages matching the search term, but this was the only
 one whose name matched the {\tt pattern} passed to {\tt grepFn}.
 
 We could next {\tt print} the {\tt splineAll} {\tt "findFn"}
 object.  However, it may not be easy to digest a table
-with \Sexpr{nrow(g)} rows.
+with 84 rows.
 
-{\tt summary(splineAll)} would tell us that the \Sexpr{nrow(splineAll)}  help pages
-came from \Sexpr{nlevels(splineAll$Package)} different packages and display the first
+{\tt summary(splineAll)} would tell us that the 803  help pages
+came from 205 different packages and display the first
 {\tt minPackages = 12} such packages.
 (If other packages had the same number of
 matches as the twelfth package, they would also appear in this
@@ -368,19 +382,21 @@ on Statistical Methods for Dynamic System Models, Vancouver, 2009: \url{http://s
 A key part of preparing for that presentation was a search of
 contributed R code, which proceeded roughly as follows:
 
-<<differntial-equations,results=hide>>=
-de <- findFn('differential equation')
-des <- findFn('differential equations')
-de. <- de | des
-@ 
+\begin{Schunk}
+\begin{Sinput}
+> de <- findFn('differential equation')
+> des <- findFn('differential equations')
+> de. <- de | des
+\end{Sinput}
+\end{Schunk}
 
-The object {\tt de} has \Sexpr{nrow(de)} rows, while {\tt des} has \Sexpr{nrow(des)}.
+The object {\tt de} has 58 rows, while {\tt des} has 115.
 If this search engine were simply searching for character
 strings, {\tt de} would be larger than {\tt des}, rather than
 the other way around.  The last object {\tt de.}\ is the union
 of {\tt de} and {\tt des};  \samp{|} is an alias for {\tt unionFindFn}.
-The {\tt de.}\ object has \Sexpr{nrow(de.)} rows, which suggests that
-the corresponding intersection must have (\Sexpr{nrow(de)} + \Sexpr{nrow(des)} $-$ \Sexpr{nrow(de.)} = \Sexpr{nrow(de) + nrow(des) - nrow(de.)}). This can be confirmed via {\tt nrow(de \& des)}.
+The {\tt de.}\ object has 137 rows, which suggests that
+the corresponding intersection must have (58 + 115 $-$ 137 = 36). This can be confirmed via {\tt nrow(de \& des)}.
 (\samp{\&} is an alias for {\tt intersectFindFn}.)
 
 To make everthing in {\tt de.}\ locally available, we can use

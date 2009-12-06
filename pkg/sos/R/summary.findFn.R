@@ -26,17 +26,19 @@ summary.findFn <- function(object, minPackages = 12,
 
 print.summary.findFn <- function(x, ...) {
   cat("\nCall:\n")
-  cat(paste(deparse(x$call), sep = "\n", collapse = "\n"),
-      "\n\n", sep = "")
+  cat(paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
   cat("Total number of matches: ", sum( x$matches) , "\n", sep = "")
   cat('Downloaded ', x$nrow, ' links in ', x$nPackages,
-      " package", c('.', 's.')[1+(x$nPackages>1)], "\n\n", sep='')
+      " package", c('.', 's.')[1 + (x$nPackages > 1)], "\n\n", sep='')
   string <- x$string
   cat("Packages with at least ", x$minCount, " match",
       if(x$minCount == 1) "" else "es",
-      " using search pattern '", string, "':\n", sep = "")
+      " using pattern\n  '", string, "'\n", sep = "")
   packSum <- x$PackageSummary
+  ## strip of %H:%M:%S time stamp which won't make any difference
+  packSum$Date <-
+    substr(packSum$Date, 1, regexpr(" ", packSum$Date) - 1)
   row.names(packSum) <- NULL
-  print(packSum)
+  print(packSum, ...)
   invisible()
 }
