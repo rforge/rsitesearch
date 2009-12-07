@@ -1,14 +1,14 @@
 \documentclass[a4paper]{report}
 
 %% need no \usepackage{Sweave}
-  
+
 \usepackage{RJournal}
 \usepackage[round]{natbib}
 %\bibliographystyle{abbrvnat}
 \SweaveOpts{keep.source=TRUE}
 <<echo=FALSE>>=
 options(width = 60, useFancyQuotes = FALSE)
-@ 
+@
 \begin{document}
 %\VignetteIndexEntry{sos R Journal article}
 %\VignetteDepends{sos}
@@ -95,7 +95,7 @@ the {\tt help.search} function.  Unfortunately, this function
 returns nothing in this case:
 <<Petal.Length>>=
 help.search('Petal.Length')
-@ 
+@
 When this failed, many users might then try
 {\tt RSiteSearch(`Petal.Length')}.  This produced 80 matches
 when it was tried one day (and 62 matches a few months later).
@@ -105,14 +105,14 @@ many purposes more useful, as follows:
 <<Petal.Length.sos>>=
 library(sos)
 PL <- findFn('Petal.Length')
-@ 
+@
 {\tt PL} is a data frame of class {\tt "findFn"} identifying
 all the help pages in Jonathan Baron's data base matching the
 search term.  An alias for {\tt findFn} is {\tt ???}, and this same
 search can be performed as follows:
 <<Petal.Length.sos.2>>=
 PL <- ???Petal.Length
-@ 
+@
 (The {\tt ???} alias only works in an assignment, so to print
 immediately, you need something like {\tt (PL <- ???Petal.Length)}.)
 
@@ -140,22 +140,22 @@ the {\tt Package} with the most help pages first:
 # the following table has been
 # manually edited for clarity
 summary(PL)
-@ 
+@
 <<summary.PL-print,echo=FALSE>>=
 s <- summary(PL)
 blank <- data.frame(Package = "<...>",
-                    Count = "", MaxScore = "", 
+                    Count = "", MaxScore = "",
                     TotalScore = "",
                     Date = "")
 s$PackageSummary[] <- lapply(s$PackageSummary[], as.character)
-row.names(s$PackageSummary) <- 
+row.names(s$PackageSummary) <-
   as.character(s$PackageSummary$Package)
 s$PackageSummary <- rbind(s$PackageSummary['yaImpute', ],
                           blank,
                           s$PackageSummary['datasets', ],
                           blank)
 print(s, row.names = FALSE)
-@ 
+@
 (The {\tt Date} here is the date that this package was added
 to Baron's database.)
 
@@ -165,10 +165,10 @@ select that row of PL just like we would select a row from any other
 data frame:
 <<Petal.Length.sos.3,results=hide>>=
 PL[PL$Package == 'datasets', 'Function']
-@ 
+@
 <<Petal.Length.sos.3-print,echo=FALSE>>=
 print(PL[PL$Package == 'datasets', 'Function'], max.levels = 0)
-@ 
+@
 Problem solved in less than a minute!  Any other method known
 to the present authors would have taken substantially more time.
 
@@ -179,7 +179,7 @@ needed to learn more about splines.  A literature search
 began as follows:
 <<RSiteSearch-spline,results=hide>>=
 RSiteSearch('spline')
-@ 
+@
 <<RSiteSearch-spline-numpages,results=hide,echo=FALSE>>=
 getRSiteSearchHits <- function(description) {
   con <- url(description)
@@ -191,38 +191,38 @@ getRSiteSearchHits <- function(description) {
   list(hits = hits, date = today)
 }
 splineHits <- getRSiteSearchHits("http://search.r-project.org/cgi-bin/namazu.cgi?query=spline&max=20&result=normal&sort=score&idxname=Rhelp08&idxname=functions&idxname=views")
-@ 
+@
 (using the {\tt RSiteSearch} function in the \pkg{utils} package).
 While preparing this manuscript, this command identified
 \Sexpr{splineHits$hits} documents as of \Sexpr{splineHits$date}.  That is too many.  It can be
 restricted to functions as follows:
 <<RSiteSearch-spline-fun,results=hide>>=
 RSiteSearch('spline', 'fun')
-@ 
+@
 <<RSiteSearch-spline-fun-numpages,results=hide,echo=FALSE>>=
 splineFunHits <- getRSiteSearchHits("http://search.r-project.org/cgi-bin/namazu.cgi?query=spline&max=20&result=normal&sort=score&idxname=functions")
-@ 
+@
 This identified only \Sexpr{splineFunHits$hits} one day (631 a few months earlier).
 That's an improvement over \Sexpr{splineHits$hits} but is still too many.
 To get a quick overview of these \Sexpr{splineFunHits$hits}, we can proceed
 as follows:
 <<sos-spline,results=hide>>=
 splinePacs <- findFn('spline')
-@ 
+@
 This downloaded a summary of the \Sexpr{nlevels(splinePacs$Link)} highest-scoring help pages
 in the 'RSiteSearch' data base in roughly 5-15 seconds, depending
 on the speed of the Internet connection.  To get all  \Sexpr{splineFunHits$hits}  matches,
 increase the {\tt maxPages} argument from its default 20:
 <<sos-spline-maxPages-999,results=hide>>=
 splineAll <- findFn('spline', maxPages = 999)
-@ 
+@
 
 If we want to find a function named {\tt spline}, we can
 proceed as follows:
 <<sos-spline-subset,results=hide>>=
 selSpl <- splineAll[, 'Function'] == 'spline'
 splineAll[selSpl, ]
-@ 
+@
 
 This has 0 rows, because there is no help page named
 {\tt spline}.  This does not mean that no function
@@ -233,14 +233,14 @@ To look for help pages whose name includes the characters
 \samp{spline}, we can use {\tt grepFn}:
 <<sos-spline-grep,results=hide>>=
 grepFn('spline', splineAll, ignore.case = TRUE)
-@ 
+@
 <<sos-spline-grep,results=hide,echo=FALSE>>=
 g <- grepFn('spline', splineAll, ignore.case = TRUE)
 gFunc6 <- as.character(g[6, "Function"])
 gPac6 <- as.character(g[6, "Package"])
 gScore6 <- g[6, "Score"]
 gCount6 <- g[6, "Count"]
-@ 
+@
 
 This returned a {\tt "findFn"} object identifying \Sexpr{nrow(g)} help pages.
 When this was
@@ -270,13 +270,13 @@ using the {\tt writeFindFn2xls} function:
 
 <<writeFindFn2xls-options,echo=FALSE>>=
 op <- options(width = 80)
-@ 
+@
 <<writeFindFn2xls,results=hide>>=
 writeFindFn2xls(splineAll)
 @
 <<writeFindFn2xls-options,echo=FALSE>>=
 options(op)
-@ 
+@
 ({\tt findFn2xls} is an alias for {\tt writeFindFn2xls}.
 We use the longer version here, as it may be
 easier to remember.)
@@ -352,15 +352,16 @@ packages:
 
 <<install-and-write-options,echo=FALSE>>=
 op <- options(width=80)
-@ 
+@
 <<install-and-write,results=hide>>=
 splineAll <- findFn('spline', maxPages = 999)
-installPackages(splineAll)
+# The following works live but fails in 'R CMD build'
+# installPackages(splineAll)
 writeFindFn2xls(splineAll)
-@ 
+@
 <<install-and-write-options-undo,echo=FALSE>>=
 options(op)
-@ 
+@
 
 The resulting \file{splineAll.xls} file can help establish priorities
 for further study of the different packages and functions.  An
@@ -381,7 +382,7 @@ contributed R code, which proceeded roughly as follows:
 de <- findFn('differential equation')
 des <- findFn('differential equations')
 de. <- de | des
-@ 
+@
 
 The object {\tt de} has \Sexpr{nrow(de)} rows, while {\tt des} has \Sexpr{nrow(des)}.
 If this search engine were simply searching for character

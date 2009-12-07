@@ -1,7 +1,7 @@
 \documentclass[a4paper]{report}
 
 %% need no \usepackage{Sweave}
-  
+
 \usepackage{RJournal}
 \usepackage[round]{natbib}
 %\bibliographystyle{abbrvnat}
@@ -363,7 +363,8 @@ packages:
 \begin{Schunk}
 \begin{Sinput}
 > splineAll <- findFn('spline', maxPages = 999)
-> installPackages(splineAll)
+> # The following works live but fails in 'R CMD build'
+> # installPackages(splineAll)
 > writeFindFn2xls(splineAll)
 \end{Sinput}
 \end{Schunk}

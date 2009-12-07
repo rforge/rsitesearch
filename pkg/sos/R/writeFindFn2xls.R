@@ -7,6 +7,16 @@ findFn2xls <- function(x,
 writeFindFn2xls <- function(x,
            file.=paste(deparse(substitute(x)), 'xls', sep='.'),
            csv, ...) {
+  wFF <- try(wFF2x(x, file., csv, ...))
+  if(class(wFF)=='try-error'){
+    cat('error converted to warning;  writing 2 csv files\n')
+    wFF <- wFF2x(x, file., csv=TRUE, ...)
+  }
+  wFF
+}
+wFF2x <- function(x,
+           file.=paste(deparse(substitute(x)), 'xls', sep='.'),
+           csv, ...) {
 ##
 ## 1.  exists(file.)?
 ##
