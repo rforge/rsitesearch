@@ -355,8 +355,7 @@ op <- options(width=80)
 @
 <<install-and-write,results=hide>>=
 splineAll <- findFn('spline', maxPages = 999)
-# The following works live but fails in 'R CMD build'
-# installPackages(splineAll)
+installPackages(splineAll)
 writeFindFn2xls(splineAll)
 @
 <<install-and-write-options-undo,echo=FALSE>>=
