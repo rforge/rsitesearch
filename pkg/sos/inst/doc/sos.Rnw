@@ -8,6 +8,7 @@
 \SweaveOpts{keep.source=TRUE}
 <<echo=FALSE>>=
 options(width = 60, useFancyQuotes = FALSE)
+options(repos=c(CRAN="http://cran.cnr.berkeley.edu"))
 @
 \begin{document}
 %\VignetteIndexEntry{sos R Journal article}
