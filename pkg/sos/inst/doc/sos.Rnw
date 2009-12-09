@@ -98,7 +98,10 @@ returns nothing in this case:
 help.search('Petal.Length')
 @
 When this failed, many users might then try
-{\tt RSiteSearch(`Petal.Length')}.  This produced 80 matches
+<<PL.RSiteSearch>>=
+RSiteSearch('Petal.Length')
+@
+This produced 80 matches
 when it was tried one day (and 62 matches a few months later).
 {\tt RSiteSearch(`Petal.Length', `function')} will identify
 only the help pages.  We can get something similar and for
