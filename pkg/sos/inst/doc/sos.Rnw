@@ -186,12 +186,15 @@ RSiteSearch('spline')
 @
 <<RSiteSearch-spline-numpages,results=hide,echo=FALSE>>=
 getRSiteSearchHits <- function(description) {
+  today <- format(Sys.time(), "%Y-%m-%d")
   con <- url(description)
   on.exit(close(con))
-  lines <- readLines(con)
+  lines <- try(readLines(con))
+  if(class(lines) == 'try-error'){
+    return(list(hits=0, date=today))
+  }
   pattern <- "^.*<!-- HIT -->([0-9]+)<!-- HIT -->.*$"
   hits <- sub(pattern, "\\1", lines[grep(pattern, lines)])
-  today <- format(Sys.time(), "%Y-%m-%d")
   list(hits = hits, date = today)
 }
 splineHits <- getRSiteSearchHits("http://search.r-project.org/cgi-bin/namazu.cgi?query=spline&max=20&result=normal&sort=score&idxname=Rhelp08&idxname=functions&idxname=views")

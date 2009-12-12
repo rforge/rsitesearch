@@ -9,7 +9,10 @@ summary.findFn <- function(object, minPackages = 12,
 ##
   nrows <- nrow(Sum)
   minPackages <- min(nrows, minPackages, na.rm=TRUE)
-  minCount <- min(minCount, Sum$Count[minPackages], na.rm=TRUE)
+  minCount <- {
+    if(minPackages<1) 0 else
+    min(minCount, Sum$Count[minPackages], na.rm=TRUE)
+  }
 #
   sel <- (Sum[, 'Count'] >= minCount)
   sumTh <- Sum[sel,, drop=FALSE]
