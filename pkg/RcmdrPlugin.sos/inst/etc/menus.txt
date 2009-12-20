@@ -1,0 +1,12 @@
+# R Commander sos Plugin Menu Definitions
+
+# based on  RcmdrPlugin.TeachingDemos 1.0-0 package last modified: 16 May 2007 by J. Fox
+# last modified: 22 Nov 2009 
+
+# When the plug-in is loaded, these menus are merged with the standard Rcmdr menus
+#   type    menu/item      operation/parent  label                              command/menu                activation    install?
+
+#    menu    exportMenu      topMenu     ""                              ""                  ""          ""
+    item    helpMenu      command     "Search R Help... (sos)"     sosInit        ""          "packageAvailable('sos')"
+#    item    topMenu         cascade     "Help"                        helpMenu          ""          ""
+
