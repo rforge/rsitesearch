@@ -1,6 +1,6 @@
 Package: RcmdrPlugin.sos
-Version: 0.1-0
-Date: 2009-12-20
+Version: 0.2-0
+Date: 2010-01-04
 Title: Efficiently search R Help pages
 Author: Liviu Andronic
 Maintainer: Liviu Andronic <landronimirc@gmail.com>
