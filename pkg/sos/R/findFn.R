@@ -58,7 +58,8 @@ findFn <- function(string,
     desc <- gsub("(<strong class=\"keyword\">)|(</strong>)", "",
                  desc0, useBytes = TRUE)
     if (length(pac) < 1 && length(Date) > 0) {
-      countDocs <- grep("Too many documents hit. Ignored", html, useBytes = TRUE)
+      countDocs <- grep("Too many documents hit. Ignored",
+                        html, useBytes = TRUE)
       tooMany <- length(tooMany) > 0
       if (tooMany) {
         warning("Too many documents hit.  Ignored")
@@ -173,14 +174,14 @@ findFn <- function(string,
   Ans.ch <- Ans[, c("Package","Function", "Description", "Link")]
   ans.ch <- as.data.frame(as.matrix(Ans.ch))
   ansKey <- cbind(as.data.frame(-ans.num), ans.ch)
-#
+  ##
   oSch <- do.call("order", ansKey[sortby])
   AnSort <- Ans[oSch, ]
-##
-## 6.  attributes
-##
+  ##
+  ## 6.  attributes
+  ##
   rownames(AnSort) <- NULL
-#
+  ##
   attr(AnSort, "matches") <- hits
   attr(AnSort, "PackageSummary") <- packageSum
   attr(AnSort, "string") <- string
