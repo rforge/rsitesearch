@@ -1,5 +1,5 @@
 installPackages <- function(x,
-                            minCount = sqrt(x[['Count']][1]),
+                            minCount = sqrt(x[1, 'Count']),
                             ...){
 ##
 ## 1.  pkgs needed
