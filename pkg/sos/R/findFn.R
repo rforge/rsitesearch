@@ -36,7 +36,7 @@ findFn <- function(string,
       attr(ans, "matches") <- 0
       return(ans)
     }
-    html <- scan(link, what = "", quiet = quiet, sep = "\n")
+    html <- readLines(link)
     hitPattern <- "^.*<!-- HIT -->(.*)<!-- HIT -->.*$"
     hitRows <- html[grep(hitPattern, html, useBytes = TRUE)]
     hits <- as.numeric(sub(hitPattern, "\\1", hitRows, useBytes = TRUE))
@@ -77,8 +77,11 @@ findFn <- function(string,
     attr(ans, "matches") <- hits
     ans
   }
-  if (substr(string, 1, 1) != "{")
+  if (substr(string, 1, 1) != "{") {
     string <- gsub(" ", "+", string)
+  } else {  ## scan(url(...)) fails with spaces
+    string <- gsub(" ", "%20", string)
+  }
   fmt <- paste("http://search.r-project.org/cgi-bin/namazu.cgi?",
                "query=%s&max=20&result=normal&sort=score&idxname=functions",
                sep = "")
