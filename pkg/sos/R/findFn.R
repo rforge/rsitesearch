@@ -2,7 +2,7 @@ findFn <- function(string,
                    maxPages = 20,
                    sortby = NULL,
                    verbose = 1, ...) {
-  ##############################################################################
+  ####################################################################
   ##
   ## RSiteSearch(string, "fun")
   ##
@@ -17,7 +17,7 @@ findFn <- function(string,
   ##      so sum(summary) may be less than hits.
   ##
   ##
-  ##############################################################################
+  ####################################################################
   ## 0.  Set up
   ##
   quiet <- (verbose < 2)
@@ -49,7 +49,8 @@ findFn <- function(string,
     fun <- sub(pattern, "\\2", links, useBytes = TRUE)
     scoreLoc <- regexpr("score:", links, useBytes = TRUE)
     scorePattern <- "^.*\\(score: ([0-9]+)\\)$"
-    score <- as.numeric(sub(scorePattern, "\\1", links, useBytes = TRUE))
+    scoreCh <- sub(scorePattern, "\\1", links, useBytes = TRUE)
+    score <- as.numeric(scoreCh)
     Date <- sub("^.*<em>(.*)</em>.*$", "\\1", dates, useBytes = TRUE)
     lnk <- sub("<dt>.*<strong><a href=\\\"(.*)\\\">R:.*$", "\\1",
                links, useBytes = TRUE)
