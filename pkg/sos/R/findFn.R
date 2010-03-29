@@ -48,7 +48,7 @@ findFn <- function(string,
     pac <- sub(pattern, "\\1", links, useBytes = TRUE)
     fun <- sub(pattern, "\\2", links, useBytes = TRUE)
     scoreLoc <- regexpr("score:", links, useBytes = TRUE)
-    scorePattern <- "^.*\\(score: ([0-9]+)\\)$"
+    scorePattern <- "^.*\\(score: ([0-9]+)\\).*$"
     scoreCh <- sub(scorePattern, "\\1", links, useBytes = TRUE)
     score <- as.numeric(scoreCh)
     Date <- sub("^.*<em>(.*)</em>.*$", "\\1", dates, useBytes = TRUE)
