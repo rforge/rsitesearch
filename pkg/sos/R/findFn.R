@@ -36,7 +36,19 @@ findFn <- function(string,
       attr(ans, "matches") <- 0
       return(ans)
     }
-    html <- readLines(link)
+    html <- try(readLines(link))
+    if (inherits(html, "try-error")) {
+      warning("An error occurred in readLine(link), link = ", link)
+      ch0 <- character(0)
+      ans <- data.frame(Package = ch0,
+                        Function = ch0,
+                        Date = ch0,
+                        Score = numeric(0),
+                        Description = ch0,
+                        Link = ch0)
+      attr(ans, "matches") <- 0
+      return(ans)
+    }
     hitPattern <- "^.*<!-- HIT -->(.*)<!-- HIT -->.*$"
     hitRows <- html[grep(hitPattern, html, useBytes = TRUE)]
     hits <- as.numeric(sub(hitPattern, "\\1", hitRows, useBytes = TRUE))
