@@ -25,7 +25,8 @@ findFn <- function(string,
     link <- try(url(href))
     on.exit(close(link))
     if (inherits(link, "try-error")) {
-      warning("An error occurred opening ", href)
+      warning("An error occurred opening ", href,
+              "\nfindFn needs Internet access;  is it available?")
       ch0 <- character(0)
       ans <- data.frame(Package = ch0,
                         Function = ch0,
@@ -38,7 +39,8 @@ findFn <- function(string,
     }
     html <- try(readLines(link))
     if (inherits(html, "try-error")) {
-      warning("An error occurred in readLine(link), link = ", link)
+      warning("An error occurred in readLine(link), link = ", link,
+              "\nfindFn needs Internet access;  is it available?")
       ch0 <- character(0)
       ans <- data.frame(Package = ch0,
                         Function = ch0,
