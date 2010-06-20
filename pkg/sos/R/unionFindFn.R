@@ -7,11 +7,12 @@ unionFindFn <- function(e1, e2, sortby=NULL) {
   if(k12 != length(names(e1)))warning('Columns in e1 not in e2')
   if(k12 != length(names(e2)))warning('Columns in e2 not in e1')
 #
- xy <- rbind(e1[, e12Names], e2[, e12Names])
+  xy <- rbind(e1[, e12Names], e2[, e12Names])
 ##
 ## 2.  Find and merge duplicates
 ##
-  if(!('Link' %in% names(xy))) stop('Neither x nor y contain Link')
+  if(!('Link' %in% names(xy)))
+    stop('Either x or y does not contain Link')
   uL <- table(xy$Link)
   dups <- names(uL[uL>1])
   ndups <- length(dups)

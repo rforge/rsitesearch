@@ -17,10 +17,11 @@ findFn <- function(string,
   ##      so sum(summary) may be less than hits.
   ##
   ##
-  ####################################################################
-  ## 0.  Set up
-  ##
+##
+## 1.  Define internal function
+##
   quiet <- (verbose < 2)
+# internal function
   parseHTML <- function(href) {
     link <- try(url(href))
     on.exit(close(link))
@@ -92,6 +93,10 @@ findFn <- function(string,
     attr(ans, "matches") <- hits
     ans
   }
+# end internal function
+##
+## 2.  Set up query
+##
   if (substr(string, 1, 1) != "{") {
     string <- gsub(" ", "+", string)
   } else {  ## scan(url(...)) fails with spaces
@@ -101,10 +106,10 @@ findFn <- function(string,
                "query=%s&max=20&result=normal&sort=score&idxname=functions",
                sep = "")
   href <- sprintf(fmt, string)
-  ##
-  ## 1.  Query
-  ##
-  ##  1.1.  Set up
+##
+## 3.  Query
+##
+  ##  3.1.  Set up
   ans <- parseHTML(href)
   hits <- attr(ans, "matches")
   if (length(hits) < 1) {
@@ -130,7 +135,7 @@ findFn <- function(string,
     es <- if (hits == 1) "" else "es"
     cat("found ", hits, " match", es, sep = "")
   }
-  ##  1.2.  Retrieve
+  ##  3.2.  Retrieve
   n <- min(ceiling(hits/20), maxPages)
   if (nrow(ans) < attr(ans, "matches")) {
     if (verbose)
@@ -155,14 +160,14 @@ findFn <- function(string,
   } else {
     cat("\n")
   }
-  ##
-  ## 2.  Compute Summary
-  ##
+##
+## 4.  Compute Summary
+##
   ans$Score <- as.numeric(as.character(ans$Score))
   pkgSum <- PackageSummary(ans)
-  ##
-  ## 3.  Sort order
-  ##
+##
+## 5.  Sort order
+##
   s0 <- c("Count", "MaxScore", "TotalScore", "Package",
           "Score", "Function", "Date", "Description", "Link")
   s0. <- tolower(s0)
@@ -175,7 +180,7 @@ findFn <- function(string,
     sortby <- s0[s1.]
   }
   ##
-  ## 4.  Merge(packageSum, ans)
+  ## 6.  Merge(packageSum, ans)
   ##
   packageSum <- pkgSum
   rownames(pkgSum) <- as.character(pkgSum$Package)
@@ -185,7 +190,7 @@ findFn <- function(string,
   rownames(pkgS2) <- NULL
   Ans <- cbind(as.data.frame(pkgS2), ans)
   ##
-  ## 5.  Sort Ans by "sort."
+  ## 7.  Sort Ans by "sort."
   ##
   Ans.num <- Ans[, c("Count", "MaxScore", "TotalScore", "Score")]
   ans.num <- cbind(as.matrix(Ans.num), Date=as.numeric(Ans$Date) )
@@ -196,7 +201,7 @@ findFn <- function(string,
   oSch <- do.call("order", ansKey[sortby])
   AnSort <- Ans[oSch, ]
   ##
-  ## 6.  attributes
+  ## 8.  attributes
   ##
   rownames(AnSort) <- NULL
   ##
