@@ -17,11 +17,18 @@ findFn <- function(string,
   ##      so sum(summary) may be less than hits.
   ##
   ##
-##
-## 1.  Define internal function
-##
-  quiet <- (verbose < 2)
-# internal function
+  ##
+  ## 1.  Define internal function
+  ## internal functions
+  parseLinks <- function(links) {
+    lnk <- sub("<dt>.*<strong><a href=\\\"(.*\\.html)\\\">.*$", "\\1",
+               links, useBytes = TRUE)
+    desc0 <- sub("<dt>.*<strong><a href=\\\".*\\\">R.*:(.*)</a>.*$", "\\1",
+                 links, useBytes = TRUE)
+    desc <- gsub("(<strong class=\"keyword\">)|(</strong>)|^[ ]+|[ ]+$", "",
+                 desc0, useBytes = TRUE)
+    list(link = lnk, description = desc)
+  }
   parseHTML <- function(href) {
     link <- try(url(href))
     on.exit(close(link))
@@ -67,12 +74,7 @@ findFn <- function(string,
     scoreCh <- sub(scorePattern, "\\1", links, useBytes = TRUE)
     score <- as.numeric(scoreCh)
     Date <- sub("^.*<em>(.*)</em>.*$", "\\1", dates, useBytes = TRUE)
-    lnk <- sub("<dt>.*<strong><a href=\\\"(.*)\\\">R:.*$", "\\1",
-               links, useBytes = TRUE)
-    desc0 <- sub("<dt>.*<strong><a href=\\\".*\\\">R:(.*)</a>.*$", "\\1",
-                 links, useBytes = TRUE)
-    desc <- gsub("(<strong class=\"keyword\">)|(</strong>)", "",
-                 desc0, useBytes = TRUE)
+    pLinks <- parseLinks(links)
     if (length(pac) < 1 && length(Date) > 0) {
       countDocs <- grep("Too many documents hit. Ignored",
                         html, useBytes = TRUE)
@@ -88,27 +90,30 @@ findFn <- function(string,
                       Function = fun,
                       Date = strptime(Date, "%a, %d %b %Y %T"),
                       Score = score,
-                      Description = desc,
-                      Link = lnk)
+                      Description = pLinks$description,
+                      Link = pLinks$link)
     attr(ans, "matches") <- hits
     ans
   }
-# end internal function
-##
-## 2.  Set up query
-##
+  ## end internal functions
+  ##
+  quiet <- (verbose < 2)
+  ##
+  ## 2.  Set up query
+  ##
   if (substr(string, 1, 1) != "{") {
     string <- gsub(" ", "+", string)
-  } else {  ## scan(url(...)) fails with spaces
+  } else {
+    ## scan(url(...)) fails with spaces
     string <- gsub(" ", "%20", string)
   }
   fmt <- paste("http://search.r-project.org/cgi-bin/namazu.cgi?",
                "query=%s&max=20&result=normal&sort=score&idxname=functions",
                sep = "")
   href <- sprintf(fmt, string)
-##
-## 3.  Query
-##
+  ##
+  ## 3.  Query
+  ##
   ##  3.1.  Set up
   ans <- parseHTML(href)
   hits <- attr(ans, "matches")
@@ -160,14 +165,14 @@ findFn <- function(string,
   } else {
     cat("\n")
   }
-##
-## 4.  Compute Summary
-##
+  ##
+  ## 4.  Compute Summary
+  ##
   ans$Score <- as.numeric(as.character(ans$Score))
   pkgSum <- PackageSummary(ans)
-##
-## 5.  Sort order
-##
+  ##
+  ## 5.  Sort order
+  ##
   s0 <- c("Count", "MaxScore", "TotalScore", "Package",
           "Score", "Function", "Date", "Description", "Link")
   s0. <- tolower(s0)
