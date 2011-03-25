@@ -1,12 +1,12 @@
 \name{Extract.findFn}
 \alias{Extract.findFn}
-\alias{"[.findFn"}
+\alias{[.findFn}
 \title{Subset a findFn object}
 \description{
   Extract rows from a \code{findFn} object
 }
 \usage{
-\method{'['}{findFn}(x, i, j,
+\method{[}{findFn}(x, i, j,
     drop = if (missing(i)) TRUE else length(cols) == 1)
 %]
 }
@@ -36,7 +36,7 @@
 \value{
   If \code{j} is missing, return an object of class c('findFn',
   'data.frame') else return whatever is returned by
-  \code{\link{Extract.data.frame}}.
+  \code{Extract.data.frame}.
 }
 \author{
   Spencer Graves
