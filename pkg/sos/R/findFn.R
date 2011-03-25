@@ -41,7 +41,7 @@ findFn <- function(string,
                         Date = ch0,
                         Score = numeric(0),
                         Description = ch0,
-                        Link = ch0)
+                        Link = ch0, stringsAsFactors=FALSE)
       attr(ans, "matches") <- 0
       return(ans)
     }
@@ -55,7 +55,7 @@ findFn <- function(string,
                         Date = ch0,
                         Score = numeric(0),
                         Description = ch0,
-                        Link = ch0)
+                        Link = ch0, stringsAsFactors=FALSE)
       attr(ans, "matches") <- 0
       return(ans)
     }
@@ -91,7 +91,7 @@ findFn <- function(string,
                       Date = strptime(Date, "%a, %d %b %Y %T"),
                       Score = score,
                       Description = pLinks$description,
-                      Link = pLinks$link)
+                      Link = pLinks$link, stringsAsFactors=FALSE)
     attr(ans, "matches") <- hits
     ans
   }

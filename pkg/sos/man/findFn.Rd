@@ -15,6 +15,8 @@
 }
 \usage{
 findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
+%findFn(string, maxPages = 20, sortby = NULL, verbose = 1,
+%       omitPackages='^tmp/', ...)
 ##???string(maxPages)
 }
 \arguments{
