@@ -119,7 +119,10 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
 
     \itemize{
       \item{matches}{
-	an integer = total number of matches found by the search
+	an integer = total number of matches found by the search.  This
+	typically will exceed the number of rows found, because the
+	search algorithm sometimes finds things that are not help pages
+	for packages.
       }
       \item{PackageSummary}{
 	a data.frame with one row for each package and columns
