@@ -38,7 +38,7 @@ PackageSum2.data.frame <- function(x,
   for(ip in seq(1, length=nx)){
     if(xP[ip] %in% instPkgs){
       pkgDesci <- packageDescription(x$Package[ip], lib.loc=lib.loc)
-      pkgHelp <- help(pac=x$Package[ip], lib.loc=lib.loc)
+      pkgHelp <- help(package=x$Package[ip], lib.loc=lib.loc)
       for(ic in seq(1, length=nf)){
         if(fields[ic] == "Packaged"){
           {
