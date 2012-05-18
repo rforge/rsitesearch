@@ -177,8 +177,10 @@ findFn <- function(string,
   ##
   ans$Score <- as.numeric(as.character(ans$Score))
   pkgSum <- PackageSummary(ans)
-  nlk <- sum(pkgSum$Count)
-  cat('Downloaded', nlk, 'links in', nrow(pkgSum), 'packages.\n')
+  if(hits.>0){
+      nlk <- sum(pkgSum$Count)
+      cat('Downloaded', nlk, 'links in', nrow(pkgSum), 'packages.\n')
+  }
   ##
   ## 5.  Sort order
   ##
