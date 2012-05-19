@@ -82,11 +82,19 @@ writeFindFn2xls <- function(x,
     #    } else print(xlsFile)
     #}
     warning('\n*** UNABLE TO WRITE xls FILE;  writing 3 csv files instead.')
+    xName <- deparse(substitute(x))
+    assign(xName, x)
+    file0 <- sub('\\.xls$', '', file.)
+    saveFile <- paste(file0, 'rda', sep='.')
+    do.call(save, list(list=xName, file=saveFile))
+    cat('NOTE:  x = ', xName, ' saved to ', saveFile,
+        '\nin case you want to try in, e.g., Rgui i386;\n',
+        '> load(\"', saveFile, '\"); findFn2xls(', xName, ')\n',
+        sep='')
   }
 ##
 ## 8.  Write 3 csv files
 ##
-#  writeFindFn2csv <- function(x, file., sum2.=sum2, cl.=cl, ...){
   f.xls <- regexpr('\\.xls', file.)
   if(f.xls>0)file. <- substring(file., 1, f.xls-1)
 #
