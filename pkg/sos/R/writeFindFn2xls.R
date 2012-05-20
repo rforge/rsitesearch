@@ -37,9 +37,14 @@ writeFindFn2xls <- function(x,
 ## 4.  Will dataframes2xls work?
 ##
   if(missing(csv) || !csv){
+#    if(require(dataframes2xls)){
+#      df2x <- TRUE
+#      shts <- c(sum2, x2., cl)
+#      write.xls(shts, file.,
+#                sh.names=c('PackageSum2', 'findFn', 'call') )
 
-  # not yet implemented
 
+#    }
 ##
 ## 5.  Will WriteXLS work?
 ##
