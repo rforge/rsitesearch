@@ -63,6 +63,8 @@ findFn2xls(x,
   \code{\link[RODBC]{odbcConnect}},
   \code{\link[RODBC]{sqlSave}},
   \code{\link[RODBC]{odbcClose}}
+  \code{\link[dataframes2xls]{write.xls}}
+  \code{\link[WriteXLS]{WriteXLS}}
 }
 \examples{
 splineSearch <- findFn("spline", maxPages = 1)

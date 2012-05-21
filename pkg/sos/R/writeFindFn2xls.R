@@ -29,24 +29,13 @@ writeFindFn2xls <- function(x,
                    stringsAsFactors=FALSE)
   x2 <- lapply(x, function(x)
                if(is.numeric(x)) x else as.character(x))
-  x2. <- as.data.frame(x2)
+  x2. <- as.data.frame(x2, stringsAsFactors=FALSE)
+
   df2x <- FALSE
   WX <- FALSE
   OB <- FALSE
 ##
-## 4.  Will dataframes2xls work?
-##
-  if(missing(csv) || !csv){
-#    if(require(dataframes2xls)){
-#      df2x <- TRUE
-#      shts <- c(sum2, x2., cl)
-#      write.xls(shts, file.,
-#                sh.names=c('PackageSum2', 'findFn', 'call') )
-
-
-#    }
-##
-## 5.  Will WriteXLS work?
+## 4.  Will WriteXLS work?
 ##
     if(require(WriteXLS)){
       WX <- TRUE
@@ -57,7 +46,7 @@ writeFindFn2xls <- function(x,
       }
     }
 ##
-## 6.  How about RODBC?
+## 5.  How about RODBC?
 ##
     if(require(RODBC)){
       RO <- TRUE
@@ -75,6 +64,36 @@ writeFindFn2xls <- function(x,
           }
         }
       }
+    }
+##
+## 6.  Will dataframes2xls work?
+##
+  if(missing(csv) || !csv){
+    if(require(dataframes2xls)){
+      df2x <- TRUE
+#      df.names <- 'sum2:::x2.:::cl'
+# copy dataframe2xls namespace contents here
+#      & reset environment of write.xls
+      here <- environment()
+      ns <- asNamespace("dataframes2xls")
+      for(nm in ls(ns)) here[[nm]] <- ns[[nm]]
+#      wx <- write.xls
+      environment(write.xls) <- here
+# dataframes2xls
+# refuses to write \n
+# and puts things in the wrong columns with ','
+      Sum2 <- lapply(x, function(x)
+                 if(is.numeric(x)) x else
+                 gsub('\n|,', ' ', as.character(x)))
+      Sum2. <- as.data.frame(Sum2, stringsAsFactors=FALSE)
+
+      x23 <- quote(c(Sum2., x2., cl))
+
+      DF2 <- do.call("write.xls", list(x23, file.,
+                 sh.names='PackageSum2:::findFn:::call') )
+#      print(class(DF2))
+      if((class(DF2)!='try-error') &&
+         (file. %in% dir()))return(invisible(file.))
     }
 ##
 ## 7.  Write warnings re. can't create xls file
