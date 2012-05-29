@@ -67,34 +67,34 @@ writeFindFn2xls <- function(x,
     }
 ##
 ## 6.  Will dataframes2xls work?
+##     -> DO NOT USE
+##     This puts quotes around all the character strings
 ##
-  if(missing(csv) || !csv){
-    if(require(dataframes2xls)){
-      df2x <- TRUE
-#      df.names <- 'sum2:::x2.:::cl'
-# copy dataframe2xls namespace contents here
-#      & reset environment of write.xls
-      here <- environment()
-      ns <- asNamespace("dataframes2xls")
-      for(nm in ls(ns)) here[[nm]] <- ns[[nm]]
-#      wx <- write.xls
-      environment(write.xls) <- here
-# dataframes2xls
-# refuses to write \n
-# and puts things in the wrong columns with ','
-      Sum2 <- lapply(x, function(x)
-                 if(is.numeric(x)) x else
-                 gsub('\n|,', ' ', as.character(x)))
-      Sum2. <- as.data.frame(Sum2, stringsAsFactors=FALSE)
-
-      x23 <- quote(c(Sum2., x2., cl))
-
-      DF2 <- do.call("write.xls", list(x23, file.,
-                 sh.names='PackageSum2:::findFn:::call') )
-#      print(class(DF2))
-      if((class(DF2)!='try-error') &&
-         (file. %in% dir()))return(invisible(file.))
-    }
+#  if(missing(csv) || !csv){
+#    if(require(dataframes2xls)){
+#      df2x <- TRUE
+##      df.names <- 'sum2:::x2.:::cl'
+## copy dataframe2xls namespace contents here
+##      & reset environment of write.xls
+#      here <- environment()
+#      ns <- asNamespace("dataframes2xls")
+#      for(nm in ls(ns)) here[[nm]] <- ns[[nm]]
+##      wx <- write.xls
+#      environment(write.xls) <- here
+## dataframes2xls
+## refuses to write \n
+## and puts things in the wrong columns with ','
+#      Sum2 <- lapply(x, function(x)
+#                 if(is.numeric(x)) x else
+#                 gsub('\n|,', ' ', as.character(x)))
+#      Sum2. <- as.data.frame(Sum2, stringsAsFactors=FALSE)
+#      x23 <- quote(c(Sum2., x2., cl))
+#      DF2 <- do.call("write.xls", list(x23, file.,
+#                 sh.names='PackageSum2:::findFn:::call') )
+##      print(class(DF2))
+#      if((class(DF2)!='try-error') &&
+#         (file. %in% dir()))return(invisible(file.))
+#    }
 ##
 ## 7.  Write warnings re. can't create xls file
 ##
@@ -105,17 +105,17 @@ writeFindFn2xls <- function(x,
    #       print(xlsClose)
     #    } else print(xlsFile)
     #}
-    warning('\n*** UNABLE TO WRITE xls FILE;  writing 3 csv files instead.')
-    xName <- deparse(substitute(x))
-    assign(xName, x)
-    file0 <- sub('\\.xls$', '', file.)
-    saveFile <- paste(file0, 'rda', sep='.')
-    do.call(save, list(list=xName, file=saveFile))
-    cat('NOTE:  x = ', xName, ' saved to ', saveFile,
-        '\nin case you want to try in, e.g., Rgui i386;\n',
-        '> load(\"', saveFile, '\"); findFn2xls(', xName, ')\n',
-        sep='')
-  }
+  warning('\n*** UNABLE TO WRITE xls FILE;  writing 3 csv files instead.')
+  xName <- deparse(substitute(x))
+  assign(xName, x)
+  file0 <- sub('\\.xls$', '', file.)
+  saveFile <- paste(file0, 'rda', sep='.')
+  do.call(save, list(list=xName, file=saveFile))
+  cat('NOTE:  x = ', xName, ' saved to ', saveFile,
+      '\nin case you want to try in, e.g., Rgui i386;\n',
+      '> load(\"', saveFile, '\"); findFn2xls(', xName, ')\n',
+      sep='')
+#  }
 ##
 ## 8.  Write 3 csv files
 ##
