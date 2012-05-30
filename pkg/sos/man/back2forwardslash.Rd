@@ -42,7 +42,7 @@ back2forwardslash(nmax=1, pattern='\\\\', replacement='/')
 %\references{}
 \examples{
 x <- back2forwardslash()
-c:\Users\
+c:\\Users\\
 #NOTE:  This function works with this string,
 # but R CMD check thinks \U is a control sequence
 #    that should be followed by a hexidecimal number and isn't.
@@ -53,7 +53,7 @@ all.equal(x, 'c:/Users/')
 
 # nmax must be one more than the number of embedded blanks
 x3 <- back2forwardslash(3)
-c:\u\a b\c d
+c:\\u\\a b\\c d
 
 \dontshow{stopifnot(}
 all.equal(x3, 'c:/u/a b/c d')
