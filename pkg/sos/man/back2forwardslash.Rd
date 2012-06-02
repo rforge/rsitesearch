@@ -7,8 +7,8 @@
   scan a character string with backslash as the quote character and
   return it with backslashs replaced by forward slash.
 
-  NOTE:  'c:\User' cannot be assigned to a character variable, because
-  '\U' must be followed by a hexidecimal number, and 's' is not a legal
+  NOTE:  'c:\\User' cannot be assigned to a character variable, because
+  '\\U' must be followed by a hexidecimal number, and 's' is not a legal
   hexidecimal digit.  Therefore, we read the character string of
   interest using scan rather than assigning it to a function argument.
 }
@@ -43,6 +43,7 @@ back2forwardslash(nmax=1, pattern='\\\\', replacement='/')
 \examples{
 x <- back2forwardslash()
 c:\\Users\\
+
 #NOTE:  This function works with this string,
 # but R CMD check thinks \U is a control sequence
 #    that should be followed by a hexidecimal number and isn't.
