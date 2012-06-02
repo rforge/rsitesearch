@@ -41,6 +41,7 @@ back2forwardslash(nmax=1, pattern='\\\\', replacement='/')
 }
 %\references{}
 \examples{
+\dontrun{
 x <- back2forwardslash()
 c:\\Users\\
 
@@ -59,6 +60,6 @@ c:\\u\\a b\\c d
 \dontshow{stopifnot(}
 all.equal(x3, 'c:/u/a b/c d')
 \dontshow{)}
-
+}
 }
 \keyword{manip}
