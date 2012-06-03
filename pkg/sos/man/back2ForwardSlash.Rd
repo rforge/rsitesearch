@@ -1,5 +1,5 @@
-\name{back2forwardslash}
-\alias{back2forwardslash}
+\name{back2ForwardSlash}
+\alias{back2ForwardSlash}
 \title{
   Replace backslash with forward slash in a character string
 }
@@ -13,20 +13,17 @@
   interest using scan rather than assigning it to a function argument.
 }
 \usage{
-back2forwardslash(nmax=1, pattern='\\\\', replacement='/')
+back2ForwardSlash(x = readline("text to convert > "))
 }
 \arguments{
-  \item{nmax}{
-    nmax argument for scan:  defaults to scanning one line of text
-    only.
-  }
-  \item{pattern, replacement}{
-    arguments passed to gsub
+  \item{x}{
+    character string in which each back slash is to be converted into a
+    forward slash.
   }
 }
 \details{
-  x <- scan(what=character(), quote=pattern, nmax=nmax)
-  gsub(pattern, replacement, x, fixed=TRUE)
+  It's not easy to turn a back slash into a forward slash, because R
+  interprets the back slash as an escape character.
 }
 \value{
   character vector with backslashes replaced by forward slashes.
@@ -41,8 +38,8 @@ back2forwardslash(nmax=1, pattern='\\\\', replacement='/')
 }
 %\references{}
 \examples{
-\dontrun{
-x <- back2forwardslash()
+%\dontrun{
+x <- back2ForwardSlash()
 c:\\Users\\
 
 #NOTE:  This function works with this string,
@@ -54,12 +51,12 @@ all.equal(x, 'c:/Users/')
 \dontshow{)}
 
 # nmax must be one more than the number of embedded blanks
-x3 <- back2forwardslash(3)
+x3 <- back2ForwardSlash()
 c:\\u\\a b\\c d
 
 \dontshow{stopifnot(}
 all.equal(x3, 'c:/u/a b/c d')
 \dontshow{)}
 }
-}
+%}
 \keyword{manip}
