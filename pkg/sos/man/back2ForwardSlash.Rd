@@ -39,16 +39,23 @@ back2ForwardSlash(x = readline("text to convert > "))
 %\references{}
 \examples{
 
-(x <- back2ForwardSlash("c:\\\\Users\\\\"))
+(x <- back2ForwardSlash('c:\\\\Users\\\\'))
 
 \dontshow{stopifnot(}
 all.equal(x, 'c:/Users/')
 \dontshow{)}
 
 
+(x2 <- back2ForwardSlash('c:\\\\u\\\\a b\\\\c d'))
+
+\dontshow{stopifnot(}
+all.equal(x2, 'c:/u/a b/c d')
+\dontshow{)}
+
+
 \dontrun{
 # Same again, this time from a file
-fname <- system.file("tests", "example_back2ForwardSlash.txt", package = "sos")
+fname <- system.file('tests', 'example_back2ForwardSlash.txt', package = 'sos')
 lines <- readLines(fname)
 (x3 <- back2ForwardSlash(lines))
 
