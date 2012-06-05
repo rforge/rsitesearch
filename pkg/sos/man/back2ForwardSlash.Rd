@@ -38,25 +38,23 @@ back2ForwardSlash(x = readline("text to convert > "))
 }
 %\references{}
 \examples{
-%\dontrun{
-x <- back2ForwardSlash()
-c:\\Users\\
 
-#NOTE:  This function works with this string,
-# but R CMD check thinks \U is a control sequence
-#    that should be followed by a hexidecimal number and isn't.
+(x <- back2ForwardSlash("c:\\\\Users\\\\"))
 
 \dontshow{stopifnot(}
 all.equal(x, 'c:/Users/')
 \dontshow{)}
 
-# nmax must be one more than the number of embedded blanks
-x3 <- back2ForwardSlash()
-c:\\u\\a b\\c d
+
+\dontrun{
+# Same again, this time from a file
+fname <- system.file("tests", "example_back2ForwardSlash.txt", package = "sos")
+lines <- readLines(fname)
+(x3 <- back2ForwardSlash(lines))
 
 \dontshow{stopifnot(}
-all.equal(x3, 'c:/u/a b/c d')
+all.equal(x3, c('c:/Users/', 'c:/u/a b/c d'))
 \dontshow{)}
 }
-%}
+}
 \keyword{manip}
