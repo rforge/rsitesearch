@@ -13,17 +13,18 @@
   interest using scan rather than assigning it to a function argument.
 }
 \usage{
-back2ForwardSlash(x = readline("text to convert > "))
+back2ForwardSlash(nmax=1, what=character(), sep='\\n', ...)
 }
 \arguments{
-  \item{x}{
-    character string in which each back slash is to be converted into a
-    forward slash.
+  \item{nmax, what, sep, \dots}{
+    arguments passed to \code{\link{scan}}
   }
 }
 \details{
   It's not easy to turn a back slash into a forward slash, because R
   interprets the back slash as an escape character.
+  \code{back2ForwardSlash} tells R to read the next \code{nmax} lines,
+  replacing '\\' with '/'.
 }
 \value{
   character vector with backslashes replaced by forward slashes.
@@ -39,29 +40,30 @@ back2ForwardSlash(x = readline("text to convert > "))
 %\references{}
 \examples{
 
-(x <- back2ForwardSlash('c:\\\\Users\\\\'))
+(x <- back2ForwardSlash())
+c:\\users\\
 
 \dontshow{stopifnot(}
 all.equal(x, 'c:/Users/')
 \dontshow{)}
 
-
-(x2 <- back2ForwardSlash('c:\\\\u\\\\a b\\\\c d'))
-
-\dontshow{stopifnot(}
-all.equal(x2, 'c:/u/a b/c d')
-\dontshow{)}
-
-
-\dontrun{
-# Same again, this time from a file
-fname <- system.file('tests', 'example_back2ForwardSlash.txt', package = 'sos')
-lines <- readLines(fname)
-(x3 <- back2ForwardSlash(lines))
+(x2. <- back2ForwardSlash(2))
+c:\\u\\a b\\n o
+d:\\pqr\\
 
 \dontshow{stopifnot(}
-all.equal(x3, c('c:/Users/', 'c:/u/a b/c d'))
+all.equal(x2., c('c:/u/a b/n o', 'd:/pqr/'))
 \dontshow{)}
-}
+
+%\dontrun{
+%# Same again, this time from a file
+%fname <- system.file('tests', 'example_back2ForwardSlash.txt', package = 'sos')
+%lines <- readLines(fname)
+%(x3 <- back2ForwardSlash(lines))
+
+%\dontshow{stopifnot(}
+%all.equal(x3, c('c:/Users/', 'c:/u/a b/c d'))
+%\dontshow{)}
+%}
 }
 \keyword{manip}
