@@ -44,7 +44,7 @@ back2ForwardSlash(nmax=1, what=character(), sep='\\n', ...)
 c:\\users\\
 
 \dontshow{stopifnot(}
-all.equal(x, 'c:/Users/')
+all.equal(x, 'c:/users/')
 \dontshow{)}
 
 (x2. <- back2ForwardSlash(2))
