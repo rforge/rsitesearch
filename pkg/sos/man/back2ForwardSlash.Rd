@@ -30,7 +30,7 @@ back2ForwardSlash(nmax=1, what=character(), sep='\\n', ...)
   character vector with backslashes replaced by forward slashes.
 }
 \author{
-  Spencer Graves
+  Spencer Graves with help from Richard Cotton and Garrett See
 }
 \seealso{
   \code{\link{scan}}
@@ -44,8 +44,8 @@ back2ForwardSlash(nmax=1, what=character(), sep='\\n', ...)
 #c:\users\
 
 #NOTE:  The "#" in this example is not needed.
-# It is included here to suppress a spurrious warning
-# the automated testing of the package via "R CMD check".
+# It is included here to suppress a spurious warning
+# in the automated testing of the package via "R CMD check".
 
 \dontshow{stopifnot(}
 all.equal(x, '#c:/users/')
