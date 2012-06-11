@@ -41,18 +41,22 @@ back2ForwardSlash(nmax=1, what=character(), sep='\\n', ...)
 \examples{
 
 (x <- back2ForwardSlash())
-c:\\users\\
+#c:\users\
+
+#NOTE:  The "#" in this example is not needed.
+# It is included here to suppress a spurrious warning
+# the automated testing of the package via "R CMD check".
 
 \dontshow{stopifnot(}
-all.equal(x, 'c:/users/')
+all.equal(x, '#c:/users/')
 \dontshow{)}
 
 (x2. <- back2ForwardSlash(2))
-c:\\u\\a b\\n o
-d:\\pqr\\
+#c:\\u\\a b\\n o
+#d:\\pqr\\
 
 \dontshow{stopifnot(}
-all.equal(x2., c('c:/u/a b/n o', 'd:/pqr/'))
+all.equal(x2., c('#c:/u/a b/n o', '#d:/pqr/'))
 \dontshow{)}
 
 %\dontrun{
