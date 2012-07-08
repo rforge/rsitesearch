@@ -102,5 +102,8 @@ PackageSum2.data.frame <- function(x,
 ##
   x. <- cbind(x, xnew.)
   rownames(x.) <- 1:nx
+  x.$Author <- gsub('\n', ' ', x.$Author)
+  x.$Maintainer <- gsub('\n', ' ', x.$Maintainer)
+  x.$vignette <- gsub('\n', ' ', x.$vignette)
   x.
 }
