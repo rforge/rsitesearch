@@ -164,6 +164,7 @@ findFn <- function(string,
         cat("retrieving page ", i, " of ", n, "\n", sep = "")
       } else if (verbose > 0) {
         cat(i, "")
+        flush.console()
       }
       href.i <- sprintf("%s&whence=%d", href, 20 * (i - 1))
       ans <- rbind(ans, parseHTML(href.i))
