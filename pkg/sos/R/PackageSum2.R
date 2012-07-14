@@ -100,10 +100,21 @@ PackageSum2.data.frame <- function(x,
 ##
 ## 5.  Done
 ##
+  fixSpace <- function(x){
+      x. <- gsub('\n', ' ', x)
+      nx <- nchar(x.)
+      repeat{
+          x. <- gsub('  ', ' ', x.)
+          nx2 <- nchar(x.)
+          if(all(nx2==nx))break
+          nx <- nx2
+      }
+      x.
+  }
   x. <- cbind(x, xnew.)
   rownames(x.) <- 1:nx
-  x.$Author <- gsub('\n', ' ', x.$Author)
-  x.$Maintainer <- gsub('\n', ' ', x.$Maintainer)
-  x.$vignette <- gsub('\n', ' ', x.$vignette)
+  x.$Author <- fixSpace(x.$Author)
+  x.$Maintainer <- fixSpace(x.$Maintainer)
+  x.$vignette <- fixSpace(x.$vignette)
   x.
 }
