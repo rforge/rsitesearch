@@ -38,7 +38,7 @@ PackageSum2.data.frame <- function(x,
   for(ip in seq(1, length=nx)){
     if(xP[ip] %in% instPkgs){
       pkgDesci <- packageDescription(x$Package[ip], lib.loc=lib.loc)
-      pkgHelp <- try(help(package=x$Package[ip], lib.loc=lib.loc, 
+      pkgHelp <- try(help(package=x$Package[ip], lib.loc=lib.loc,
                           help_type='text'))
       if(class(pkgHelp) != 'try-error'){
         for(ic in seq(1, length=nf)){
@@ -114,6 +114,7 @@ PackageSum2.data.frame <- function(x,
   }
   x. <- cbind(x, xnew.)
   rownames(x.) <- 1:nx
+  x.$Title <- fixSpace(x.$Title)
   x.$Author <- fixSpace(x.$Author)
   x.$Maintainer <- fixSpace(x.$Maintainer)
   x.$vignette <- fixSpace(x.$vignette)
