@@ -167,12 +167,13 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
 }
 \examples{
 z <- findFn("spline", maxPages = 2)
+\dontshow{if(!fda::CRAN()){}
 # alternative
 zq <- ???spline(2)
 
 \dontshow{stopifnot(}
 all.equal(z, zq)
-\dontshow{)}
+\dontshow{)}}
 
 # To search for 2 terms, not necessarily together:
 RSS <- findFn('RSiteSearch function', 1)
