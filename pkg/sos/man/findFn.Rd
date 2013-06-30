@@ -173,7 +173,7 @@ zq <- ???spline(2)
 
 \dontshow{stopifnot(}
 all.equal(z, zq)
-\dontshow{)}}
+\dontshow{)}
 
 # To search for 2 terms, not necessarily together:
 RSS <- findFn('RSiteSearch function', 1)
@@ -202,7 +202,7 @@ attr(fa0, 'call') <- call('findFn', string = "factor analysis")
 
 \dontshow{stopifnot(}
 all.equal(fa, fa0)
-\dontshow{)}
+\dontshow{)}}
 
 }
 \keyword{misc}
