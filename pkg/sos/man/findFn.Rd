@@ -166,7 +166,8 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   determining \code{Score}
 }
 \examples{
-#\dontshow{if(!fda::CRAN()){}
+# Skip these tests on CRAN,
+# because they take more than 5 seconds
 if(!fda::CRAN()){
 
 z <- findFn("spline", maxPages = 2)
@@ -203,9 +204,9 @@ attr(fa0, 'PackageSummary') <- PackageSummary(fa0)
 attr(fa0, 'string') <- 'factor+analysis'
 attr(fa0, 'call') <- call('findFn', string = "factor analysis")
 
-#\dontshow{stopifnot(}
-#all.equal(fa, fa0)
-#\dontshow{)}}
+\dontshow{stopifnot(}
+all.equal(fa, fa0)
+\dontshow{)}
 }
 }
 \keyword{misc}
