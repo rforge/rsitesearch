@@ -39,8 +39,9 @@ writeFindFn2xls <- function(x,
 ##
     if(require(WriteXLS)){
       WX <- TRUE
-      if(tP <- testPerl()){
-        WXo <- try(WriteXLS(c('sum2', 'x2.', 'cl'), ExcelFileName=file.,
+      if(tP <- WriteXLS::testPerl()){
+        WXo <- try(WriteXLS::WriteXLS(c('sum2', 'x2.', 'cl'),
+                 ExcelFileName=file.,
                  SheetNames=c('PackageSum2', 'findFn', 'call') ))
         if(class(WXo)!='try-error')return(invisible(file.))
       }
@@ -50,16 +51,17 @@ writeFindFn2xls <- function(x,
 ##
     if(require(RODBC)){
       RO <- TRUE
-      xlsFile <- try(odbcConnectExcel(file., readOnly=FALSE))
+      xlsFile <- try(RODBC::odbcConnectExcel(file., readOnly=FALSE))
       if(class(xlsFile)!='try-error'){
-        on.exit(odbcClose(xlsFile))
+        on.exit(RODBC::odbcClose(xlsFile))
 #   Create the sheets
-        sum2. <- try(sqlSave(xlsFile, sum2, tablename='PackageSum2'))
+        sum2. <- try(RODBC::sqlSave(xlsFile, sum2, tablename='PackageSum2'))
         if(class(sum2.)!='try-error'){
-          x. <- try(sqlSave(xlsFile, as.data.frame(x2), tablename='findFn'))
+          x. <- try(RODBC::sqlSave(xlsFile, as.data.frame(x2),
+                                   tablename='findFn'))
 #
           if(class(x.)!='try-error'){
-            cl. <- try(sqlSave(xlsFile, cl, tablename='call'))
+            cl. <- try(RODBC::sqlSave(xlsFile, cl, tablename='call'))
             if(class(cl.)!='try=error')return(invisible(file.))
           }
         }

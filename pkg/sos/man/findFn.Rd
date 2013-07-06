@@ -166,8 +166,10 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   determining \code{Score}
 }
 \examples{
+#\dontshow{if(!fda::CRAN()){}
+if(!fda::CRAN()){
+
 z <- findFn("spline", maxPages = 2)
-\dontshow{if(!fda::CRAN()){}
 # alternative
 zq <- ???spline(2)
 
@@ -178,6 +180,7 @@ all.equal(z, zq)
 # To search for 2 terms, not necessarily together:
 RSS <- findFn('RSiteSearch function', 1)
 matches(RSS)
+
 # To search for an exact string, use braces:
 RSS. <- findFn('{RSiteSearch function}', 1)
 matches(RSS.) # list(nrow = 0, matches = 0)
@@ -200,9 +203,9 @@ attr(fa0, 'PackageSummary') <- PackageSummary(fa0)
 attr(fa0, 'string') <- 'factor+analysis'
 attr(fa0, 'call') <- call('findFn', string = "factor analysis")
 
-\dontshow{stopifnot(}
-all.equal(fa, fa0)
-\dontshow{)}}
-
+#\dontshow{stopifnot(}
+#all.equal(fa, fa0)
+#\dontshow{)}}
+}
 }
 \keyword{misc}
