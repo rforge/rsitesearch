@@ -17,7 +17,7 @@ options(repos=c(CRAN="http://cran.cnr.berkeley.edu"))
 %\VignetteKeywords{help, search}
 %\VignettePackage{sos}
 
-\begin{article}
+%\begin{article}
 \title{Searching help pages of R packages}
 \author{by Spencer Graves, Sundar Dorai-Raj, and Romain Fran\c{c}ois}
 
@@ -543,6 +543,6 @@ Montpellier, France} \\
   %\bibliographystyle{Chicago}
   \bibliographystyle{abbrvnat}
 %  \bibliography{sos}
-\end{article}
+%\end{article}
 
 \end{document}
