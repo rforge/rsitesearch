@@ -7,6 +7,6 @@
 #   type    menu/item      operation/parent  label                              command/menu                activation    install?
 
 #    menu    exportMenu      topMenu     ""                              ""                  ""          ""
-    item    helpMenu      command     "Search R Help... (sos)"     sosInit        ""          "packageAvailable('sos')"
+    item    helpMenu      command     "Search R help system... (sos)"     sosInit        ""          "packageAvailable('sos')"
 #    item    topMenu         cascade     "Help"                        helpMenu          ""          ""
 

@@ -1,4 +1,4 @@
 * The characters "|" and "&" are used as separating operators, so one 
-may not search for them via the Rcmdr sos interface. 
+may not search for them via the Rcmdr 'sos' interface. 
 * One may not mix "|" and "&" in the search string, when performing 
 multiple searches. 

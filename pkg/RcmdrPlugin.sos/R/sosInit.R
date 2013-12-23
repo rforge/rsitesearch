@@ -3,7 +3,9 @@
 # last modified: 20 Nov 2009
 
 sosInit <- function(){
-    require(tcltk2)
+    #require(tcltk2)
+#   defaults <- list (initial.x = NULL, initial.goodnessOfFit = "0")
+#	dialog.values <- getDialog ("frequencyDistribution", defaults)
     initializeDialog(title=gettextRcmdr("Search R help pages"))
     searchFrame <- tkframe(top)
     searchInput <- tclVar("")
@@ -20,7 +22,7 @@ sosInit <- function(){
     xlsCheckBox <- tkcheckbutton(searchFrame, variable=xlsVariable)
     xlsCheckBoxTip <- paste('writeFindFn2xls() reports additional information \non installed packages (available vignettes, etc.). \nNOTE: The resulting file will be (over)written to \n".sos.xls" (or to ".sos.csv" in some cases). ', sep="")
     tk2tip(xlsCheckBox, xlsCheckBoxTip)
-    require("sos")
+    #require("sos")
     sosGrep(recall=sosInit, bLabel=gettextRcmdr("Filter by:"), eLabel=gettextRcmdr("in"), 
       initialLabel=gettextRcmdr("Filter by"))
     onOK <- function(){
@@ -114,7 +116,9 @@ sosInit <- function(){
         tkdestroy(top)
         tkfocus(CommanderWindow())
     }
-    OKCancelHelp(helpSubject="findFn")
+    OKCancelHelp(helpSubject="findFn"
+    #, reset = "sosInit", apply = "sosInit"
+    )
     tkgrid(tklabel(searchFrame, text=gettextRcmdr("Enter a search term..."), fg="blue"), sticky="w")
     tkgrid(tk2label(searchFrame, tip=searchFieldTip, text=gettextRcmdr("String:")), searchField, sticky="w")
     tkgrid(labelRcmdr(searchFrame, text=gettextRcmdr("Maximum pages:")),
