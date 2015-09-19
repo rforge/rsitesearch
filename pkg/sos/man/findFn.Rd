@@ -137,9 +137,9 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   }
 }
 \author{
-  Spencer Graves, Sundar Dorai-Raj, Romain Francois.  Duncan Duncan
-  Murdoch suggested the "???" alias for "findFn" and contributed the
-  code for it.
+  Spencer Graves, Sundar Dorai-Raj, Romain Francois.  Duncan
+  Murdoch suggested the "???" alias for "findFn" and 
+  contributed the code for it.
 
   Special thanks to Jonathan Baron and Andy Liaw.  Baron maintains the
   RSiteSearch data base.  Liaw and Baron created the \code{RSiteSearch}
