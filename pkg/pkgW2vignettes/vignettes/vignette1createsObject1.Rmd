@@ -1,0 +1,20 @@
+---
+title: "vignette1createsObject1"
+author: "Spencer Graves"
+date: "`r Sys.Date()`"
+output:
+      rmarkdown::html_vignette:
+vignette: >
+  %\VignetteIndexEntry{vignette 1 creates Object1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}{inputenc}
+---
+
+Objects created and not deleted in one vignette are available to vignettes compiled later using "R CMD build" + "R CMD check".  However, when a vignette is compiled itself from within RStudio -- at least with R 3.3.0 on Mac OS X 10.11.4 -- objects from another vignette are not so available.  
+
+In this vignette, the following "objects()" call always returns character(0), as we might expect.  "Object1", created on the next line appears when "vignette2confusedByObject1" is compiled using "R CMD build" + "R CMD check" but not when it is compiled itself from within RStudion:  
+
+```{r}
+objects()
+Object1 <- 1
+```

@@ -12,6 +12,7 @@ options(width = 60, useFancyQuotes = FALSE)
 options(repos=c(CRAN="http://cran.cnr.berkeley.edu"))
 @
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 %\VignetteIndexEntry{sos R Journal article}
 %\VignetteDepends{sos}
 %\VignetteKeywords{help, search}

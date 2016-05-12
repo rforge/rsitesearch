@@ -1,0 +1,16 @@
+Package: pkgW2vignettes 
+Version: 0.1-2
+Date: 2016-05-12
+Title: objects kept from vignette1 to vignette2
+Author: Spencer Graves 
+Maintainer: Spencer Graves <spencer.graves@effectivedefense.org>
+Depends: R (>= 3.2.3)
+Suggests: knitr, rmarkdown, RefManageR
+Description: This package demonstrates that objects created 
+  in one vignette, "vignette1")", are available for another, 
+  "vignette2")", with "R CMD build pkgW2vignettes" + 
+  "R CMD check pkgW2vignettes" but not when "vignette2"" is
+  built alone in RStudio.
+LazyData: true 
+License: GPL (>=2)
+VignetteBuilder: knitr
