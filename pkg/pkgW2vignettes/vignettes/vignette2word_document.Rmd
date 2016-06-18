@@ -1,0 +1,26 @@
+---
+title: "vignette will not build to a word document"
+author: "Spencer Graves"
+date: "`r Sys.Date()`"
+output: word_document
+#output: 
+#  rmarkdown::html_vignette:
+vignette: >
+  %\VignetteIndexEntry{vignette 1 creates Object1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}{inputenc}
+---
+
+With "output: word_document", clicking "Knit Word" in RStudio works as expected.  
+
+However, However, it throws an ERROR with R CMD build:  
+
+$ R CMD build pkgW2vignettes
+* checking for file ‘pkgW2vignettes/DESCRIPTION’ ... OK
+* preparing ‘pkgW2vignettes’:
+* checking DESCRIPTION meta-information ... OK
+* installing the package to build vignettes
+* creating vignettes ... ERROR
+Error: processing vignette 'vignette2word_document.Rmd' failed with diagnostics:
+Failed to locate the ‘weave’ output file (by engine ‘knitr::rmarkdown’) for vignette with name ‘vignette2word_document’. The following files exist in directory ‘.’: ‘vignette1createsObject1.R’, ‘vignette1createsObject1.Rmd’, ‘vignette1createsObject1.html’, ‘vignette2confusedByObject1.R’, ‘vignette2confusedByObject1.Rmd’, ‘vignette2confusedByObject1.html’, ‘vignette2word_document.Rmd’, ‘vignette2word_document.docx’
+Execution halted

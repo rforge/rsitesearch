@@ -243,7 +243,7 @@ To look for help pages whose name includes the characters
 <<sos-spline-grep,results=hide>>=
 grepFn('spline', splineAll, ignore.case = TRUE)
 @
-<<sos-spline-grep,results=hide,echo=FALSE>>=
+<<sos-spline-grep2,results=hide,echo=FALSE>>=
 g <- grepFn('spline', splineAll, ignore.case = TRUE)
 gFunc6 <- as.character(g[6, "Function"])
 gPac6 <- as.character(g[6, "Package"])
@@ -283,7 +283,7 @@ op <- options(width = 80)
 <<writeFindFn2xls,results=hide>>=
 writeFindFn2xls(splineAll)
 @
-<<writeFindFn2xls-options,echo=FALSE>>=
+<<writeFindFn2xls-options2,echo=FALSE>>=
 options(op)
 @
 ({\tt findFn2xls} is an alias for {\tt writeFindFn2xls}.
