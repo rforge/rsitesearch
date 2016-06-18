@@ -2,8 +2,8 @@
 title: "vignette1createsObject1"
 author: "Spencer Graves"
 date: "`r Sys.Date()`"
-output:
-      rmarkdown::html_vignette:
+output: 
+  rmarkdown::html_vignette:
 vignette: >
   %\VignetteIndexEntry{vignette 1 creates Object1}
   %\VignetteEngine{knitr::rmarkdown}
