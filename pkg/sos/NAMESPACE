@@ -8,6 +8,7 @@ export("?", back2ForwardSlash, findFn, findFn2xls, grepFn,
 importFrom("utils", "browseURL", "flush.console", "help",
      "install.packages", "packageDescription", "vignette",
      "write.csv")
+importFrom('brew', 'brew')
 
 S3method("[", findFn)
 S3method(PackageSum2, data.frame)
