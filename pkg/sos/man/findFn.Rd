@@ -149,14 +149,15 @@ findFn(string, maxPages = 20, sortby = NULL, verbose = 1, ...)
   \code{\link{help.search}} to search only installed packages.
   \code{\link[utils]{RSiteSearch}},
   \code{\link[utils]{download.file}}
-  \url{http://finzi.psych.upenn.edu/search.html} for a web interface to
-  this same search capability with more general options.
-  \code{findFn} searches only "Target:  Functions" from that site,
-  ignoring the R-help arcihves.
+  \url{http://finzi.psych.upenn.edu/search.html} for a web 
+    interface to this same search capability with more 
+    general options.
+  \code{findFn} searches only "Target:  Functions" from that 
+    site, ignoring the R-help arcihves.
 
-  \url{http://www.r-project.org/search.html} for a list of alternative R
-  search capabilities, each of which may be best for different types of
-  inquiries.
+  \url{http://www.r-project.org/search.html} for a list of 
+    alternative R search capabilities, each of which may be 
+    best for different types of inquiries.
 
   \code{\link{findFunction}} for a completely different
   function with a similar name.
