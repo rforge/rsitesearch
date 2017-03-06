@@ -32,8 +32,8 @@ print.findFn <- function(x,
   }
   if (length(where)>1)
     stop("if length(where)>1, ", 
-      "where must names columns of", 
-      " x;  they do not.  where = ",
+      "where must be names of columns of", 
+      " x;  they are not.  where = ",
          paste(where, collapse=", "))
   if (toupper(where) == "HTML") {
     f0 <- tempfile()
@@ -97,9 +97,12 @@ print.findFn <- function(x,
 ##
 ## save "x" as "xin" for debugging
   xin <- x
+# Allow x to have a NULL Description 
+# to simplify testing of other sos functions   
+  Desc <- x$Description 
+  if(is.null(Desc))Desc <- ''
   x$Description <- gsub("(^[ ]+)|([ ]+$)", 
-      "", as.character(x$Description),
-      useBytes = TRUE)
+      "", as.character(Desc), useBytes = TRUE)
   x[] <- lapply(x, as.character)
 ##
 ## 6.  template for brew?

@@ -90,6 +90,7 @@ PackageSum2(x,
 }
 \author{Spencer Graves}
 \seealso{
+  \code{\link{packageSum}}, which does essentially the same thing but returns an object of class \code{packageSum}.  
   \code{\link{findFn}}
   \code{\link{PackageSummary}}
   \code{\link{installPackages}}
@@ -98,28 +99,31 @@ PackageSum2(x,
 ##
 ## data.frame method
 ##
-tstdf <- data.frame(Package=c('grid', 'base'), stringsAsFactors=FALSE)
-tst2 <- PackageSum2(tstdf)
+Tstdf <- data.frame(Package=c('grid', 'base'), 
+            stringsAsFactors=FALSE)
+Tst2 <- PackageSum2(Tstdf)
 
 ##
 ## list method
 ##
-tstList <- list(PackageSummary=tstdf)
+TstList <- list(PackageSummary=Tstdf)
 \dontshow{stopifnot(}
-all.equal(tst2, PackageSum2(tstList))
+all.equal(Tst2, PackageSum2(TstList))
 \dontshow{)}
 
 ##
 ## findFn method
 ##
-tst.findFn <- data.frame(Package=c('grid', 'base')[c(1,1,2)], 
-      Score=2:4, Date=LETTERS[1:3], stringsAsFactors=FALSE)
-attr(tst.findFn, 'PackageSummary') <- PackageSummary(tst.findFn)
-class(tst.findFn) <- c('findFn', 'data.frame')
-tst2. <- PackageSum2(tst.findFn)
+Tst.findFn <- data.frame(
+    Package=c('grid', 'base')[c(1,1,2)], 
+    Score=2:4, Date=LETTERS[1:3], stringsAsFactors=FALSE)
+attr(Tst.findFn, 'PackageSummary') <- PackageSummary(
+    Tst.findFn)
+class(Tst.findFn) <- c('findFn', 'data.frame')
+Tst2. <- PackageSum2(Tst.findFn)
 
 \dontshow{stopifnot(}
-all.equal(tst2, tst2.[names(tst2)])
+all.equal(Tst2, Tst2.[names(Tst2)])
 \dontshow{)}
 
 }

@@ -63,6 +63,16 @@ splineSearch <- findFn("spline", maxPages = 2)
 if(!fda::CRAN()){
   print(splineSearch, 'console')
   splineSearch # all columns in a browser
+##  
+## fake findFn object 
+##
+  tst.findFn <- data.frame(
+      Package=c('grid', 'base')[c(1,1,2)], 
+      Score=2:4, Date=LETTERS[1:3], stringsAsFactors=FALSE)
+  attr(tst.findFn, 'PackageSummary') <- PackageSummary(
+          tst.findFn)
+  class(tst.findFn) <- c('findFn', 'data.frame')
+  tst.findFn
 }
 }
 \keyword{print}
