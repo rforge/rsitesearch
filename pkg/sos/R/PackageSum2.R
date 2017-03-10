@@ -26,6 +26,7 @@ PackageSum2.data.frame <- function(x,
 ##
 ## 1.  Create character matrix for fields
 ##
+  cat('PackageSum2.data.frame\n')
   nf <- length(fields)
   nx <- nrow(x)
 #  xout <- x
@@ -40,6 +41,13 @@ PackageSum2.data.frame <- function(x,
 ##
 ## 3.  Get packageDescription for each package
 ##
+# Make sure getOption('width') is at least 80 
+# so the call to utils::help doesn't error  
+# when calling formatDL from within library
+# 2017-03-09 per William Dunlap
+  w0 <-options(width=80)
+  on.exit(options(w0))
+# reset after the   
   for(ip in seq(1, length=nx)){
     if(xP[ip] %in% instPkgs){
       pkgDesci <- utils::packageDescription(x$Package[ip], 

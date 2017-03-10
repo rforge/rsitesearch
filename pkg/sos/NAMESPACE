@@ -22,6 +22,6 @@ S3method(PackageSum2, findFn)
 S3method(PackageSum2, list)
 
 S3method(print, findFn)
-S3method(print, summary.findFn)
+S3method(print, packageSum)
 S3method(summary, findFn)
 S3method(Ops, findFn)
