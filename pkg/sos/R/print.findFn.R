@@ -57,10 +57,11 @@ print.findFn <- function(x,
   Ocall <- attr(x, "call")
   Oc0 <- deparse(Ocall)
   Oc. <- gsub('\"', "'", Oc0)
+  if(Oc.=='NULL')Oc. <- '...'
   Oc1 <- paste(cl, "<-", Oc.)
 #  Oc2 <- paste0('For a package summary:  ', 
-  Oc2 <- paste0('installPackages(', cl, 
-    ');  writeFindFn2xls(', cl, ')')
+  Oc2 <- paste0('For more info, call installPackages', 
+          ' before packageSum')
 #  ocall <- paste(cl, "<-", Oc1)
 #  ocall <- parse(text=Ocx)
   string <- attr(x, "string")
@@ -131,7 +132,8 @@ print.findFn <- function(x,
     close(template)
   }
 ##
-## 7.  Was File created appropriately?  If no, try Sundar's original code
+## 7.  Was File created appropriately?  
+##       If no, try Sundar's original code
 ##
   FileInfo <- file.info(File)
   if (is.na(FileInfo$size) || FileInfo$size <= 0) {

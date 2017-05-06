@@ -11,8 +11,13 @@ packageSum.findFn <- function(x,
         "Maintainer", "Packaged", 'helpPages',
         'vignette', 'URL'), 
     lib.loc=NULL, ...){
-  packageSum(attr(x, 'PackageSummary'), 
+  ps2 <- packageSum(attr(x, 'PackageSummary'), 
              fields, lib.loc, ...)
+  if(is.null(attr(ps2, 'call')))
+    attr(ps2, 'call') <- attr(x, 'call')
+  if(is.null(attr(ps2, 'string')))
+    attr(ps2, 'string') <- attr(x, 'string')
+  ps2 
 }
 
 packageSum.list <- function(x,
@@ -20,8 +25,14 @@ packageSum.list <- function(x,
         "Maintainer", "Packaged", 'helpPages',
         'vignette', 'URL'), 
     lib.loc=NULL, ...){
-  packageSum(x$PackageSummary, fields, 
+  ps2 <- packageSum(x$PackageSummary, fields, 
              lib.loc, ...)
+  if(is.null(attr(ps2, 'call')))
+    attr(ps2, 'call') <- attr(x, 'call')
+  if(is.null(attr(ps2, 'string')))
+    attr(ps2, 'string') <- attr(x, 'string')
+  class(ps2) <- c("packageSum", "data.frame")
+  ps2 
 }
 
 packageSum.data.frame <- function(x,
@@ -34,6 +45,10 @@ packageSum.data.frame <- function(x,
 ##
   ps2 <- PackageSum2(x, fields=fields, 
                      lib.loc=NULL, ...)
+  if(is.null(attr(ps2, 'call')))
+    attr(ps2, 'call') <- attr(x, 'call')
+  if(is.null(attr(ps2, 'string')))
+    attr(ps2, 'string') <- attr(x, 'string')
 ##
 ## 2.  assign class 
 ##

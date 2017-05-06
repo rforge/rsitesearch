@@ -23,8 +23,8 @@ print.packageSum <- function(x,
   ##
   if (length(where) == 1 && 
       where == "console")
-    where <-  c("Count", "Package",
-        "Function", "Score", "Date")
+    where <-  c("Package", "Count", 'MaxScore', 
+        'TotalScore', 'Date', "Title", 'Version', 'Author')
   ##
   if (all(where %in% names(x))) {
     print.data.frame(x[, where])
@@ -38,8 +38,7 @@ print.packageSum <- function(x,
   if (toupper(where) == "HTML") {
     f0 <- tempfile()
     for(i in 1:111) {
-      File <- paste(f0, ".html", 
-                    sep = "")
+      File <- paste0(f0, ".html")
       fInf <- file.info(File)
       if(all(is.na(fInf)))
         break
