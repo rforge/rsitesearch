@@ -58,7 +58,7 @@ print.findFn <- function(x,
   Oc0 <- deparse(Ocall)
   Oc. <- gsub('\"', "'", Oc0)
   if(Oc.=='NULL')Oc. <- '...'
-  Oc1 <- paste(cl, "<-", Oc.)
+  Oc1 <- paste(cl, "<-", paste(Oc., collapse=''))
 #  Oc2 <- paste0('For a package summary:  ', 
   Oc2 <- paste0('For more info, call installPackages', 
           ' before packageSum')

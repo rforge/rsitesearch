@@ -56,7 +56,7 @@ print.packageSum <- function(x,
   Ocall <- attr(x, "call")
   Oc0 <- deparse(Ocall)
   Oc. <- gsub('\"', "'", Oc0)
-  Oc1 <- paste(cl, "<-", Oc.)
+  Oc1 <- paste(cl, "<-", paste(Oc., collapse=''))
 #  Oc2 <- paste0('For a package summary:  ', 
 #  Oc2 <- paste0('installPackages(', cl, 
 #    ');  writeFindFn2xls(', cl, ')')
