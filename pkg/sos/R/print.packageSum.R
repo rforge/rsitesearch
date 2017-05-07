@@ -58,8 +58,8 @@ print.packageSum <- function(x,
   Oc. <- gsub('\"', "'", Oc0)
   Oc1 <- paste(cl, "<-", Oc.)
 #  Oc2 <- paste0('For a package summary:  ', 
-  Oc2 <- paste0('installPackages(', cl, 
-    ');  writeFindFn2xls(', cl, ')')
+#  Oc2 <- paste0('installPackages(', cl, 
+#    ');  writeFindFn2xls(', cl, ')')
 #  ocall <- paste(cl, "<-", Oc1)
 #  ocall <- parse(text=Ocx)
   string <- attr(x, "string")
@@ -92,15 +92,15 @@ print.packageSum <- function(x,
     file.copy(js, Dir)
   }
 ##
-## 5.  Modify x$Description
+## 5.  Modify x$Title
 ##
 ## save "x" as "xin" for debugging
   xin <- x
-# Allow x to have a NULL Description 
+# Allow x to have a NULL Title 
 # to simplify testing of other sos functions   
-  Desc <- x$Description 
+  Desc <- x$Title 
   if(is.null(Desc))Desc <- ''
-  x$Description <- gsub("(^[ ]+)|([ ]+$)", 
+  x$Title <- gsub("(^[ ]+)|([ ]+$)", 
       "", as.character(Desc), useBytes = TRUE)
   x[] <- lapply(x, as.character)
 ##
@@ -109,7 +109,7 @@ print.packageSum <- function(x,
   hasTemplate <- !missing(template)
   if (!hasTemplate) {
     templateFile <- system.file("brew",
-        "default", "results.brew.html",
+        "default", "pkgSum.brew.html",
         package = "sos")
     template <- file(templateFile, 
         encoding = "utf-8", open = "r" )
@@ -120,8 +120,9 @@ print.packageSum <- function(x,
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)
   assign("Oc1", Oc1, envir = xenv)
-  assign("Oc2", Oc2, envir = xenv)
-  ocall <- paste0(Oc1, '; ', Oc2)
+#  assign("Oc2", Oc2, envir = xenv)
+#  ocall <- paste0(Oc1, '; ', Oc2)
+  ocall <- Oc1
   assign("ocall", ocall, envir = xenv)
   assign("x", x, envir = xenv)
   ##
@@ -130,7 +131,8 @@ print.packageSum <- function(x,
     close(template)
   }
 ##
-## 7.  Was File created appropriately?  If no, try Sundar's original code
+## 7.  Was File created appropriately?  
+##     If no, try Sundar's original code
 ##
   FileInfo <- file.info(File)
   if (is.na(FileInfo$size) || FileInfo$size <= 0) {
@@ -213,13 +215,15 @@ print.packageSum <- function(x,
     .cat("<h2>call: <font color='#800'>",
          paste(ocall, collapse = ""), "</font></h2>\n")
     .cat("<table class='sortable'>\n<thead>")
-    link <- as.character(x$Link)
-    desc <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description), useBytes = TRUE)
-    x$Link <- sprintf("<a href='%s' target='_blank'>%s</a>", link, desc)
-    x$Description <- NULL
-    ## change "Link" to "Description and Link"
-    ilk <- which(names(x) == "Link")
-    names(x)[ilk] <- "Description and Link"
+    link <- as.character(x$pkgLink)
+    desc <- gsub("(^[ ]+)|([ ]+$)", "", 
+        as.character(x$Title), useBytes = TRUE)
+    x$pkgLink <- sprintf("<a href='%s' target='_blank'>%s</a>", 
+                      link, desc)
+    x$Title <- NULL
+    ## change "Link" to "Title and Link"
+    ilk <- which(names(x) == "pkgLink")
+    names(x)[ilk] <- "Title and Link"
     ##
     .cat("<tr>\n  <th style='width:40px'>Id</th>")
     .cat(sprintf("  <th>%s</th>\n</tr>",
