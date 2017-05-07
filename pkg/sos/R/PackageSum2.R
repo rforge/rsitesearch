@@ -26,7 +26,7 @@ PackageSum2.data.frame <- function(x,
 ##
 ## 1.  Create character matrix for fields
 ##
-  cat('PackageSum2.data.frame\n')
+#  cat('PackageSum2.data.frame\n')
   nf <- length(fields)
   nx <- nrow(x)
 #  xout <- x
