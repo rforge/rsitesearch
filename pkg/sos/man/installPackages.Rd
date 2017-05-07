@@ -1,7 +1,7 @@
 \name{installPackages}
 \alias{installPackages}
-\alias{PackageSum2.findFn}
-\alias{PackageSum2.packageSum}
+\alias{installPackages.findFn}
+\alias{installPackages.packageSum}
 \alias{installPackages.character}
 \title{
   install packages with minimum count
