@@ -60,6 +60,8 @@ print.packageSum <- function(x,
 #  Oc2 <- paste0('For a package summary:  ', 
 #  Oc2 <- paste0('installPackages(', cl, 
 #    ');  writeFindFn2xls(', cl, ')')
+  iPx <- paste0('installPackages(', cl, ',...)')
+  w2xls <- paste0('writeFindFn2xls(', cl, ')')
 #  ocall <- paste(cl, "<-", Oc1)
 #  ocall <- parse(text=Ocx)
   string <- attr(x, "string")
@@ -120,12 +122,14 @@ print.packageSum <- function(x,
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)
   assign("Oc1", Oc1, envir = xenv)
-#  assign("Oc2", Oc2, envir = xenv)
+#  assign("Oc2", cl, envir = xenv)
 #  ocall <- paste0(Oc1, '; ', Oc2)
-  ocall <- Oc1
-  assign("ocall", ocall, envir = xenv)
+#  ocall <- Oc1
+#  assign("ocall", ocall, envir = xenv)
+  assign('iPx', iPx, envir=xenv)
+  assign('w2xls', w2xls, envir=xenv)
   assign("x", x, envir = xenv)
-  ##
+##
   brew::brew(template, File, envir = xenv)
   if (!hasTemplate) {
     close(template)
@@ -212,8 +216,8 @@ print.packageSum <- function(x,
     .cat("<h1>findFn Results</h1>")
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)    
-    .cat("<h2>call: <font color='#800'>",
-         paste(ocall, collapse = ""), "</font></h2>\n")
+#    .cat("<h2>call: <font color='#800'>",
+#         paste(ocall, collapse = ""), "</font></h2>\n")
     .cat("<table class='sortable'>\n<thead>")
     link <- as.character(x$pkgLink)
     desc <- gsub("(^[ ]+)|([ ]+$)", "", 
