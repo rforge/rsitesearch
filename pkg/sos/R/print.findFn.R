@@ -50,24 +50,9 @@ print.findFn <- function(x,
     File <- where
   }
 ##
-## 2.  Get call including search
-##     string
+## 2.  title, Dir?
 ##
-#  cl <- match.call()
-  Ocall <- attr(x, "call")
-  Oc0 <- deparse(Ocall)
-  Oc. <- gsub('\"', "'", Oc0)
-  if(Oc.=='NULL')Oc. <- '...'
-  Oc1 <- paste(cl, "<-", paste(Oc., collapse=''))
-#  Oc2 <- paste0('For a package summary:  ', 
-  Oc2 <- paste0('For more info, call installPackages', 
-          ' before packageSum')
-#  ocall <- paste(cl, "<-", Oc1)
-#  ocall <- parse(text=Ocx)
   string <- attr(x, "string")
-##
-## 3.  title, Dir?
-##
   if (missing(title)) {
     title <- string
   }
@@ -79,7 +64,29 @@ print.findFn <- function(x,
     dc0 <- dir.create(Dir, FALSE, TRUE)
   }
 ##
-## 4.  sorttable.js?
+## 3.  print(packageSum(...))
+##   ... moved to the end 
+#  if((toupper(where)=='HTML') && openBrowser){
+#    sumLink <- print(packageSum(x, title=title, ...))
+#  } else sumLink <- ''
+##
+## 4.  Get call including search
+##     string
+##
+#  cl <- match.call()
+  Ocall <- attr(x, "call")
+  Oc0 <- deparse(Ocall)
+  Oc. <- gsub('\"', "'", Oc0)
+  if(Oc.=='NULL')Oc. <- '...'
+  Oc1 <- paste(cl, "<-", paste(Oc., collapse=''))
+#  Oc2 <- paste0('For a package summary:  ', 
+#  Oc2 <- paste0('For more info, call installPackages', 
+#          ' before packageSum')
+  pkgS <- paste0('packageSum(', cl, ',...)')
+#  ocall <- paste(cl, "<-", Oc1)
+#  ocall <- parse(text=Ocx)
+##
+## 5.  sorttable.js?
 ##
 ##  Dir <- tools:::file_path_as_absolute( dirname(File) )
 ##  This line is NOT ENOUGH:
@@ -94,7 +101,7 @@ print.findFn <- function(x,
     file.copy(js, Dir)
   }
 ##
-## 5.  Modify x$Description
+## 6.  Modify x$Description
 ##
 ## save "x" as "xin" for debugging
   xin <- x
@@ -106,7 +113,7 @@ print.findFn <- function(x,
       "", as.character(Desc), useBytes = TRUE)
   x[] <- lapply(x, as.character)
 ##
-## 6.  template for brew?
+## 7.  template for brew?
 ##
   hasTemplate <- !missing(template)
   if (!hasTemplate) {
@@ -122,9 +129,11 @@ print.findFn <- function(x,
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)
   assign("Oc1", Oc1, envir = xenv)
-  assign("Oc2", Oc2, envir = xenv)
-  ocall <- paste0(Oc1, '; ', Oc2)
-  assign("ocall", ocall, envir = xenv)
+#  assign("Oc2", Oc2, envir = xenv)
+  assign('pkgS', pkgS, envir=xenv)
+#  assign('sumLink', sumLink, envir=xenv)
+#  ocall <- paste0(Oc1, '; ', Oc2)
+#  assign("ocall", ocall, envir = xenv)
   assign("x", x, envir = xenv)
   ##
   brew::brew(template, File, envir = xenv)
@@ -132,7 +141,7 @@ print.findFn <- function(x,
     close(template)
   }
 ##
-## 7.  Was File created appropriately?  
+## 8.  Was File created appropriately?  
 ##       If no, try Sundar's original code
 ##
   FileInfo <- file.info(File)
@@ -214,7 +223,7 @@ print.findFn <- function(x,
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)    
     .cat("<h2>call: <font color='#800'>",
-         paste(ocall, collapse = ""), "</font></h2>\n")
+         paste(Ocall, collapse = ""), "</font></h2>\n")
     .cat("<table class='sortable'>\n<thead>")
     link <- as.character(x$Link)
     desc <- gsub("(^[ ]+)|([ ]+$)", "", as.character(x$Description), useBytes = TRUE)
@@ -238,7 +247,7 @@ print.findFn <- function(x,
     .cat("</tbody></table></body></html>")
   }
   ##
-  ## 8.  Display in a browser?
+  ## 9.  Display in a browser?
   ##
   if (openBrowser) {
     FileInf2 <- file.info(File)
@@ -250,6 +259,7 @@ print.findFn <- function(x,
         warning("0 bytes in file ", File, ";  nothing to give to a browser.")
       } else {
         utils::browseURL(File)
+        print(packageSum(x, title=title, ...))
       }
     }
   }

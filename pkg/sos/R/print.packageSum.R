@@ -7,6 +7,7 @@ print.packageSum <- function(x,
 ##    further ...
 ##
   cl <- deparse(substitute(x)) 
+  if(length(grep('\\(', cl))>0)cl <- 'x'
 #  print(cl)
   if (nrow(x) < 1) {
     cat("x has zero rows;  ", 
