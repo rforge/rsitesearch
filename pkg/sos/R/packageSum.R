@@ -3,7 +3,7 @@ packageSum <- function(x,
        "Maintainer", "Packaged", 'helpPages',
        'vignette', 'URL'), 
     lib.loc=NULL, ...){
-  cat('packageSum generic\n')
+#  cat('packageSum generic\n')
   UseMethod('packageSum')
 }
 
@@ -12,7 +12,7 @@ packageSum.findFn <- function(x,
         "Maintainer", "Packaged", 'helpPages',
         'vignette', 'URL'), 
     lib.loc=NULL, ...){
-  cat('packageSum.findFn: enter\n')
+#  cat('packageSum.findFn: enter\n')
   ps2 <- packageSum(attr(x, 'PackageSummary'), 
              fields, lib.loc, ...)
   if(is.null(attr(ps2, 'call')))
@@ -27,7 +27,7 @@ packageSum.list <- function(x,
         "Maintainer", "Packaged", 'helpPages',
         'vignette', 'URL'), 
     lib.loc=NULL, ...){
-  cat('packageSum.list: enter\n')
+#  cat('packageSum.list: enter\n')
   ps2 <- packageSum(x$PackageSummary, fields, 
              lib.loc, ...)
   if(is.null(attr(ps2, 'call')))
@@ -46,7 +46,7 @@ packageSum.data.frame <- function(x,
 ##
 ## 1.  PackageSum2
 ##
-  cat('packageSum.data.frame: enter\n')
+#  cat('packageSum.data.frame: enter\n')
   ps2 <- PackageSum2(x, fields=fields, 
                      lib.loc=NULL, ...)
   if(is.null(attr(ps2, 'call')))
