@@ -66,6 +66,6 @@ installPackages.character <- function(x, minCount,
 ## 5.  get packages not already installed
 ##
   if (length(notInst) > 0)
-    utils::install.packages(notInst)
+    try(utils::install.packages(notInst))
 }
 
