@@ -15,7 +15,7 @@ S3method("[", findFn)
 
 S3method(installPackages, packageSum)
 S3method(installPackages, findFn)
-S3method(installPackages, character)
+#S3method(installPackages, character)
 
 S3method(packageSum, data.frame)
 S3method(packageSum, findFn)

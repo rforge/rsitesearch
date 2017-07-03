@@ -2,25 +2,22 @@
 \alias{installPackages}
 \alias{installPackages.findFn}
 \alias{installPackages.packageSum}
-\alias{installPackages.character}
 \title{
   install packages with minimum count
 }
 \description{
   Ensure that the most important packages 
-  in \code{x} are installed.  "Importance"" here is 
+  in \code{x} are installed.  "Importance" here is 
   defined in the description of the \code{minCount}
   argument below.  
 }
 \usage{
 %installPackages(x, minCount=sqrt(x[1, 'Count']), ...)
 
-
 installPackages(x, minCount, ...)
 \method{installPackages}{findFn}(x, minCount, ...) 
-\method{installPackages}{packageSum}(x, minCount, ...)
-\method{installPackages}{packageSum}(x, minCount, ...)
-\method{installPackages}{character}(x, minCount, ...) 
+\method{installPackages}{packageSum}(x, minCount, 
+              repos = getOption("repos"), ...)
 }
 \arguments{
   \item{x}{
@@ -37,11 +34,10 @@ installPackages(x, minCount, ...)
     \code{x[, 'Package']} with \code{x[, 'Count']} >= 
     \code{minCount}.  By default, \code{minCount} = 
     \code{sqrt(x[1, 'Count'])}.  
-
-    if \code{class(x)} is \code{\link{character}}, 
-    install the first \code{minCount} components of 
-    \code{x}.  By default, \code{minCount} = 
-    \code{sqrt(length(x))}.  
+  }
+  \item{repos}{
+    argument passed to 
+    \code{\link{install.packages}}
   }
   \item{\dots}{
     optional arguments passed to 
@@ -93,19 +89,12 @@ installPackages(spl)
 
 splS <- packageSum(spl)
 # check the code but do not install anything:
-installPackages(splS, 0)
+installPackages(splS, splS[1, 'Count']+1)
 
 # install ALL packages
 \dontrun{
 installPackages(splS, 1)
 }
-
-##
-## 3.  character vector 
-##
-# Confirm that the code works with a character 
-# vector without installing anything:  
-installPackages('fda', 0)
 
 }
 \keyword{package}

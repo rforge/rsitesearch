@@ -25,7 +25,8 @@ print.packageSum <- function(x,
   if (length(where) == 1 && 
       where == "console")
     where <-  c("Package", "Count", 'MaxScore', 
-        'TotalScore', 'Date', "Title", 'Version', 'Author')
+        'TotalScore', 'Date', "Title", 'Version',
+        'Author')
   ##
   if (all(where %in% names(x))) {
     print.data.frame(x[, where])
@@ -70,7 +71,7 @@ print.packageSum <- function(x,
 ## 3.  title, Dir?
 ##
   if (missing(title)) {
-    title <- string
+    title <- paste('packageSum for', string)
   }
   Dir <- dirname(File)
   if (Dir == ".") {
@@ -85,7 +86,8 @@ print.packageSum <- function(x,
 ##  Dir <- tools:::file_path_as_absolute( dirname(File) )
 ##  This line is NOT ENOUGH:
 ##     browseURL(File) needs the full path in File
-  js <- system.file("js", "sorttable.js", package = "sos")
+  js <- system.file("js", "sorttable.js", 
+                    package = "sos")
   if (!file.exists(js)) {
     warning("Unable to locate 'sorttable.js' file")
   } else {
@@ -151,7 +153,8 @@ print.packageSum <- function(x,
     con <- file(File, "wt")
     on.exit(close(con))
     .cat <- function(...)
-      cat(..., "\n", sep = "", file = con, append = TRUE)
+      cat(..., "\n", sep = "", file = con, 
+          append = TRUE)
     ## start
     cat("<html>", file = con)
     .cat("<head>")
@@ -214,11 +217,17 @@ print.packageSum <- function(x,
          "</style>\n",
          "</head>")
     ##  Search results ... ???
-    .cat("<h1>findFn Results</h1>")
+    .cat("<h1>", title, "</h1>")
 # str(ocall)
 #language findFn(string = "spline", maxPages = 1)    
-#    .cat("<h2>call: <font color='#800'>",
-#         paste(ocall, collapse = ""), "</font></h2>\n")
+    .cat("<h2>call: <font color='#800'>",
+         paste(Oc1, collapse = ""), "</font></h2>\n")
+    .cat("<h2>Title, etc., are available on ", 
+         "installed packages. To get more, use", 
+         " <font color='#800'> ", iPx, 
+         " </font></h2>")
+    .cat("<h2>See also: <font color='#800'>", 
+         w2xls, "</font></h2>")
     .cat("<table class='sortable'>\n<thead>")
     link <- as.character(x$pkgLink)
     desc <- gsub("(^[ ]+)|([ ]+$)", "", 
@@ -232,13 +241,16 @@ print.packageSum <- function(x,
     ##
     .cat("<tr>\n  <th style='width:40px'>Id</th>")
     .cat(sprintf("  <th>%s</th>\n</tr>",
-                 paste(names(x), collapse = "</th>\n  <th>")))
+        paste(names(x), collapse = "</th>\n  <th>")))
     .cat("</thead>\n<tbody>")
     paste.list <- c(list(row.names(x)),
-                    lapply(x, as.character), sep = "</td>\n  <td>")
+        lapply(x, as.character), 
+            sep = "</td>\n  <td>")
     tbody.list <- do.call("paste", paste.list)
-    tbody <- sprintf("<tr>\n  <td>%s</td>\n</tr>", tbody.list)
-    tbody <- sub("<td><a", "<td class=link><a", tbody, useBytes = TRUE)
+    tbody <- sprintf("<tr>\n  <td>%s</td>\n</tr>",
+                     tbody.list)
+    tbody <- sub("<td><a", "<td class=link><a", 
+                 tbody, useBytes = TRUE)
     .cat(tbody)
     ## another (shorter) multiline thingy ???
     .cat("</tbody></table></body></html>")

@@ -23,7 +23,7 @@ installPackages.findFn <- function(x, minCount, ...){
 } 
 
 installPackages.packageSum <- function(x, minCount, 
-                                       ...){
+                repos = getOption("repos"), ...){
 ##
 ## 1.  minCount
 ##
@@ -41,31 +41,16 @@ installPackages.packageSum <- function(x, minCount,
   sel <- (x$Count >= minCount)
   toget <- x$Package[sel]
 ##
-## 4.  installPackages.character
-##
-  installPackages(toget, 1, ...)
-}
-
-installPackages.character <- function(x, minCount, 
-                                      ...){
-##
-## 1.  select
-##
-  nx <- length(x)
-  if(missing(minCount))
-    minCount <- sqrt(nx)
-  sel <- seq(1, length=
-               min(nx, trunc(minCount)))
-  toget <- x[sel]
-##
-## 2.  Installed pkgs?
+## 4.  Installed pkgs?
 ##
   instPkgs <- .packages(TRUE)
   notInst <- toget[!(toget %in% instPkgs)]
 ##
-## 5.  get packages not already installed
+## 5.  get not installed
 ##
-  if (length(notInst) > 0)
-    try(utils::install.packages(notInst))
+  if (length(notInst) > 0){
+    print(getOption('repos'))
+    utils::install.packages(notInst, repos=repos)
+  }
 }
 

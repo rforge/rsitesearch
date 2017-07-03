@@ -54,7 +54,10 @@ print.findFn <- function(x,
 ##
   string <- attr(x, "string")
   if (missing(title)) {
-    title <- string
+    title <- paste('Help pages for', string)
+    titSum <- paste('package summary for', string)
+  } else {
+    titSum <- paste('packageSum(', string, ')')
   }
   Dir <- dirname(File)
   if (Dir == ".") {
@@ -258,8 +261,11 @@ print.findFn <- function(x,
       if (FileInf2$size <= 0) {
         warning("0 bytes in file ", File, ";  nothing to give to a browser.")
       } else {
+#       display HTML "File";  browseURL accesses 
+#          variable(s) in this calling function 
+#          like 'title'   
         utils::browseURL(File)
-        print(packageSum(x, title=title, ...))
+        print(packageSum(x, title=titSum, ...))
       }
     }
   }
