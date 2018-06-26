@@ -22,8 +22,7 @@ PackageSummary(x, sortby=NULL)
     'MaxScore', 'TotalScore', 'Package') to sort descending 
     on numerics and ascending on alphnumerics.  Specifying 
     sortby = c('c', 't', 'm') is equivalent to c('Count', 
-    'TotalScore', 'MaxScore', 'Package', 'Score', 
-    'Function').
+    'TotalScore', 'MaxScore', 'Package').
 
     Components of \code{sortby} must match either this list 
     or c('Score', 'Function', 'Date', 'Description', 'Link').  
